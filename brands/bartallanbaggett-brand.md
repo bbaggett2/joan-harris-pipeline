@@ -92,9 +92,20 @@ Smart, warm, direct, occasionally self-deprecating. Personal stories are the hoo
 
 ## DOMAINS & CTAs
 
-- **happywealthymind.com** — the newsletter. New issue every Tuesday.
+- **happywealthymind.com** — the newsletter. New issue every Month.
 
-⚠️ **UNRESOLVED — needs Bart's decision.** `bartbaggett.com` is currently claimed by **both** this brand (as the standard "More from Bart" CTA) and the QDE forensic brand (as the expert-witness authority site). Those are the two lanes that must never mix. Until this is decided, do not use `bartbaggett.com` in Bart Allan Baggett copy. Use happywealthymind.com.
+## DOMAINS & CTAs
+
+- **happywealthymind.com** — the newsletter. New issue every Month.
+thebartshowpodcast.com
+https://www.youtube.com/@bartshowpodcast
+
+`bartbaggett.com` is currently claimed by  QDE forensic brand (as the expert-witness authority site). Those are the two lanes that must never mix. Until further notice do not use  this brand on `bartbaggett.com` in Bart Allan Baggett copy. 
+
+Use happywealthymind.com.
+thebartshowpodcast.com
+https://www.youtube.com/@bartshowpodcast
+
 
 ---
 
