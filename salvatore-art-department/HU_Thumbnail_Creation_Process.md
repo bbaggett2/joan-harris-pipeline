@@ -63,9 +63,9 @@ the HU feather-and-letters mark in the corner.
 
 Three things make it work. Everything else is detail.
 
-1. **The parchment must look torn, not cut.**
+1. **The parchment must precisely torn at the edges. It must resemble old paper.**
 2. **The parchment must never cover his face.**
-3. **The parchment sizes itself to the words — not the other way round.**
+3. **The parchment sizes itself to the key words in the headline — not the other way round.**
 
 ---
 
@@ -80,7 +80,7 @@ Three things make it work. Everything else is detail.
 | Paper shadow | Black @ 51% | — | Offset +16/+18, blur 26, *under* the parchment. This is most of what sells the paper as physical. |
 
 The parchment/navy pairing is the brand's native combination — navy collegiate letters on
-cream is exactly the HU logo's own palette, which is why the logo sits naturally on it.
+cream is exactly the HU logo's own palette, which is why the logo fits nicely on the thumbnail and expresses university educational Ivy League status..
 
 ---
 
@@ -171,7 +171,7 @@ was explicit. Three approved layouts, chosen by title:
 
 It seems like long titles want a white line up top. The opposite is true. A white line
 spends ~200px before the parchment even begins — on a shallow band, that's fatal. **Long
-titles can least afford it.** Always test placement against the hairline before choosing.
+titles can least afford it.** Always test placement against the hairline before choosing.If the headline is long, part of the the headline is a bold font and only the most compelling key word or phrase lands on the parchment. 
 
 ### When you split, the paper carries the PUNCH
 
