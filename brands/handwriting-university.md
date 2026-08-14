@@ -136,11 +136,11 @@ The HU mark is a navy **"HU"** paired with a **silver quill** accent.
 
 Canvas 1280×720. Maximum **three** visual focus elements.
 
-1. **Presenter — right ~40%.** Headshot, shoulders-up, **entire head fully visible, never cropped.** Confident, expressive, looking directly into camera.
-2. **Visual trait focus — left ~40%.** One large, clearly legible magnified handwritten cursive letter or word, circled or highlighted in bright teacher-red pen.
-3. **Headline text — upper left.** Heavy collegiate block-serif, ALL CAPS, white with metallic-silver edge. The single key word sits inside a slightly tilted antique-parchment rectangle with navy text.
+1. **Presenter — right ~40%.** Headshot, Waist-up, **entire head fully visible, never cropped.** The emotion and body language will come from the content of the transcript.  Host always looking directly into camera.
+2. **Visual trait focus — left ~40%.** One large, clearly legible magnified handwritten cursive letter or word, circled or highlighted in bright teacher-red pen. The source of this image will always come from published material from Bart Baggett's Libary of approved trait images. https://drive.google.com/drive/folders/1_ZzlXw1Zr2hoT-2aW8NK1cbWq8L2j-gH
+3. **Headline text — upper left.** Heavy collegiate block-serif, ALL CAPS, white with metallic-silver edge. The single key word or phrase sits inside a slightly tilted antique-parchment rectangle with navy text. The parchment should look like paper. Sometimes the edges are torn, but often they appear cut with scissors.  That depends on the size of the space required.
 4. **Logo.** Small, bottom-left or top-right. Bottom-right stays clear.
-5. **Background.** Dark cinematic study at dusk, real photographic depth, non-distracting.
+5. **Background.** Dark cinematic study at dusk, real photographic depth, non-distracting. The background is generated at a different step by Gemini. Building a background as a different solo step using Gemini produces better results and less drift than asking gemini to assemble the thumbnail with background and words in one prompt. 
 
 **Text limit:** 3–5 words maximum. It must be readable at 168×94px.
 
