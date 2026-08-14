@@ -1,9 +1,11 @@
 # Handwriting University — Brand Kit
 
 **Brand ID:** `handwriting-university` / `HU`
-**Version:** 2026.1
+**Version:** 2026.2
 **Owner:** Bart Baggett, Founder
 **File purpose:** Single source of truth for all HU artwork, graphics, thumbnails, articles, captions, and AI generation. If you are producing anything under the HU brand, this file governs it.
+
+**Changelog — 2026.2 (2026-08-14):** §5 logo filename corrected to underscores. §7 rewritten for the two host paths. §8.1 stripped to a host-and-background plate prompt, per §6 item 5. §8.2 added. §2.5 copy-fidelity rule added. §11 updated. §12 items 7 and 8 closed; 11–13 added.
 
 ---
 
@@ -84,6 +86,10 @@ Confident, warm, plainspoken, and curiosity-driven. Bart teaches — he does not
 
 Handwriting analysis is presented as a **tool for insight**, not as a diagnostic or predictive instrument. Do not claim it detects disease, predicts crime, or guarantees outcomes. Do not attribute analysis to a named living person's handwriting without a documented public sample and Bart's approval.
 
+### 2.5 Bart's copy is set exactly as he writes it
+
+Never tidy, normalise, correct, or re-punctuate Bart's own headline or on-screen copy. If it looks like a typo, flag it and ship what he wrote. The approved `liar-liar` cover reads `LIAR !` on line one — space before the bang — because that is how he typed it. It was flagged to him and left alone.
+
 ---
 
 ## 3. Color Palette
@@ -93,7 +99,7 @@ Handwriting analysis is presented as a **tool for insight**, not as a diagnostic
 | Primary base | **HU Navy** | `#1D3557` | Main brand color, logo text, parchment-block headlines, primary accents |
 | Accent / metal | **Silver Quill** | `#C0C0C0` (or metallic gradient) | Logo quill, metallic text edges, subtle highlights |
 | Parchment accent | **Parchment Cream** | `#F5F5DC` | Torn parchment blocks, highlight banners, text backdrops — **flat fill, no heavy grain** |
-| Contrast / alert | **Teacher Red** | `#D62828` | Magnification circles, callouts, highlight strokes, UI alerts |
+| Contrast / alert | **Teacher Red** | `#D62828` | Magnification circles, callouts, highlight strokes, UI alerts. **16:9 only — no red on 9:16.** |
 | Raw pen red | **Pen Red** | `#FF0000` | Simulated red-pen annotation strokes only — the "wet ink" look *(recommendation, not yet ratified by Bart)* |
 | Text primary | **Pure White** | `#FFFFFF` | Thumbnail headlines, overlay text on dark |
 | Background | **Cinematic Dusk** | `#0B1320` → `#101820` | Darkened study, dusk window light, deep photographic depth |
@@ -123,10 +129,12 @@ The HU mark is a navy **"HU"** paired with a **silver quill** accent.
 
 **Placement rules:**
 - YouTube 16:9 → bottom-left or top-right, small. Never dominant. **Keep bottom-right clear** for the YouTube timestamp overlay.
-- Vertical 9:16 → bottom-left, approximately **148px wide** on a 1080×1920 canvas.
+- Vertical 9:16 → bottom-left. Exact locked coordinates are in the constants file named in §7 — the 148px figure is superseded; do not re-derive it.
 - Never stretch, recolor, rotate, or place on a low-contrast background.
 
-**Asset file:** `HU logo new 2026 Watermark.png`, used **unaltered** — do not re-export, recolor, or "clean up." It is a padded PNG, so measure placement against the **visible mark**, not the file box. It lives in `salvatore-art-department/`; see that folder's process file §7 for the two known asset quirks Bart has already reviewed and accepted.
+**Asset file:** `HU_logo_new_2026_Watermark.png` — **underscores, not spaces.** The file was renamed on 2026-08-10 and the older spaced name no longer resolves. It lives in `salvatore-art-department/`.
+
+Used **unaltered** — do not re-export, recolor, or "clean up." It is a padded PNG, so measure placement against the **visible mark**, not the file box. Two known asset quirks (opaque letter counters; the mark's navy vanishing against mid-brightness clothing) have been reviewed and accepted by Bart — do not "fix" them without asking. Exact locked coordinates and the quirk detail are in the constants file named in §7.
 
 **Other variants** (light/dark/mono, web favicon, print): `[TO VERIFY]` — none supplied.
 
@@ -144,22 +152,36 @@ Canvas 1280×720. Maximum **three** visual focus elements.
 
 **Text limit:** 3–5 words maximum. It must be readable at 168×94px.
 
+**File limits:** minimum width 640px; JPG, PNG or GIF; under 2 MB.
+
+**Trait card handling.** The published library cards ship with a green border, a green trait banner, caption text, and green pointer arrows. Crop to the handwriting strokes only — that chrome is deck design, not HU brand — and let the build script draw the teacher-red circle. Individual cards are in the Drive folder `18lfO4P8oJRpcKc_buT7ehjCz0PM6ERx_`, named `NNN_traitname.png`. Read a card's own caption to confirm it matches the video's claim before using it.
+
 ---
 
-## 7. Vertical Covers (9:16 — Instagram Reels, TikTok, Shorts)
+## 7. Thumbnail method files — where the build detail lives
 
-**This spec is not in this file, by design.** The 9:16 cover method is owned by the art department and documented in full there:
+**This file specifies the 16:9 layout (§6) and nothing else about the build.** Geometry, constants, and the vertical format are owned by the art department:
 
-```
-salvatore-art-department/HU_Thumbnail_Creation_Process.md
-```
+| File | Scope |
+| :--- | :--- |
+| `salvatore-art-department/HU_Thumbnail_Constants_v1.md` | **Both paths, both formats.** Locked numbers, tear octaves, paper sizing, logo coordinates, fonts, build asserts. **If a number appears here and there, that file wins.** |
+| `salvatore-art-department/HU_Thumbnail_Creation_Process_v5.md` | **Path A — the default.** AI-generated host likeness. |
+| `salvatore-art-department/HU_Brand_Thumbnail_v2_Screenshot_Torn_Parchment.md` | **Path B routing.** When the screengrab method may be used. |
+| `salvatore-art-department/HU_PathB_Frame_Acquisition_v1.md` | **Path B execution.** Frame selection, hair/face detection, landscape padding. |
+| `joan-supervising-agent/HU_Thumbnail_Step_Map_v1.md` | Step-by-step orchestration, human gates, ClickUp closure. |
 
-Read that file before producing any 9:16 cover. Do not work from a summary, from memory, or from an older version of this brand kit — the earlier "top 40% full-bleed parchment band" spec has been **retired** and any output built to it is wrong.
+### The two host paths
 
-Two things you need to know before you go there:
+**Path A is the default. An agent never elects Path B.** Absence of instruction means Path A.
 
-1. **The method is a deterministic Python build (`build_hu_ig_thumbnail.py`), not a prompt.** Do not hand it to an image model. If the script is unavailable, stop and say so rather than substituting a generated approximation.
-2. **Bart approves. Nothing else does.**
+- **Path A — generated host.** The likeness of Bart is generated, guided by a fixed reference set of real photographs. Those photographs are input, not output; they are considered overused as published images.
+- **Path B — screengrab.** A real frame from the actual video. **Bart elects this per video, in writing.**
+
+**One video, one path.** The 16:9 and the 9:16 for the same video must use the same host source, or the pair will not match.
+
+Do not work from a summary, from memory, or from an older version of this brand kit — the earlier "top 40% full-bleed parchment band" spec is **retired** and any output built to it is wrong. The 9:16 build is a deterministic Python script (`build_hu_ig_thumbnail.py`), not a prompt. Do not hand it to an image model.
+
+**Bart approves. Nothing else does.**
 
 ---
 
@@ -167,26 +189,29 @@ Two things you need to know before you go there:
 
 Copy these verbatim. Replace only `[BRACKETED]` variables. Do not add brown, do not add extra subjects, do not add text beyond what is specified.
 
-### 8.1 YouTube 16:9 thumbnail
+### 8.1 Host + background plate — 16:9
+
+Per §6 item 5, this prompt produces **the plate only**: host and scene. The handwriting, headline, parchment block, and logo are composited afterwards by the build script. Asking one prompt to assemble all of it is what causes drift.
 
 ```text
-A professional 16:9 YouTube thumbnail for a psychology and handwriting analysis channel.
-SUBJECT: A headshot of the male host on the right side (40% width), shoulders-up, head fully
-visible, confident and engaged expression looking directly at the camera.
-BACKGROUND: Dark cinematic study at dusk with soft lighting, high contrast, genuine
-photographic depth, non-distracting.
-VISUAL ELEMENT (left side): A magnified, highly legible sample of handwritten cursive text on
-high-quality parchment, with [TRAIT] circled in bright red teacher-pen.
-TEXT OVERLAY: Bold collegiate block-serif headline in pure white with a subtle metallic silver
-edge on the upper-left, reading "[HEADLINE]". The key word "[KEYWORD]" placed inside a slightly
-tilted antique-parchment block in navy blue lettering.
-BRANDING: Small Handwriting University logo in the corner.
-Clean composition, maximum 3 visual focus elements, bottom-right clear. No brown backgrounds.
+A photoreal 16:9 image for a psychology and handwriting analysis channel.
+SUBJECT: The male host on the right side (approximately 40% of the width), waist-up, entire head
+fully visible and never cropped, looking directly into the camera. Expression and body language:
+[REGISTER — one word drawn from the transcript, e.g. skeptical / warm / grave / amused].
+BACKGROUND: Dark cinematic collegiate setting at dusk — study, library, or Ivy League campus —
+soft lighting, high contrast, genuine photographic depth, non-distracting.
+COMPOSITION: Leave the left ~40% of the frame quiet and uncluttered. Leave clear space in the
+upper left. No text anywhere in the image.
+NO TEXT. NO HANDWRITING. NO LOGO. NO GRAPHIC OVERLAYS. No brown dominant tones.
 ```
 
-### 8.2 Vertical 9:16 Reel / Short cover — **REMOVED**
+**Reject the plate and regenerate** if it contains any text, handwriting, parchment block, or logo. Do not paint over them.
 
-There is no AI prompt for 9:16 covers. The earlier prompt described the retired full-bleed parchment band and would produce wrong output. See §7 — the method is a script in the art department folder.
+### 8.2 Vertical 9:16 plate
+
+Same prompt as §8.1, regenerated at 9:16 with the **identical reference set, wardrobe, and scene**, and with the host positioned low in frame so the top third is quiet dead space for the parchment.
+
+**Do not upscale, crop, or pad the 16:9 into a vertical canvas.** That was a rescue technique for bad screengrabs and applies to Path B only.
 
 ### 8.3 Website header banner
 
@@ -242,13 +267,17 @@ Do not use QDE-specific tags (`#HandwritingExpert`, forensic/legal tags) on HU c
 - [ ] No outcome promises, no unverified stats, no unverified credentials
 - [ ] Colors match §3 exactly; no brown dominant background
 - [ ] Parchment is flat fill, not heavy grain
-- [ ] Presenter's head fully visible, uncropped, unobstructed
-- [ ] 16:9 thumbnail readable at 168×94px; ≤5 words of text; bottom-right clear
+- [ ] Bart's own copy reproduced exactly as written — not tidied or re-punctuated (§2.5)
+- [ ] Presenter waist-up, head fully visible, uncropped, unobstructed; expression drawn from the transcript
+- [ ] Trait handwriting came from the published library — never generated (§6 item 2)
+- [ ] Same host path used for both the 16:9 and the 9:16 of this video (§7)
+- [ ] 16:9 thumbnail readable at 168×94px; ≤5 words of text; bottom-right clear; under 2 MB
+- [ ] Logo filename is the underscored `HU_logo_new_2026_Watermark.png` (§5)
 - [ ] Captions built from actual transcript, not from the title
 - [ ] CTA points to HandwritingUniversity.com only
 - [ ] Every `[TO VERIFY]` and `[UNRATIFIED DRAFT]` item resolved or explicitly flagged to Bart
 
-**For 9:16 covers, this checklist does not apply.** Use the one in `salvatore-art-department/HU_Thumbnail_Creation_Process.md` §8.
+**For 9:16 covers**, also run the checks in `salvatore-art-department/HU_Thumbnail_Constants_v1.md` §9.
 
 ---
 
@@ -256,13 +285,16 @@ Do not use QDE-specific tags (`#HandwritingExpert`, forensic/legal tags) on HU c
 
 These are unresolved. Do not guess.
 
-1. Logo asset file paths and approved variants (light/dark/mono).
+1. Approved logo variants (light/dark/mono, favicon, print). The primary asset file is settled — see §5.
 2. Official tagline or positioning line for HU.
 3. Ratification of the `#D62828` vs `#FF0000` split proposed in §3 — **agent's proposal, not Bart's.**
 4. Licensed display typeface — "heavy collegiate block-serif" is a description, not a named font.
 5. House article word count and standard CTA wording.
 6. Approved course/product names and pricing for CTA copy.
-7. Approved presenter photo library and any restrictions on which headshots may be used.
-8. Whether the §6 16:9 YouTube layout still stands. It predates the 9:16 torn-parchment method and was **not** superseded by it — that method declares itself 9:16 only — but the two have never been reconciled.
+7. ~~Approved presenter photo library~~ — **CLOSED 2026-08-14.** The seven reference photographs in `salvatore-art-department/` are the fixed reference set for Path A generation. They are input, not published output.
+8. ~~Whether the §6 16:9 layout still stands~~ — **CLOSED 2026-08-14.** Bart rewrote §6. It stands, and §7 now reconciles it with the 9:16 method.
 9. Ratification of §8.4 and the §9 article structure, both currently `[UNRATIFIED DRAFT]`.
-10. Liar Liar reference: is `ig_v2.jpg` or `ig_v3` canonical? See the art department file §10.2.
+10. Liar Liar reference: is `ig_v2.jpg` or `ig_v3` canonical? The supplied filename also contains the banned status word "approved".
+11. **16:9 has no locked constant set.** Margins, padding, and logo coordinates for 1280×720 have never been measured the way the 9:16 set was. Every 16:9 build currently works from prose.
+12. **Synthetic-media disclosure.** Path A generates a likeness of a real person — Bart himself, with his own consent, which is the straightforward case. Current YouTube policy on disclosing realistic synthetic depictions should be checked directly before this scales. **Flagged, not researched.**
+13. **Ratify §6 of `HU_Thumbnail_Creation_Process_v5.md`.** That section is an agent draft implementing Bart's verbal ruling; none of it is his own wording.
