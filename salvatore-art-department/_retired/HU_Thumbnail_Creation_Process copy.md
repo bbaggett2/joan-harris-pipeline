@@ -1,12 +1,9 @@
 # HU Brand Thumbnail — The Screenshot + Torn Parchment Method
 
 **Brand:** Handwriting University (HU)
-**Format:** Instagram Reel / TikTok cover, 1080×1920 (9:16) — **this method is 9:16 only.**
+**Format:** Instagram Reel / TikTok cover, 1080×1920 (9:16)
 **Style:** real screenshot of the host + torn cream parchment + collegiate lettering
 **Status:** locked by Bart, 2026-07-17 → 2026-08-09
-**Lives at:** `salvatore-art-department/HU_Thumbnail_Creation_Process.md`
-**Referenced by:** `/brands/handwriting-university.md` §7
-
 **Ruling files:**
 - SOP → `Salvadore - art department/SOP_HU_IG_Screenshot_Torn_Paper_v2.md`
 - Build → `Salvadore - art department/build_hu_ig_thumbnail.py`
@@ -15,43 +12,6 @@ Reference builds Bart signed off on:
 - `true-optimists-write-like-this/ig_v6.jpg` — *"very very good"*
 - `vanity-nobody-likes-him/ig_v7.jpg` — *"pretty darn good"*
 - `liar-liar/ig_v2.jpg` — *"This is excellent."*
-
-> **Everything in §1–§9 below is Bart's, transcribed unaltered.** No procedure in this
-> document was authored by an agent. §10 and §11 are reconciliation notes only — they
-> record path and filename facts, and they contain no build instructions.
-
----
-
-## 0. Repository contents — what must be in this folder
-
-An agent can only follow this method if the assets are present. Upload manifest in §11.
-
-**Required:**
-
-| File | Why |
-| :--- | :--- |
-| `HU_Thumbnail_Creation_Process.md` | This file. The narrative method. |
-| `SOP_HU_IG_Screenshot_Torn_Paper_v2.md` | The ruling SOP named above. |
-| `build_hu_ig_thumbnail.py` | The build. **The method is this script — not a prompt.** |
-| `HU logo new 2026 Watermark.png` | The logo, used unaltered. See §7. |
-
-**Reference builds (read-only comparison targets):**
-
-| File | Layout |
-| :--- | :--- |
-| `liar-liar/ig_v2.jpg` | C — stacked hero |
-| `true-optimists-write-like-this/ig_v6.jpg` | A — all text on paper |
-| `vanity-nobody-likes-him/ig_v7.jpg` | B — trait emphasised |
-| `Thumbnail.HU_hates-all-men-host-photo-sample.png` | host screengrab sample |
-| `thumbnail_IQtest_ig_approved.jpg` | generated-host sample — see §10.3 |
-
-**URL forms.** A `blob/` URL returns an HTML page, not an image. Any agent or model that
-needs to *see* a reference must use the raw form:
-
-```
-view →  https://github.com/bbaggett2/joan-harris-pipeline/blob/main/salvatore-art-department/<FILE>
-load →  https://raw.githubusercontent.com/bbaggett2/joan-harris-pipeline/main/salvatore-art-department/<FILE>
-```
 
 ---
 
@@ -254,76 +214,3 @@ crosses a safe zone, so hero-type layouts get a warning rather than a silent cli
 6. The frame is chosen first; the face is never covered; landscape frames get padded.
 7. The logo is the unaltered PNG, 3×, bottom-left, lifted clear of platform UI.
 8. Filenames are `v1`, `v2`, `v3` — only Bart approves, so only Bart names anything approved.
-
----
-
-## 10. Reconciliation notes
-
-These record facts about paths and filenames. **They add no procedure.**
-
-### 10.1 `Salvadore` vs `salvatore`
-
-Both spellings are live and they point at two different places:
-
-| Context | Spelling | Path |
-| :--- | :--- | :--- |
-| Local Mac Studio (Joan's machine) | `Salvadore` | `Salvadore - art department/` |
-| GitHub repo | `salvatore` | `salvatore-art-department/` |
-
-The ruling-file paths in the header are **local Mac paths** and stay as written. GitHub URLs
-use the lowercase hyphenated form. *This is a reconciliation of two observed spellings, not a
-ruling — if you want one canonical spelling, say which and both get updated.*
-
-### 10.2 Liar Liar — `ig_v2` vs `ig_v3`
-
-§5 cites `liar-liar/ig_v2.jpg` as the Layout C reference carrying Bart's *"This is
-excellent."* The file separately supplied is named `LiarLiar_thumbnail_approved_ig_v3.jpg`.
-These are two different filenames and it is not established that they are the same image.
-
-Also note: that filename contains the status word **"approved"**, which §8 step 8 and §9
-rule 8 forbid. **Unresolved — Bart to confirm which file is canonical and whether the
-GitHub copy should be renamed to conform.**
-
-### 10.3 The generated-host sample
-
-`thumbnail_IQtest_ig_approved.jpg` was supplied as a generated-host example rather than a
-screengrab. **There is no written process for it.** It is listed in §0 as a reference image
-only. Do not infer a method from it, and do not produce generated-host covers until Bart
-documents one.
-
-### 10.4 Scope
-
-This method is **9:16 only**, per the header. The 16:9 YouTube thumbnail layout is
-unaffected and remains as specified in `/brands/handwriting-university.md` §6.
-
----
-
-## 11. Upload manifest
-
-Target: `salvatore-art-department/` on `bbaggett2/joan-harris-pipeline`, branch `main`.
-
-**Already present (per the URLs Bart supplied):**
-- [x] `Thumbnail.HU_hates-all-men-host-photo-sample.png`
-- [x] `thumbnail_IQtest_ig_approved.jpg`
-
-**To upload — blocking. Without these an agent cannot execute the method:**
-- [ ] `HU_Thumbnail_Creation_Process.md` ← this file
-- [ ] `SOP_HU_IG_Screenshot_Torn_Paper_v2.md` ← copy from `Salvadore - art department/`
-- [ ] `build_hu_ig_thumbnail.py` ← copy from `Salvadore - art department/`
-- [ ] `HU logo new 2026 Watermark.png` ← the padded PNG, unaltered, do not re-export
-
-**To upload — reference builds. Keep the slug-folder structure:**
-- [ ] `liar-liar/ig_v2.jpg`
-- [ ] `true-optimists-write-like-this/ig_v6.jpg`
-- [ ] `vanity-nobody-likes-him/ig_v7.jpg`
-
-**To upload — fonts, if the build runs anywhere other than the Mac:**
-- [ ] `Gelasio-Bold.ttf` — Georgia substitute; Georgia is proprietary and absent on Linux
-- [ ] `Anton-Regular.ttf` — Impact substitute, only if setup lines are used
-
-**Do not upload:** Georgia Bold or Impact (proprietary, do not redistribute); any file with
-a status word in its name other than the two already present; re-exported or "cleaned"
-versions of the logo.
-
-**After uploading**, confirm each raw URL resolves:
-`https://raw.githubusercontent.com/bbaggett2/joan-harris-pipeline/main/salvatore-art-department/<FILE>`
