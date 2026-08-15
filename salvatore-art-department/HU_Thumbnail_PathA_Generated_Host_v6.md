@@ -12,7 +12,8 @@
 
 | File | Scope |
 | :--- | :--- |
-| `HU_Thumbnail_Constants_v1.md` | **The numbers.** Tear octaves, paper sizing, logo coordinates, fonts, asserts. Both paths. **If a number appears there and here, that file wins.** |
+| `HU_Thumbnail_Constants_v1.md` | **The 9:16 numbers.** Tear octaves, paper sizing, logo coordinates, fonts, asserts. **If a number appears there and here, that file wins.** |
+| `HU_Thumbnail_16x9_Constants_v1.md` | **The 16:9 numbers.** Canvas, margins, keepouts, type sizes, asserts. Same precedence rule. |
 | `brands/handwriting-university.md` §6 | The 16:9 layout spec |
 | `HU_PathB_Frame_Acquisition_v1.md` | Path B — screengrab, opt-in only |
 | `HU_Thumbnail_Step_Map_v1.md` | n8n step contracts and human gates |
@@ -208,31 +209,50 @@ the build, not from the card. Green is not an HU brand colour.
 
 ## 6. Pass 2 — PIL layers the brand
 
+**16:9 and 9:16 use two different scripts. They are not one script with a flag.**
+
+| Deliverable | Script | Constants |
+| :--- | :--- | :--- |
+| YouTube 16:9, 1280×720 | `build_hu_yt_thumbnail.py` | `HU_Thumbnail_16x9_Constants_v1.md` |
+| Vertical 9:16, 1080×1920 | `build_hu_ig_thumbnail.py` | `HU_Thumbnail_Constants_v1.md` |
+
 ```bash
-python3 salvatore-art-department/build_hu_ig_thumbnail.py \
-  --input outputs/$VID_ID-$SLUG-raw-16x9.png \
+python3 salvatore-art-department/build_hu_yt_thumbnail.py \
+  --plate    outputs/$VID_ID-$SLUG-raw-16x9.png \
+  --trait    <cropped trait from the approved library> \
+  --logo     salvatore-art-department/HU_logo_new_2026_Watermark.png \
+  --font     "/System/Library/Fonts/Supplemental/Georgia Bold.ttf" \
   --headline "$HEADLINE" \
-  --subhead "$SUBHEAD" \
-  --format 16x9 \
-  --output outputs/$VID_ID-$SLUG-final-16x9.png
+  --keyword  "$KEY_WORD" \
+  --out      outputs/$VID_ID-$SLUG-yt_v1.jpg
 ```
 
-PIL handles: torn parchment (three-octave fractal noise), navy collegiate typography, the HU logo
-at its safe-zone position, drop shadows, the teacher-red trait circle.
+Run `--help` before invoking. **Do not copy a command line out of a document without checking it
+against the script** — see the correction below.
 
-**All geometry, colour, and type values come from `HU_Thumbnail_Constants_v1.md`.** They are not
-restated here. Duplicating them across files is how they drift.
+PIL handles the parchment block, navy collegiate typography, the teacher-red trait circle, the HU
+logo at its measured position, and drop shadows. All geometry lives in the constants files and is
+not restated here.
+
+Every run writes a **168 × 94 proof image** beside the output. Read it before approving.
+
+> ### Correction, 2026-08-14 — a command line in earlier versions was fiction
+>
+> v6 as first written, and `HU_AI_GE_Thumbnail_instructions.MD` before it, printed a Pass 2
+> invocation of `build_hu_ig_thumbnail.py` with `--input`, `--headline`, `--subhead`, and
+> `--format 16x9`. **None of those flags exist.** That script hardcodes `W, H = 1080, 1920`, has
+> no `argparse` and no `__main__`, and `build()` is a Python function only. There was no 16:9
+> build path at all — not a broken one, none. The command was transcribed from document to
+> document and never run.
+>
+> `build_hu_yt_thumbnail.py` was written on 2026-08-14 to close that gap, and tested against a
+> real Gemini plate before being documented. Its constants are **provisional** — derived in one
+> session, not measured against a body of approved work.
 
 > **PIL is the method, not a violation.** The V7 pipeline doc says "BANNED: PIL hand-composite"
 > without defining the term, and agents have read it as "PIL is banned." **Hand-compositing** —
-> an agent eyeballing coordinates in a throwaway script — is banned. A committed, versioned build
-> script that happens to use PIL is required. If you find yourself picking an x/y by eye, stop.
-
-> **`--format 16x9` is unverified.** The 2026-08-10 file shows this flag, but the script could not
-> be read when this document was merged. **Confirm the flag exists and that 16:9 constants are
-> actually defined in it before trusting a 16:9 build.** See open items.
-
----
+> eyeballing coordinates in a throwaway script — is banned. A committed, versioned build script
+> that happens to use PIL is required. If you find yourself picking an x/y by eye, stop.
 
 ## 7. Likeness drift — the thing that breaks first `[UNRATIFIED]`
 
@@ -330,9 +350,9 @@ Resolve the task ID inside that video's cloned list. **Never write to the templa
 
 1. **`generate_thumbnail.py` is not in the repository.** Pass 1 cannot run from a clean clone.
    Commit it, or document that it is Mac-only and why.
-2. **Verify `--format 16x9` in `build_hu_ig_thumbnail.py`**, and whether 16:9 margins, padding, and
-   logo coordinates are actually defined. The 9:16 constants were measured; **it is not established
-   that the 16:9 ones ever were.**
+2. ✅ **CLOSED 2026-08-14.** `--format 16x9` did not exist and neither did any 16:9 build path.
+   Resolved by `build_hu_yt_thumbnail.py` + `HU_Thumbnail_16x9_Constants_v1.md`. Those constants
+   are provisional and should be revisited after the first few approved thumbnails.
 3. **Gate the Path B code.** Frame-grab, skin detection, and `manual_scale` padding in
    `build_hu_ig_thumbnail.py` are live Path B logic — gate behind an explicit path flag, do not
    delete. Record the path in the output.
