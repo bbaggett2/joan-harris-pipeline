@@ -1,6 +1,7 @@
 # HU Thumbnail — 16:9 Constants & Build (YouTube)
 
-**Version:** 1
+**Version:** 1.1 — 2026-08-15. Fonts named and enforced (§1); assert list corrected (§4); usage
+rewritten against the shipped CLI (§5).
 **Scope:** YouTube thumbnail, 1280 × 720. **16:9 only.**
 **Build:** `salvatore-art-department/build_hu_yt_thumbnail.py`
 **Companion:** `HU_Thumbnail_Constants_v1.md` is the **9:16** set. Different canvas, different
@@ -35,6 +36,12 @@ MARGIN            44        # nothing crosses
 LEFT_COL_W        540       # headline + key word + trait live here
 RIGHT_KEEPOUT_X   760       # host zone; never composite left-column art past this
 TIMESTAMP_KEEPOUT (1080, 630, 1280, 720)   # YouTube duration stamp
+
+FONT_HEAD_FILL    CollegiateFLF.ttf          # drawn first, filled white
+FONT_HEAD_OUTLINE CollegiateOutlineFLF.ttf   # laid over it, HU Navy
+FONT_KEY          CollegiateFLF.ttf          # navy, on the parchment
+                  # ~/Library/Fonts/. NO SUBSTITUTES -- the build refuses.
+                  # Impact / Anton / Georgia / Gelasio are retired. Brand kit 4.
 
 HEAD_MAX_PT       82        # auto-fits down to HEAD_MIN_PT
 HEAD_MIN_PT       44
@@ -120,15 +127,35 @@ hand and pass the result without `--trim`.
 ## 4. Asserts — the build refuses rather than ships
 
 ```
-logo mark inside the left margin and on canvas
-trait circle stays left of RIGHT_KEEPOUT_X (host zone)
-trait circle does not overlap the parchment block
-trait circle does not collide with the logo mark
-logo does not intrude on the timestamp keepout
-headline wraps to at most 3 lines
-headline + key word is at most 5 words total
-output under 2 MB
+FONT  headline / fill / key-word faces are CollegiateFLF or CollegiateOutlineFLF
+      -- checked before any file is opened; refuses by name and says which face
+      is retired. Section 1.
+
+LOGO  bottom-left: mark inside the left margin
+      top-right:   mark inside the right and top margins
+      either:      mark on canvas
+      does not intersect the TIMESTAMP_KEEPOUT rectangle
+
+TRAIT circle stays left of RIGHT_KEEPOUT_X (host zone)
+      circle does not overhang the left margin, and is on canvas
+      circle does not cross the bottom margin
+      circle does not overlap the parchment block
+      circle does not collide with the logo mark  (bottom-left only)
+      at least 90px of vertical budget remains -- otherwise the build exits and
+      tells you to shorten the headline. Do NOT respond by shrinking margins.
+
+TEXT  headline wraps to at most 3 lines
+      headline + key word is at most 5 words TOTAL, counted by whitespace
+      (so "THIS Y-LOOP REVEALS" + "TRUST ISSUES" = 5, and passes)
+
+FILE  output under 2 MB
 ```
+
+> **Three assert bugs were found and fixed on 2026-08-15.** The timestamp check compared x only
+> and used `mark[1] > H`, which can never be true — so any logo past x=1080 tripped a keepout that
+> lives at the *bottom* right, and a legal top-right logo was rejected. It is now a real rectangle
+> intersection. The logo-margin assert assumed bottom-left. And there was no left-margin assert on
+> the trait circle at all. If you are reading an older copy of this file, it lists none of these.
 
 Every run also writes a **168 × 94 proof image** beside the output. Read it before approving —
 that is the size the thumbnail is actually judged at.
@@ -139,20 +166,33 @@ that is the size the thumbnail is actually judged at.
 
 ```bash
 python3 build_hu_yt_thumbnail.py \
-  --plate    outputs/0814-raw-16x9.png \
-  --trait    assets/y-no-trust-cropped.png \
-  --logo     HU_logo_new_2026_Watermark.png \
-  --font     Gelasio-Bold.ttf \
-  --headline "DOESN'T TRUST" \
-  --keyword  "ANYONE" \
-  --out      outputs/0814-yt_v1.jpg
+  --plate     outputs/0814-raw-16x9-dark.png \
+  --trait     assets/y-no-trust-cropped.png \
+  --logo      HU_logo_new_2026_Watermark.png \
+  --headline  "THIS Y-LOOP REVEALS" \
+  --keyword   "TRUST ISSUES" \
+  --logo-pos  top-right \
+  --tilt      0 \
+  --parch-pad-x 30 --parch-pad-y 26 --key-max-pt 62 \
+  --out       outputs/0814-yt_v1.jpg
 ```
+
+**The three font flags are not in that command on purpose** — they now default to the approved
+Collegiate faces, so a bare invocation is already compliant. Pass them only to be explicit.
 
 | Flag | Notes |
 | :--- | :--- |
 | `--plate` | Pass 1 Gemini output. Host and scene only. Scale-to-fill, centre-crop. |
 | `--trait` | From the approved library. **Never generated.** |
-| `--font` | `/System/Library/Fonts/Supplemental/Georgia Bold.ttf` on the Mac; `Gelasio-Bold.ttf` off-Mac. Metrics shift between them — re-check the fit. |
+| `--headline-font` | `~/Library/Fonts/CollegiateOutlineFLF.ttf`. **Enforced** — the build exits if it is anything else. |
+| `--headline-fill-font` | `~/Library/Fonts/CollegiateFLF.ttf`. Drawn white beneath the outline so the letters have a body. Omit it and the headline is hollow and illegible at 168×94. |
+| `--keyword-font` | `~/Library/Fonts/CollegiateFLF.ttf`. **Enforced.** |
+| `--logo-pos` | `bottom-left` or `top-right`. Top-right returns ~104px of vertical budget to the trait graphic. |
+| `--font` | Legacy fallback only. Nothing in an HU build should rely on it. |
+| `--headline-outline-color` | `navy` (default), `silver`, or `black`. Navy on a near-black plate is dark-on-dark — `silver` lifts it if the outline softens on a phone. |
+| `--tilt` | Parchment tilt in degrees. Default `-3.0`. **The approved reference builds are untilted — pass `0`.** |
+| `--parch-pad-x` / `--parch-pad-y` | Parchment padding. Defaults 34 / 20. **Collegiate needs more vertical padding than Georgia — use ~26 for `pad-y`** or the glyph bottoms spill past the cream and vanish against a dark plate. |
+| `--key-max-pt` | Caps the key-word size. Default 92. The parchment sizes to the type and the trait gets what is left, so a large key word starves the trait. ~62 is a good balance on a 3-line headline. |
 | `--edge` | `cut` (default) or `torn`. §6 permits either on 16:9, by the space the text needs. 9:16 is always torn. |
 | `--trim` | Opt-in. See §3. |
 
