@@ -218,13 +218,20 @@ the build, not from the card. Green is not an HU brand colour.
 
 ```bash
 python3 salvatore-art-department/build_hu_yt_thumbnail.py \
-  --plate    outputs/$VID_ID-$SLUG-raw-16x9.png \
-  --trait    <cropped trait from the approved library> \
-  --logo     salvatore-art-department/HU_logo_new_2026_Watermark.png \
-  --font     "/System/Library/Fonts/Supplemental/Georgia Bold.ttf" \
-  --headline "$HEADLINE" \
-  --keyword  "$KEY_WORD" \
-  --out      outputs/$VID_ID-$SLUG-yt_v1.jpg
+  --plate              outputs/$VID_ID-$SLUG-raw-16x9.png \
+  --trait              <cropped trait from the approved library> \
+  --logo               salvatore-art-department/HU_logo_new_2026_Watermark.png \
+  --headline-font      ~/Library/Fonts/CollegiateOutlineFLF.ttf \
+  --headline-fill-font ~/Library/Fonts/CollegiateFLF.ttf \
+  --keyword-font       ~/Library/Fonts/CollegiateFLF.ttf \
+  --logo-pos           top-right \
+  --headline           "$HEADLINE" \
+  --keyword            "$KEY_WORD" \
+  --out                outputs/$VID_ID-$SLUG-yt_v1.jpg
+
+**The two Collegiate faces are mandatory and enforced** — the build exits if anything else is
+passed. Brand kit §4. `--headline-fill-font` is not optional: the outline face alone renders
+hollow letters that fail at 168×94.
 ```
 
 Run `--help` before invoking. **Do not copy a command line out of a document without checking it
