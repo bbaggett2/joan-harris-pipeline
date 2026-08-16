@@ -5,6 +5,12 @@
 **Owner:** Bart Baggett, Founder
 **File purpose:** Single source of truth for all HU artwork, graphics, thumbnails, articles, captions, and AI generation. If you are producing anything under the HU brand, this file governs it.
 
+**Changelog — 2026.3 (2026-08-15):** §4 typography rewritten — the display face is now named and
+closed to substitutes (`CollegiateFLF` + `CollegiateOutlineFLF`), on both formats and enforced in
+code. §6 item 3 updated to match. §11 gained a font check. §12 item 4 closed. §7 routing table
+corrected — retired v5 replaced by v6, Step Map path fixed, 16:9 constants row added, constants
+split by format. §12 item 13 re-pointed.
+
 **Changelog — 2026.2 (2026-08-14):** §5 logo filename corrected to underscores. §7 rewritten for the two host paths. §8.1 stripped to a host-and-background plate prompt, per §6 item 5. §8.2 added. §2.5 copy-fidelity rule added. §11 updated. §12 items 7 and 8 closed; 11–13 added.
 
 ---
@@ -115,11 +121,29 @@ Never tidy, normalise, correct, or re-punctuate Bart's own headline or on-screen
 
 | Level | Font | Rules |
 | :--- | :--- | :--- |
-| **Display / headline** | Heavy collegiate block-serif, or `Impact` | ALL CAPS. Hook lines, big numbers ("10,000 TIMES"), thumbnail headlines. White with metallic-silver edge on dark backgrounds. |
-| **Parchment block text** | `Georgia Bold` or classic serif | Rendered in HU Navy `#1D3557`. Used for text sitting on parchment. |
+| **Display / headline** | **`CollegiateFLF` + `CollegiateOutlineFLF`** | ALL CAPS. Hook lines, big numbers ("10,000 TIMES"), thumbnail headlines. Solid face filled white, outline face over it in HU Navy. **No substitutes.** |
+| **Parchment block text** | **`CollegiateFLF`** | Rendered in HU Navy `#1D3557`. Used for text sitting on parchment. **No substitutes.** |
 | **Body / web prose** | `Inter`, `Roboto`, or `Helvetica Neue` | Clean sans-serif, high legibility. Web pages, descriptions, articles. |
 
-Do not mix more than two typefaces in a single graphic. Never set body copy in Impact.
+**Hard rule — the display typeface is named and closed.** HU thumbnail headlines are set in
+**`CollegiateFLF`** and **`CollegiateOutlineFLF`** and in nothing else. "Heavy collegiate
+block-serif" was a description, not a font, and for months every build silently fell back to
+whatever `--font` happened to carry — which is how Georgia Bold ended up setting display
+headlines. There is no substitute list. If the fonts are missing, the build stops; it does not
+pick something close.
+
+**Both faces are used together on the same glyphs.** `CollegiateFLF` is drawn first, filled
+white; `CollegiateOutlineFLF` is laid over it in HU Navy. `CollegiateOutlineFLF` on its own is
+hollow — at 168x94 the strokes close up and the headline turns to mush. Verified 2026-08-15.
+
+Fonts install via Font Book to `~/Library/Fonts/`. `Impact`, `Anton`, `Georgia Bold`, and
+`Gelasio Bold` are **retired from HU display use.**
+
+> **`[TO VERIFY]` — licensing.** The Collegiate FLF family's commercial-use licence has **not**
+> been confirmed. These thumbnails are commercial YouTube assets. Confirm the licence before this
+> scales, and record it here.
+
+Do not mix more than two typefaces in a single graphic. Never set body copy in a display face.
 
 ---
 
@@ -146,7 +170,7 @@ Canvas 1280×720. Maximum **three** visual focus elements.
 
 1. **Presenter — right ~40%.** Headshot, Waist-up, **entire head fully visible, never cropped.** The emotion and body language will come from the content of the transcript.  Host always looking directly into camera.
 2. **Visual trait focus — left ~40%.** One large, clearly legible magnified handwritten cursive letter or word, circled or highlighted in bright teacher-red pen. The source of this image will always come from published material from Bart Baggett's Libary of approved trait images. https://drive.google.com/drive/folders/1_ZzlXw1Zr2hoT-2aW8NK1cbWq8L2j-gH
-3. **Headline text — upper left.** Heavy collegiate block-serif, ALL CAPS, white with metallic-silver edge. The single key word or phrase sits inside a slightly tilted antique-parchment rectangle with navy text. The parchment should look like paper. Sometimes the edges are torn, but often they appear cut with scissors.  That depends on the size of the space required.
+3. **Headline text — upper left.** `CollegiateFLF` filled white with `CollegiateOutlineFLF` over it in HU Navy (§4), ALL CAPS. The single key word or phrase sits inside a slightly tilted antique-parchment rectangle with navy text. The parchment should look like paper. Sometimes the edges are torn, but often they appear cut with scissors.  That depends on the size of the space required.
 4. **Logo.** Small, bottom-left or top-right. Bottom-right stays clear.
 5. **Background.** Dark cinematic study at dusk, real photographic depth, non-distracting. The background is generated at a different step by Gemini. Building a background as a different solo step using Gemini produces better results and less drift than asking gemini to assemble the thumbnail with background and words in one prompt. 
 
@@ -164,11 +188,20 @@ Canvas 1280×720. Maximum **three** visual focus elements.
 
 | File | Scope |
 | :--- | :--- |
-| `salvatore-art-department/HU_Thumbnail_Constants_v1.md` | **Both paths, both formats.** Locked numbers, tear octaves, paper sizing, logo coordinates, fonts, build asserts. **If a number appears here and there, that file wins.** |
-| `salvatore-art-department/HU_Thumbnail_Creation_Process_v5.md` | **Path A — the default.** AI-generated host likeness. |
+| `salvatore-art-department/HU_Thumbnail_16x9_Constants_v1.md` | **16:9 numbers.** Canvas, margins, keepouts, type sizes, fonts, build asserts for 1280×720. Build is `build_hu_yt_thumbnail.py`. **If a number appears here and there, that file wins.** |
+| `salvatore-art-department/HU_Thumbnail_Constants_v1.md` | **9:16 numbers.** Tear octaves, paper sizing, logo coordinates, fonts, build asserts for 1080×1920. Build is `build_hu_ig_thumbnail.py`. **Same precedence rule.** |
+| `salvatore-art-department/HU_Thumbnail_PathA_Generated_Host_v6.md` | **Path A — the default.** AI-generated host likeness. **This is the current operating document.** |
 | `salvatore-art-department/HU_Brand_Thumbnail_v2_Screenshot_Torn_Parchment.md` | **Path B routing.** When the screengrab method may be used. |
 | `salvatore-art-department/HU_PathB_Frame_Acquisition_v1.md` | **Path B execution.** Frame selection, hair/face detection, landscape padding. |
-| `joan-supervising-agent/HU_Thumbnail_Step_Map_v1.md` | Step-by-step orchestration, human gates, ClickUp closure. |
+| `salvatore-art-department/HU_Thumbnail_Step_Map_v1.md` | Step-by-step orchestration, human gates, ClickUp closure. |
+
+> **Path corrections, 2026-08-15.** Three rows above were wrong and are fixed here.
+> `HU_Thumbnail_Creation_Process_v5.md` is **retired** — it lives in `_retired/` and was replaced
+> by `HU_Thumbnail_PathA_Generated_Host_v6.md`; this table had been sending agents to a retired
+> file for the *default* path. The Step Map was listed under `joan-supervising-agent/`, which
+> contains only a README — the file is in `salvatore-art-department/`. And the 16:9 constants file
+> had no row at all despite being the 16:9 authority. The single "both formats" constants row is
+> now split, because there are two builds with two different canvases.
 
 ### The two host paths
 
@@ -265,6 +298,7 @@ Do not use QDE-specific tags (`#HandwritingExpert`, forensic/legal tags) on HU c
 - [ ] Correct brand lane confirmed (§1.2) — this is not QDE or Bart Show content
 - [ ] The words "graphology" / "graphologist" appear nowhere in body copy, titles, or on-screen text
 - [ ] No outcome promises, no unverified stats, no unverified credentials
+- [ ] Headline and key word set in `CollegiateFLF` / `CollegiateOutlineFLF` only — no Impact, Anton, Georgia or Gelasio (§4)
 - [ ] Colors match §3 exactly; no brown dominant background
 - [ ] Parchment is flat fill, not heavy grain
 - [ ] Bart's own copy reproduced exactly as written — not tidied or re-punctuated (§2.5)
@@ -288,7 +322,9 @@ These are unresolved. Do not guess.
 1. Approved logo variants (light/dark/mono, favicon, print). The primary asset file is settled — see §5.
 2. Official tagline or positioning line for HU.
 3. Ratification of the `#D62828` vs `#FF0000` split proposed in §3 — **agent's proposal, not Bart's.**
-4. Licensed display typeface — "heavy collegiate block-serif" is a description, not a named font.
+4. ~~Licensed display typeface~~ — **CLOSED 2026-08-15.** Bart named it: `CollegiateFLF` for
+   filled text and `CollegiateOutlineFLF` for the outline, on both 16:9 and 9:16, enforced in the
+   build script. Its commercial licence is still `[TO VERIFY]` — see §4.
 5. House article word count and standard CTA wording.
 6. Approved course/product names and pricing for CTA copy.
 7. ~~Approved presenter photo library~~ — **CLOSED 2026-08-14.** The seven reference photographs in `salvatore-art-department/` are the fixed reference set for Path A generation. They are input, not published output.
@@ -297,4 +333,4 @@ These are unresolved. Do not guess.
 10. Liar Liar reference: is `ig_v2.jpg` or `ig_v3` canonical? The supplied filename also contains the banned status word "approved".
 11. **16:9 has no locked constant set.** Margins, padding, and logo coordinates for 1280×720 have never been measured the way the 9:16 set was. Every 16:9 build currently works from prose.
 12. **Synthetic-media disclosure.** Path A generates a likeness of a real person — Bart himself, with his own consent, which is the straightforward case. Current YouTube policy on disclosing realistic synthetic depictions should be checked directly before this scales. **Flagged, not researched.**
-13. **Ratify §6 of `HU_Thumbnail_Creation_Process_v5.md`.** That section is an agent draft implementing Bart's verbal ruling; none of it is his own wording.
+13. **Ratify §7 of `HU_Thumbnail_PathA_Generated_Host_v6.md`** (the likeness-drift controls, marked `[UNRATIFIED]`). That section is an agent draft implementing Bart's verbal ruling; none of it is his own wording. *(Previously cited as §6 of the retired `HU_Thumbnail_Creation_Process_v5.md`.)*
