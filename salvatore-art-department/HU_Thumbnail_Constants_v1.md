@@ -242,20 +242,33 @@ crosses a safe zone.
 
 ---
 
-## 8. Fonts
+## 8. Fonts — named and closed, 2026-08-15
 
-Georgia Bold and Impact are proprietary. **On the Mac use the real ones:**
-`/System/Library/Fonts/Supplemental/Georgia Bold.ttf` and `.../Impact.ttf`
+| Role | File | Colour |
+| :--- | :--- | :--- |
+| Headline body | `CollegiateFLF.ttf` | White, drawn first |
+| Headline outline | `CollegiateOutlineFLF.ttf` | HU Navy, laid over the body |
+| Parchment key word | `CollegiateFLF.ttf` | HU Navy |
 
-In a Linux container they don't exist. Metric-holding substitutes:
+Installed via Font Book to `~/Library/Fonts/`. **There is no substitute list.** If a font is
+missing the build stops rather than picking something close — a silent fallback is exactly how
+Georgia Bold ended up setting display headlines. Brand kit §4 governs.
 
-- **Gelasio Bold** → metric-compatible Georgia Bold
-  `https://raw.githubusercontent.com/SorkinType/Gelasio/master/fonts/ttf/Gelasio-Bold.ttf`
-- **Anton** → closest open Impact
-  `https://raw.githubusercontent.com/google/fonts/main/ofl/anton/Anton-Regular.ttf`
+**`CollegiateOutlineFLF` is never used alone.** It is an outline face: drawn by itself the letters
+are hollow, and at thumbnail size the strokes close up. Always fill with `CollegiateFLF` first.
 
-**The approved builds used the substitutes.** Rebuilding on the Mac with the real fonts **will
-shift the type** — expect it and re-check the fit.
+**Georgia Bold, Gelasio Bold, Impact and Anton are RETIRED from HU display use.**
+
+> ### The approved 9:16 builds predate this rule
+>
+> `liar-liar/ig_v2.jpg`, `true-optimists-write-like-this/ig_v6.jpg` and
+> `vanity-nobody-likes-him/ig_v7.jpg` were set in Gelasio Bold and Anton. They remain the approved
+> **layout** references — §6 still stands. They are **no longer typography references.**
+>
+> **The measured point sizes in §3 and §6 — `[156, 52, 52]`, `[230, 230]`, ~78pt — were fitted to
+> Georgia's metrics. Collegiate is wider.** Every one of them has to be re-fitted before the next
+> 9:16 build. Do not copy those numbers across. `build_hu_ig_thumbnail.py` has **not** yet been
+> given the two-font treatment; only the 16:9 script has. Flagged as the open item below.
 
 ---
 
