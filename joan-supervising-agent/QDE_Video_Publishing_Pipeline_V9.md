@@ -14,7 +14,7 @@
 
 This file was built from V9's structure with QDE brand facts from
 `brands/qde-brand.md`. It was **not** copied from the local QDE pipeline on the hard
-drive, deliberately: that file last ran cleanly in May and June 2026, which is *before*
+drive, deliberately: that file last ran cleanly in May -JULY 2026, which is *before*
 every failure the current procedure exists to prevent — bundled Metricool posts, the
 "link in bio" ban, Drive URLs failing as Metricool media, and ffprobe-before-REEL. A
 May-era pipeline would reintroduce all four.
@@ -65,15 +65,15 @@ palette is one that will be wrong within a month — this is exactly what went w
 ## BRAND CONFIG — OPERATIONAL IDS ONLY
 
 ```
-Metricool brand      : [TO VERIFY]
-Metricool blogId     : 6268508                    [BEST ESTIMATE — confirm]
+Metricool brand      : Handwriting Expert Inc
+Metricool blogId     : 6268508   
 Timezone             : America/Chicago
 Publish time         : [TO VERIFY]
-YouTube channel ID   : UCrpyI5SkE075HJaFyxO_ozQ   [BEST ESTIMATE — confirm]
-YouTube handle       : [TO VERIFY]
-TikTok               : [TO VERIFY]
-Instagram            : [TO VERIFY]
-Facebook page ID     : [TO VERIFY]
+YouTube channel ID   : UCrpyI5SkE075HJaFyxO_ozQ 
+YouTube handle       : @thehandwritingexpert
+TikTok               : @handwritingexpertsinc
+Instagram            : forensichandwritingexpert
+Facebook page ID     : handwritingexpertsinc
 Networks             : [TO VERIFY — HU runs YT/TikTok/IG/FB. Confirm QDE's set.]
 Ready-to-Publish     : [TO VERIFY — Drive folder ID]
 Description prompt   : peggy-olson-copywriting/qde_legal_description_prompt_V6.md
