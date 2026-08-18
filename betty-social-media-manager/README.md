@@ -100,8 +100,13 @@ from the video, the folder, or the title.
 | Brand | Pipeline | Status |
 |---|---|---|
 | Handwriting University | `joan-supervising-agent/HU_Video_Publishing_Pipeline_V9.md` | **Ready** |
-| Handwriting Experts Inc. / QDE | — | ⛔ not forked from V7 | BRANDS IN THE BRAND FOLDER, But some MD files not writte
-| Bart Allan Baggett / The Bart Show | — | ⛔ BRANDS IN THE BRAND FOLDER, But some MD files not written|
+| Handwriting Experts Inc. / QDE | — | ⛔ not forked from V7 |
+| Bart Allan Baggett / The Bart Show | — | ⛔ not written |
+
+**Brand kits for all three lanes exist** in `brands/` — `handwriting-university.md`,
+`qde-brand.md`, `bartallanbaggett-brand.md`. What is missing is not brand facts. QDE
+needs its pipeline forked from V7; the Bart Show needs both a pipeline and a description
+prompt.
 
 If a video does not belong to a lane with a pipeline on `main`: **STOP and ask Joan.**
 
