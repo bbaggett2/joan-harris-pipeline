@@ -4,6 +4,7 @@
 **Date:** 2026-08-18
 **Location:** `joan-supervising-agent/` — this is a cross-agent document, not Betty's
 **Status:** AUTHORITATIVE for HU — supersedes V8, which supersedes V7
+**Amended:** 2026-09-11 — Phase 6 upload method corrected to the `yutu` CLI (Bart)
 
 ---
 
@@ -131,7 +132,7 @@ ffprobe -v error -select_streams v:0 \
 | Agent | Phases | Tools |
 |---|---|---|
 | **Joan** | 0, all ClickUp gates, 9 | MASTER sheet, ClickUp, Metricool read, memory |
-| **Betty** | 1, 5, 6, 7, 8 | Drive, VTT cleaning, ffmpeg, YouTube Studio, Metricool API, lftp |
+| **Betty** | 1, 5, 6, 7, 8 | Drive, VTT cleaning, ffmpeg, rclone + `yutu` CLI, Metricool API, lftp |
 | **Peggy** | 2 (titles), 3 (descriptions + captions) | VTT reading, brand kit, description prompt |
 | **Salvatore** | 4 (all thumbnails) | Gemini via Mac (Desktop Commander), Drive |
 | **Bart** | Approval gates on 2, 3, 4, 6 | Sign-off only |
@@ -317,8 +318,15 @@ ffmpeg -y -i <land>.mp4 -vf "split[a][b];\
 ⛔ Approved title ✓ + approved `<VID_ID>_Description_Package_v1.md` ✓ + approved thumbnail ✓ all in
 hand, or STOP.
 
-1. **YouTube Studio in Chrome, uploading from Drive cloud.** Not a local download,
-   **not the yutu CLI.**
+1. **Direct terminal upload with the `yutu` CLI, from a local file path.** Not YouTube
+   Studio, not a Chrome session. rclone the final render down from Drive first — `yutu`
+   needs a real local path.
+
+   > *Corrected 2026-09-11 by Bart.* The prior instruction here ("YouTube Studio in
+   > Chrome, uploading from Drive cloud. Not a local download, not the yutu CLI")
+   > contradicted `Joan_PreFlight_Pipeline_Checklist_v3.md` Gate 4, which is the newer
+   > document, and is withdrawn. **Phase 7 caption upload is unaffected and is NOT
+   > `yutu`** — that remains a separate, separately-decided step.
 2. Sign in as `@handwritinguniversity` — channel `UCG-DLule9ZSStBdc5gSEoCw`.
 3. Create → Upload → select the final render.
 4. Visibility: **PRIVATE**. Never Unlisted, Public, or Scheduled at this stage.
@@ -476,3 +484,8 @@ any flags or exceptions.
 6. **`Joan_PreFlight_Pipeline_Checklist_v1.md`** — referenced by V8 as the Phase 0
    governing doc, never committed. Folded into Phase 0 above; delete the reference or
    commit the file.
+7. **This file is duplicated.** `joan-supervising-agent/README.md` holds a second copy of
+   this pipeline, and the two have already diverged — the README copy records the
+   Facebook page ID as verified (Bart, 2026-08-18) and carries a different Open Flags
+   list. Collapse to one file: keep this one, reduce the README to a pointer. Until then,
+   an agent told to "read the HU pipeline" can read either and get different answers.
