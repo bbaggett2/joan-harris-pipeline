@@ -3,13 +3,12 @@
 **Brand:** Handwriting University (HU) ONLY
 **Date:** 2026-09-12
 **Location:** `joan-supervising-agent/` — cross-agent document, not Betty's
-**Status:** DRAFT FOR REVIEW — supersedes V9 *and* the duplicate copy in `joan-supervising-agent/README.md`
+**Status:** AUTHORITATIVE for HU — supersedes V9, which has been deleted
 
-> ⚠️ **This file is not yet canonical.** V9 and the README copy are still live on `main`.
-> On approval: move both to `_retired/2026-09-12/` and rename this file to
-> `HU_Video_Publishing_Pipeline.md` — the repo's rule is that version numbers live in the
-> header, not the filename. The `V10` in this filename exists only so the change is
-> reviewable side by side, and comes out as soon as it has been read.
+> **Versioning:** the version lives in the filename, and the highest number is current.
+> `..._V10.md` beats `..._V9.md`, always. The header version above must match the filename.
+> A new revision becomes `..._V11.md`, and this file is deleted at the same time. Never two
+> live — that is what produced the duplicate README this file also replaces.
 
 ---
 
@@ -41,7 +40,7 @@
 
 **GitHub is authority. The Mac is where execution happens.**
 
-Every SOP, pipeline, prompt, and brand fact is committed to `bbaggett2/joan-harris-pipeline`.
+Every SOP, prompt, and brand fact is committed to `bbaggett2/joan-harris-pipeline`.
 Local copies under `joan foundation documents and SOP/`, `Ai Prompt Documents/`, installed
 skills, and plugins are caches. They drift. **When any local file disagrees with `main`,
 `main` wins.**
@@ -401,8 +400,7 @@ sees the finished article.
 
 **Default path: hand Metricool the Google Drive URL of the vertical 9:16 cut.** Metricool
 uploads Drive files into its own storage automatically, provided Google Drive is linked in
-the Metricool account (⚠️ OPEN FLAGS #2). Nothing is staged, nothing is copied, nothing is
-deleted.
+the Metricool account (⚠️ OPEN FLAGS #2). Nothing is staged, copied, or deleted.
 
 **Fallback — the FTP bridge.** Use this *only* when the Drive URL fails with
 `Failed to normalize media`, which happens when the file is **owner-only to an editor's
@@ -534,9 +532,9 @@ Never delete entries.
    with `getScheduledPosts`.
 4. **`Betty_SOP_VideoSmimeo_IG_Resize_Normalize_v1.md` is named as the Phase 5 governing
    doc but was never committed.** Under this repo's own rule that is a blocked job.
-5. **Retire the predecessors.** On approval of this file, move
-   `HU_Video_Publishing_Pipeline_V9.md` and `joan-supervising-agent/README.md` to
-   `_retired/2026-09-12/`, and rename this file to drop the version from its name.
+5. **`joan-supervising-agent/README.md` is still live and is a duplicate of this pipeline.**
+   It predates V10, still carries the withdrawn YouTube Studio instruction, and is what
+   GitHub renders on the folder page. Delete it — `README_V2.md` replaces it.
 6. **CTA variants** — two approved CTAs in circulation. Confirm which is canonical.
 7. **`BART_BAGGETT_VOICE.MD` is committed three times** — `brands/`, `betty/`, `peggy/`,
    all identical. Keep `brands/`. Delete the other two.
