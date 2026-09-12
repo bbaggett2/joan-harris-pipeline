@@ -3,12 +3,12 @@
 **Brand:** Handwriting Experts Inc. / QDE ONLY
 **Date:** 2026-09-12
 **Location:** `joan-supervising-agent/` — cross-agent document
-**Status:** DRAFT FOR REVIEW — supersedes V9
+**Status:** AUTHORITATIVE for QDE — supersedes V9, which has been deleted
 
-> ⚠️ **Not yet canonical.** V9 is still live on `main`. On approval: move
-> `QDE_Video_Publishing_Pipeline_V9.md` to `_retired/2026-09-12/` and rename this file to
-> `QDE_Video_Publishing_Pipeline.md`. Version belongs in the header, not the filename — the
-> `V10` exists only so the change is reviewable side by side.
+> **Versioning:** the version lives in the filename, and the highest number is current.
+> `..._V10.md` beats `..._V9.md`, always. The header version above must match the filename.
+> A new revision becomes `..._V11.md`, and this file is deleted at the same time. Never two
+> live.
 >
 > ⛔ **Keep V7 in git history** until this file has run a live batch clean.
 
@@ -46,7 +46,7 @@ QDE-specific:
 
 **GitHub is authority. The Mac is where execution happens.**
 
-Every SOP, pipeline, prompt, and brand fact is committed to `bbaggett2/joan-harris-pipeline`.
+Every SOP, prompt, and brand fact is committed to `bbaggett2/joan-harris-pipeline`.
 Local copies are caches. They drift. **When a local file disagrees with `main`, `main` wins.**
 An uncommitted file is a blocked job, not a fallback.
 
@@ -526,6 +526,3 @@ Never delete entries.
    $5,000 flat rate. **No pricing appears in any public copy until it is resolved.**
 10. **"Free initial case review"** — confirm the offer is current before it appears in a
     consumer CTA.
-11. **Retire the predecessor.** On approval, move `QDE_Video_Publishing_Pipeline_V9.md` to
-    `_retired/2026-09-12/` and rename this file to drop the version from its name. Keep V7
-    in git history until this file has run a live batch clean.
