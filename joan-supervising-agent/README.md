@@ -10,7 +10,7 @@ handling, and the pre-flight checklist every job runs first.
 ## Which file is current
 
 **The version is in the filename, the highest number wins, and every change bumps it.**
-`..._V10.md` beats `..._V9.md`. Any edit to a numbered file's content produces the next
+`..._V11.md` beats `..._V10.md`. Any edit to a numbered file's content produces the next
 number, and the file it replaces is deleted in the same commit. Never two live.
 
 The version header inside a file must match its filename. If they disagree, the filename is
@@ -31,13 +31,16 @@ duplicate of the HU pipeline and had already drifted out of sync with it.
 
 | You need | Read |
 | :--- | :--- |
-| The HU publishing procedure, end to end | `HU_Video_Publishing_Pipeline_V10.md` |
+| The HU publishing procedure, end to end | `HU_Video_Publishing_Pipeline_V11.md` |
 | The QDE publishing procedure, end to end | `QDE_Video_Publishing_Pipeline_V10.md` |
 | The gate that runs **before** any pipeline job | `Joan_PreFlight_Pipeline_Checklist_V4.md` |
 | Voice, palette, typography, banned terms | `brands/<brand>.md` — never a pipeline file |
 | Thumbnail methods and build scripts | `salvatore-art-department/` |
 | Description and caption prompts | `peggy-olson-copywriting/` |
 | Social and video execution SOPs | `betty-social-media-manager/` |
+
+> If a filename above has been superseded, the highest-numbered file of that name is the one
+> to read — it is authoritative even when this table has not caught up.
 
 ---
 
