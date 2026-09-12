@@ -10,15 +10,21 @@ handling, and the pre-flight checklist every job runs first.
 ## Which file is current
 
 **The version is in the filename, the highest number wins, and every change bumps it.**
-`..._V11.md` beats `..._V10.md`. Any edit to a numbered file's content produces the next
-number, and the file it replaces is deleted in the same commit. Never two live.
+Any edit to a numbered file's content produces the next number, and the file it replaces is
+deleted in the same commit. Never two live.
 
 The version header inside a file must match its filename. If they disagree, the filename is
 right and the header needs fixing.
 
-**READMEs are exempt** and stay unnumbered, because GitHub renders them by name. They carry
-a *Last updated* date instead. That is safe only because a README here states no rule that
-is not stated in a numbered file — if you find one that does, that is the bug.
+**Cross-references never name an exact version.** Anything written below as
+`Something_V<n>.md` means *the highest-numbered `Something_V*.md` in that folder* — it might
+be V5, V6 or V8. Always take the highest. This is why a bump in one file never makes another
+file wrong.
+
+**READMEs are exempt from numbering** and stay unnumbered, because GitHub renders them by
+name. They carry a *Last updated* date instead. That is safe only because a README here
+states no rule that is not stated in a numbered file — if you find one that does, that is
+the bug.
 
 ---
 
@@ -29,18 +35,15 @@ a bug — the rule belongs in the pipeline file, and a second copy of it will be
 month. That is exactly what happened to the README this one replaces: it had become a full
 duplicate of the HU pipeline and had already drifted out of sync with it.
 
-| You need | Read |
+| You need | Read (highest `n` wins) |
 | :--- | :--- |
-| The HU publishing procedure, end to end | `HU_Video_Publishing_Pipeline_V11.md` |
-| The QDE publishing procedure, end to end | `QDE_Video_Publishing_Pipeline_V10.md` |
-| The gate that runs **before** any pipeline job | `Joan_PreFlight_Pipeline_Checklist_V4.md` |
+| The HU publishing procedure, end to end | `HU_Video_Publishing_Pipeline_V<n>.md` |
+| The QDE publishing procedure, end to end | `QDE_Video_Publishing_Pipeline_V<n>.md` |
+| The gate that runs **before** any pipeline job | `Joan_PreFlight_Pipeline_Checklist_V<n>.md` |
 | Voice, palette, typography, banned terms | `brands/<brand>.md` — never a pipeline file |
 | Thumbnail methods and build scripts | `salvatore-art-department/` |
 | Description and caption prompts | `peggy-olson-copywriting/` |
 | Social and video execution SOPs | `betty-social-media-manager/` |
-
-> If a filename above has been superseded, the highest-numbered file of that name is the one
-> to read — it is authoritative even when this table has not caught up.
 
 ---
 
@@ -102,7 +105,7 @@ Restating is how two files come to disagree.
 
 **Every change bumps the number in the filename** — and the file it replaces is deleted in
 the same commit. Bumping and leaving the predecessor live recreates the ambiguity the rule
-exists to prevent.
+exists to prevent. **Never write an exact version into a cross-reference.**
 
 **Retire by deleting, or by moving to `_retired/YYYY-MM-DD/`.** Git history keeps the file
 either way. A missing file throws a loud error; a stale file gets read and believed.
@@ -116,7 +119,7 @@ Cite the Drive folder ID, never a local path.
 
 - [ ] Does another file already state this? Link instead.
 - [ ] Does this contradict anything written elsewhere? Search first.
-- [ ] Did a filename change? Grep the repo for the old one.
 - [ ] Number bumped in **both** the filename and the header, and do they match?
 - [ ] **Is the file it replaces deleted in the same commit?** Never leave two live.
+- [ ] Did you write an exact version into a reference? Use `_V<n>` instead.
 - [ ] Mac pulled since?
