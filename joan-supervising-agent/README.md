@@ -5,10 +5,6 @@ handling, and the pre-flight checklist every job runs first.
 
 **Last updated:** 2026-09-12
 
-> ⚠️ **`README_V2.md` in this folder is superseded by this file and should be deleted.**
-> READMEs are the one exemption from the numbering rule — GitHub renders `README.md` by
-> name, and a numbered README renders nowhere. See the root `README.md`.
-
 ---
 
 ## Which file is current
