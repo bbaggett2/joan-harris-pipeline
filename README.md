@@ -2,6 +2,8 @@
 
 Pipeline to manage agents for publishing and brand lanes.
 
+**Last updated:** 2026-09-12
+
 ---
 
 ## GitHub is the source of record. The Mac is a clone.
@@ -24,20 +26,27 @@ surface the problem. A quietly diverged copy does not.
 **One spec, one home.** If a rule or number already exists in another file, link to it.
 Restating is how two files come to disagree.
 
-**The version goes IN the filename, and the highest number is current.**
+**The version goes IN the filename, the highest number is current, and EVERY change bumps it.**
 `HU_Video_Publishing_Pipeline_V10.md` beats `..._V9.md`, always. A file with no number is older
-than any numbered file of the same name. This is Bart's rule, set 2026-09-12, and it replaces the
-earlier "version in the header, not the filename" rule — which is why you may still find files
-whose headers say otherwise.
+than any numbered file of the same name.
 
-> ⚠️ **This rule only works if you delete the old file.** Bumping the number and leaving the
-> predecessor live recreates the exact problem it exists to prevent — two live copies, and an
-> agent that reads whichever one it happened to open. When a V10 lands, the V9 goes. Every time.
-> The version header inside the file stays too, and must match the filename.
+> **Every change means every change.** Not "significant" changes, not "procedure" changes — any
+> edit to the content produces the next number. There is no judgment call about what counts,
+> which is the point: if the number moved, something is different, and you do not have to read
+> both files to find out whether it mattered.
+>
+> ⚠️ **Bumping the number and leaving the old file live is the failure this prevents.** The new
+> file and the deletion of the old one are the same action. Never two live. The version header
+> inside the file moves with the filename, and the two must match.
+>
+> *Exemption — `README.md` only.* GitHub renders `README.md` by name on the repo and folder
+> pages; a numbered README renders nowhere. READMEs therefore stay unnumbered and carry a
+> **Last updated** date instead. This is safe because a README here is navigation: it points at
+> the numbered files and states no rule that is not stated in one of them. Nothing authoritative
+> escapes the numbering.
 
-**Retire by moving or deleting — but do not leave it in place.** A superseded document either
-goes to `_retired/YYYY-MM-DD/` or gets deleted outright, since git history keeps it either way.
-A missing file throws a loud error; a stale file gets read and believed.
+**Retire by deleting, or by moving to `_retired/YYYY-MM-DD/`.** Git history keeps the file either
+way. A missing file throws a loud error; a stale file gets read and believed.
 
 **Assets are pulled, not mirrored.** Images in the Handwriting University Drive library are fetched
 on demand. Cite the Drive folder ID, never a local path.
@@ -47,16 +56,16 @@ on demand. Cite the Drive folder ID, never a local path.
 | Folder | Contents | Start here |
 | :--- | :--- | :--- |
 | `brands/` | Brand kits — voice, palette, typography, layout | the brand file for your lane |
-| `joan-supervising-agent/` | Orchestration — pipelines, the review gate, pre-flight | `README_V2.md` |
+| `joan-supervising-agent/` | Orchestration — pipelines, the review gate, pre-flight | the folder README |
 | `salvatore-art-department/` | Graphics SOPs, thumbnail methods, build scripts, host photos | `Salvator_AI_Graphics_SOP_v1.md` |
 | `peggy-olson-copywriting/` | Description and caption prompts, brand voice | the prompt for your lane |
-| `betty-social-media-manager/` | Social and video execution SOPs | `README.md` |
+| `betty-social-media-manager/` | Social and video execution SOPs | the folder README |
 
 ## Before you commit
 
 - [ ] Does another file already state this? Link instead.
 - [ ] Does this contradict anything written elsewhere? Search first.
 - [ ] Did a filename change? Grep the repo for the old one.
-- [ ] Is the version number bumped in **both** the filename and the header?
-- [ ] **Is the superseded file deleted or moved to `_retired/`?** Never leave two live.
+- [ ] **Number bumped in the filename AND the header, and do they match?**
+- [ ] **Is the file it replaces deleted in the same commit?** Never leave two live.
 - [ ] Mac pulled since?
