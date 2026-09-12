@@ -1,9 +1,22 @@
 # Handwriting University — Brand Kit
 
 **Brand ID:** `handwriting-university` / `HU`
-**Version:** 2026.2
+**Version:** 2026.4
 **Owner:** Bart Baggett, Founder
 **File purpose:** Single source of truth for all HU artwork, graphics, thumbnails, articles, captions, and AI generation. If you are producing anything under the HU brand, this file governs it.
+
+> **This file is not version-numbered in its filename**, unlike the art-department SOPs. Nine files
+> reference `brands/handwriting-university.md` by bare name, so numbering it would break all of
+> them. It versions in this header instead. Cross-references below never name an exact version:
+> `Something_v<n>.md` means *the highest-numbered file of that name* — take the highest.
+
+**Changelog — 2026.4 (2026-09-12):** Header version corrected — it read 2026.2 while the changelog
+below described 2026.3. §7 routing table repointed: all six rows now use the `_v<n>` form, because
+every file they named has since been replaced. §7's "Bart approves. Nothing else does." removed —
+the approver is a reviewer role and approval happens once, on the private YouTube video and the
+Metricool drafts. §11's 9:16 check reference repointed. §12 item 11 corrected: it claimed 16:9 had
+no constant set, which stopped being true on 2026-08-14. §12 item 13 repointed. §2.4 and the Path B
+election in §7 deliberately unchanged — those stay with Bart.
 
 **Changelog — 2026.3 (2026-08-15):** §4 typography rewritten — the display face is now named and
 closed to substitutes (`CollegiateFLF` + `CollegiateOutlineFLF`), on both formats and enforced in
@@ -91,6 +104,10 @@ Confident, warm, plainspoken, and curiosity-driven. Bart teaches — he does not
 ### 2.4 Claims discipline
 
 Handwriting analysis is presented as a **tool for insight**, not as a diagnostic or predictive instrument. Do not claim it detects disease, predicts crime, or guarantees outcomes. Do not attribute analysis to a named living person's handwriting without a documented public sample and Bart's approval.
+
+> **This one stays with Bart personally**, and did not move to the reviewer when the publishing
+> approval gates did. Attributing analysis to a named living person is a brand and legal judgement,
+> not a production check.
 
 ### 2.5 Bart's copy is set exactly as he writes it
 
@@ -184,37 +201,43 @@ Canvas 1280×720. Maximum **three** visual focus elements.
 
 ## 7. Thumbnail method files — where the build detail lives
 
-**This file specifies the 16:9 layout (§6) and nothing else about the build.** Geometry, constants, and the vertical format are owned by the art department:
+**This file specifies the 16:9 layout (§6) and nothing else about the build.** Geometry, constants, and the vertical format are owned by the art department.
+
+**Take the highest-numbered file of each name below.** These rows do not name exact versions, so the table cannot go stale when a file bumps.
 
 | File | Scope |
 | :--- | :--- |
-| `salvatore-art-department/HU_Thumbnail_16x9_Constants_v1.md` | **16:9 numbers.** Canvas, margins, keepouts, type sizes, fonts, build asserts for 1280×720. Build is `build_hu_yt_thumbnail.py`. **If a number appears here and there, that file wins.** |
-| `salvatore-art-department/HU_Thumbnail_Constants_v1.md` | **9:16 numbers.** Tear octaves, paper sizing, logo coordinates, fonts, build asserts for 1080×1920. Build is `build_hu_ig_thumbnail.py`. **Same precedence rule.** |
-| `salvatore-art-department/HU_Thumbnail_PathA_Generated_Host_v6.md` | **Path A — the default.** AI-generated host likeness. **This is the current operating document.** |
-| `salvatore-art-department/HU_Brand_Thumbnail_v2_Screenshot_Torn_Parchment.md` | **Path B routing.** When the screengrab method may be used. |
-| `salvatore-art-department/HU_PathB_Frame_Acquisition_v1.md` | **Path B execution.** Frame selection, hair/face detection, landscape padding. |
-| `salvatore-art-department/HU_Thumbnail_Step_Map_v1.md` | Step-by-step orchestration, human gates, ClickUp closure. |
+| `salvatore-art-department/HU_Thumbnail_16x9_Constants_v<n>.md` | **16:9 numbers.** Canvas, margins, keepouts, type sizes, fonts, build asserts for 1280×720. Build is `build_hu_yt_thumbnail.py`. **If a number appears here and there, that file wins.** |
+| `salvatore-art-department/HU_Thumbnail_Constants_v<n>.md` | **9:16 numbers.** Tear octaves, paper sizing, logo coordinates, fonts, build asserts for 1080×1920. Build is `build_hu_ig_thumbnail.py`. **Same precedence rule.** |
+| `salvatore-art-department/HU_Thumbnail_PathA_Generated_Host_v<n>.md` | **Path A — the default.** AI-generated host likeness. **This is the current operating document.** |
+| `salvatore-art-department/HU_Brand_Thumbnail_v<n>_Screenshot_Torn_Parchment.md` | **Path B routing.** When the screengrab method may be used. |
+| `salvatore-art-department/HU_PathB_Frame_Acquisition_v<n>.md` | **Path B execution.** Frame selection, hair/face detection, landscape padding. |
+| `salvatore-art-department/HU_Thumbnail_Step_Map_v<n>.md` | Step-by-step orchestration and ClickUp closure. |
 
-> **Path corrections, 2026-08-15.** Three rows above were wrong and are fixed here.
-> `HU_Thumbnail_Creation_Process_v5.md` is **retired** — it lives in `_retired/` and was replaced
-> by `HU_Thumbnail_PathA_Generated_Host_v6.md`; this table had been sending agents to a retired
-> file for the *default* path. The Step Map was listed under `joan-supervising-agent/`, which
-> contains only a README — the file is in `salvatore-art-department/`. And the 16:9 constants file
-> had no row at all despite being the 16:9 authority. The single "both formats" constants row is
-> now split, because there are two builds with two different canvases.
+> **Path corrections, 2026-09-12.** Every row above named an exact version, and every one of those
+> files has since been replaced — the table was sending agents to six deleted files, including for
+> the *default* path. The `_v<n>` form fixes that permanently.
+>
+> Earlier corrections still worth knowing: `HU_Thumbnail_Creation_Process_v5.md` is **retired** and
+> lives in `_retired/`; it was replaced by the Path A generated-host document. The Step Map was
+> once listed under `joan-supervising-agent/` — it is in `salvatore-art-department/`. And the 16:9
+> constants had no row at all despite being the 16:9 authority.
 
 ### The two host paths
 
 **Path A is the default. An agent never elects Path B.** Absence of instruction means Path A.
 
 - **Path A — generated host.** The likeness of Bart is generated, guided by a fixed reference set of real photographs. Those photographs are input, not output; they are considered overused as published images.
-- **Path B — screengrab.** A real frame from the actual video. **Bart elects this per video, in writing.**
+- **Path B — screengrab.** A real frame from the actual video. **Bart elects this per video, in writing.** This is a brand decision about how the host is portrayed, and it stays with him — it did not move to the reviewer.
 
 **One video, one path.** The 16:9 and the 9:16 for the same video must use the same host source, or the pair will not match.
 
 Do not work from a summary, from memory, or from an older version of this brand kit — the earlier "top 40% full-bleed parchment band" spec is **retired** and any output built to it is wrong. The 9:16 build is a deterministic Python script (`build_hu_ig_thumbnail.py`), not a prompt. Do not hand it to an image model.
 
-**Bart approves. Nothing else does.**
+**Nothing publishes without the reviewer.** Thumbnails are seen once, with the video — on the
+private YouTube upload and in the Metricool drafts. Making the video public and scheduling the
+drafts is the approval. There is no per-thumbnail sign-off, and **the reviewer is a role, not a
+named person.** *(Earlier versions of this section read "Bart approves. Nothing else does.")*
 
 ---
 
@@ -311,7 +334,7 @@ Do not use QDE-specific tags (`#HandwritingExpert`, forensic/legal tags) on HU c
 - [ ] CTA points to HandwritingUniversity.com only
 - [ ] Every `[TO VERIFY]` and `[UNRATIFIED DRAFT]` item resolved or explicitly flagged to Bart
 
-**For 9:16 covers**, also run the checks in `salvatore-art-department/HU_Thumbnail_Constants_v1.md` §9.
+**For 9:16 covers**, also run the checks in `salvatore-art-department/HU_Thumbnail_Constants_v<n>.md` §9.
 
 ---
 
@@ -331,6 +354,13 @@ These are unresolved. Do not guess.
 8. ~~Whether the §6 16:9 layout still stands~~ — **CLOSED 2026-08-14.** Bart rewrote §6. It stands, and §7 now reconciles it with the 9:16 method.
 9. Ratification of §8.4 and the §9 article structure, both currently `[UNRATIFIED DRAFT]`.
 10. Liar Liar reference: is `ig_v2.jpg` or `ig_v3` canonical? The supplied filename also contains the banned status word "approved".
-11. **16:9 has no locked constant set.** Margins, padding, and logo coordinates for 1280×720 have never been measured the way the 9:16 set was. Every 16:9 build currently works from prose.
+11. **The 16:9 constants are provisional, not proven.** *(Corrected 2026-09-12 — this item
+    previously said 16:9 had no constant set and that every 16:9 build worked from prose. That
+    stopped being true on 2026-08-14.)* `HU_Thumbnail_16x9_Constants_v<n>.md` holds the full set —
+    canvas, margins, keepouts, type sizes, logo coordinates, asserts. What is accurate is that
+    those numbers were derived from §6 plus the 168×94 legibility floor and tuned across seven test
+    renders, rather than measured against a body of approved work the way the 9:16 set was, and no
+    approved 16:9 reference build exists in the repo to compare against. Commit the first approved
+    16:9 thumbnail as the reference, then revisit the numbers.
 12. **Synthetic-media disclosure.** Path A generates a likeness of a real person — Bart himself, with his own consent, which is the straightforward case. Current YouTube policy on disclosing realistic synthetic depictions should be checked directly before this scales. **Flagged, not researched.**
-13. **Ratify §7 of `HU_Thumbnail_PathA_Generated_Host_v6.md`** (the likeness-drift controls, marked `[UNRATIFIED]`). That section is an agent draft implementing Bart's verbal ruling; none of it is his own wording. *(Previously cited as §6 of the retired `HU_Thumbnail_Creation_Process_v5.md`.)*
+13. **Ratify §7 of `HU_Thumbnail_PathA_Generated_Host_v<n>.md`** (the likeness-drift controls, marked `[UNRATIFIED]`). That section is an agent draft implementing Bart's verbal ruling; none of it is his own wording. It also now carries more weight than it did: with the single review, the human eye that catches likeness drift lands on the private video rather than on the plate, so those three controls are what stand between a drifting likeness and a redo.
