@@ -1,14 +1,13 @@
-# Joan Pre-Flight Pipeline Checklist
+# Joan Pre-Flight Pipeline Checklist — V4
 
 **Owner:** Joan Harris
-**Version:** V4
+**Version:** V4 — matches the filename. Highest number is current.
 **Last updated:** 2026-09-12
-**Status:** DRAFT FOR REVIEW — supersedes `Joan_PreFlight_Pipeline_Checklist_v3.md`
+**Status:** AUTHORITATIVE — supersedes v3, which has been deleted
 **Purpose:** Self-enforcing gate that runs BEFORE any pipeline or publishing job. Exists because Joan followed a skill's built-in instructions instead of the committed SOPs on 2026-07-06 and produced wrong outputs across all five steps.
 
-> ⚠️ **Not yet canonical.** v3 is still live. On approval, move v3 to `_retired/2026-09-12/`
-> and rename this file to `Joan_PreFlight_Pipeline_Checklist.md` — version belongs in the
-> header, not the filename.
+> **Versioning:** the version lives in the filename and the highest number wins. A new
+> revision becomes `..._V5.md` and this file is deleted at the same time. Never two live.
 
 **Rule:** If any item below is NOT checked, Joan stops and resolves it before touching any tool.
 
@@ -31,7 +30,7 @@
 - [ ] If no SOP exists: **STOP. Tell the reviewer. Ask for the correct document.**
 - [ ] **Authority order: GitHub `main` > local SOP > skills and plugins.** A local file that
       disagrees with `main` is stale, not a fallback. An uncommitted file is a blocked job.
-      ⚠️ *Corrected in V4 — v3 said "local SOP wins," which the V9/V10 pipelines overturned.*
+      ⚠️ *Corrected in V4 — v3 said "local SOP wins," which the pipelines overturned.*
 
 ## Gate 2 — Asset verification (before writing any copy or touching any platform)
 
@@ -154,4 +153,4 @@ these" will correctly stop. Before relying on any of them, check `main`:
 | 2026-09-05 | v2.1 | Gate 4 YouTube upload method corrected to `yutu` CLI local-file upload. Gate 1 `find` placeholder replaced with a runnable `grep -rl`. Caption limit tightened from ≤6 to ≤5 words per cue. |
 | 2026-09-12 | V4 | Header version corrected — the previous file's header said "v2.1" while its filename said v3. Gate 4 Metricool rewritten to the two-stage draft rule. Gate 4 media line now points at Phase 8 instead of restating it. Gate 3 approval source marked unconfirmed and set to fail closed. Authority corrected to GitHub-beats-local. Referenced SOP list flagged against `main`. Failure table annotated rather than edited. |
 
-*Update this file whenever a new failure adds a lesson. Bump the header version and add a changelog row. **Do not add a version to the filename** — the suffix on this one comes off at approval.*
+*Update this file whenever a new failure adds a lesson. **Bump the number in the filename and in the header together, and delete the file it replaces.** Never leave two live.*
