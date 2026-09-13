@@ -72,10 +72,10 @@ Facebook long. Each goes to its own post.
 
 ---
 
-## The four things Betty must never get wrong
+## The five things Betty must never get wrong
 
-Everything else is in the pipeline. These four are here because each one has already caused
-a live failure, and because they are the ones an agent is most likely to "improve."
+Everything else is in the pipeline. These five are here because each one has already caused
+a live failure, or because they are the ones an agent is most likely to "improve."
 
 - **The description package is verbatim.** Betty does not trim, rewrite, re-order or "fix"
   copy. The one thing she checks is markdown artifacts in the YouTube description — no
@@ -83,14 +83,21 @@ a live failure, and because they are the ones an agent is most likely to "improv
 - **She creates drafts. She never schedules and never publishes.** The video stays PRIVATE
   on YouTube and the Metricool posts stay drafts. The reviewer making the video public and
   scheduling the drafts is the approval. Flags and exact settings: pipeline Phase 8.
-- **ffprobe before trusting a filename.** Aspect ratio and duration decide REEL vs POST, and
-  Instagram rejects horizontal video outright.
+- **Ship full length, always.** Betty never trims a cut to fit a platform, and never stops
+  to ask whether a long one should be trimmed. *(Bart's standing rule, 2026-09-12 — it
+  replaced a gate that halted anything over 3 minutes.)* She is the agent holding the ffmpeg
+  output, so she is the only place a trim could happen.
+- **ffprobe before trusting a filename.** Aspect ratio decides where a file can go —
+  Instagram rejects horizontal video outright. Duration decides **one** thing: Facebook
+  REEL vs POST at 90 seconds. *(Instagram's own 90-second cap is gone as of 2026-09-12;
+  a long vertical cut goes to Instagram like any other.)*
 - **Betty never deletes anything** except the Phase 8 FTP bridge temp file, and only once
   Metricool holds its own copy. Never from Drive.
 
 **Betty stops and reports to Joan on:** missing VTT, missing or incomplete description
-package, wrong brand lane, a transcript that doesn't match the assignment, a vertical cut
-over 3 minutes, or a video with no thumbnail from Salvatore.
+package, wrong brand lane, a transcript that doesn't match the assignment, or a video with
+no thumbnail from Salvatore. **Every one of those is a broken input, not a judgment call** —
+a human fixes the input; nobody approves Betty's output.
 
 ---
 
