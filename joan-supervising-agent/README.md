@@ -3,7 +3,7 @@
 Orchestration for the video publishing pipelines: the phase map, the review gate, ClickUp
 handling, and the pre-flight checklist every job runs first.
 
-**Last updated:** 2026-09-12
+**Last updated:** 2026-09-13
 
 ---
 
@@ -65,7 +65,7 @@ before doing any of this.
 
 | Phase | What happens | Owner |
 | :--- | :--- | :--- |
-| **0** | Pre-flight: brand, client approval, assets, ClickUp task, repo freshness | Joan |
+| **0** | Pre-flight: brand, assets, ClickUp task, repo freshness | Joan |
 | **1** | Generate captions, clean the VTT to ≤5 words per cue, fix name spellings | Betty |
 | **2** | Six title options written from the cleaned transcript | Peggy |
 | **3** | The description package — five platform outputs in one file | Peggy |
@@ -76,7 +76,7 @@ before doing any of this.
 | **8** | Media URL, then four Metricool **drafts** — one per network, never scheduled | Betty |
 | **9** | Verify everything, notify the reviewer, append the ledger | Joan |
 
-**Phases 1–9 run agent-to-agent with no human step.** The work then stops and waits.
+**Phases 0–9 run agent-to-agent with no human step.** The work then stops and waits.
 
 ---
 
@@ -92,9 +92,20 @@ approval. There is no approval form and no third tool.
 address and the accounts whose action counts as approval, so handing review to a hired person
 is a config change, not a rewrite.
 
-⚠️ **QDE has one addition:** the legal-accuracy check. Statutes, jurisdictions, citations,
-credentials and timestamps are verified by a human before the video goes public, and any
-`[TO VERIFY]` marker left in the copy is a blocker. See the QDE pipeline, Gate 7.
+### The only two human touchpoints
+
+1. **Someone puts the video in the Ready-to-Publish folder** — the approval to start.
+   *(That folder is the approval. Phase 0 does not check a spreadsheet for one.)*
+2. **The reviewer makes the video public and schedules the drafts** — the approval to publish.
+
+Anything else that halts a job is a **broken input, not an approval** — a missing VTT, no
+ClickUp task, a missing asset, a prompt not on `main`, content in the wrong brand lane. A
+human fixes the input; nobody approves an output.
+
+⚠️ **QDE has one addition:** the legal-accuracy check, which is part of touchpoint 2.
+Statutes, jurisdictions, citations, credentials and timestamps are verified by a human before
+the video goes public, and any `[TO VERIFY]` marker left in the copy is a blocker. See the
+QDE pipeline, Gate 7.
 
 ---
 
