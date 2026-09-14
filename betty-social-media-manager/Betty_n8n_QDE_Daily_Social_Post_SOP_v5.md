@@ -17,7 +17,7 @@ The only two things that stop a run: **the queue has no READY row**, or **an API
 
 Every weekday at 7:00 AM Central, n8n:
 
-1. Reads **QDE_Post_Queue** (first tab, gid 0) and takes the first row whose `status` is `READY`.
+1. Reads **QDE_Post_Queue** (first tab, gid 0) and takes the first row whose `status` is `READY` or 'image not approved'
 2. Runs **preflight** on the caption. Preflight has two outcomes per check — **repair** or **flag** — and no third. See the table below. It never sets `BLOCKED`.
 3. Resolves the image, in this order, with no gap a human has to fill:
    - `image_url` filled → use it as-is (a hand-approved graphic).
@@ -58,10 +58,10 @@ The Aretha Franklin and Howard Hughes graphics were made in ChatGPT from a singl
 - **The headline, quoted, with the gold word named**: `headline "…" in white with only the word "…" in gold (#FFE455)`, then the sub-line quoted.
 - **The document at the center** with its detail (the smiley in the A, the CONTESTED stamp, the cracked ink under the magnifier).
 - **The torn cream notepad** with the `torn_note` bullets quoted verbatim.
-- **Law-book spines** with 3–4 words, optional.
-- Close with: *No logos, no other text.* For Hitler-diaries material add *No swastikas, no insignia.* For Hofmann add *No explosions, no religious symbols.*
 
-Expect a Hughes-type face rather than a photograph of Hughes; that is acceptable. Expect one bad letter in ten renders; the reviewer regenerates by clearing `image_url` and setting the row back to `READY`.
+- Close with:For Hitler-diaries material add swastikas and a similar diary in german ink.  For Hofmann story, add an image of a Mormon temple. 
+
+If public domain photographs are available of the celebrity, use them.  A photograph of Hughes and his airplanes are part of the library of congress and public domain; black and white photo is acceptable.  The reviewer regenerates by clearing `image_url` and setting the row back to `READY` and then running another N8N action called Betty — Regenerate image (button)
 
 ## Regenerate image — the button
 
