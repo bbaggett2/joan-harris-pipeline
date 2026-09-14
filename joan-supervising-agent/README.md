@@ -3,7 +3,7 @@
 Orchestration for the video publishing pipelines: the phase map, the review gate, ClickUp
 handling, and the pre-flight checklist every job runs first.
 
-**Last updated:** 2026-09-13
+**Last updated:** 2026-09-14
 
 ---
 
@@ -49,11 +49,13 @@ duplicate of the HU pipeline and had already drifted out of sync with it.
 
 ## Start here, in this order
 
-1. **Pre-flight checklist.** Identify the SOP, read it end to end, verify assets. A job that
-   skips this is how the 2026-07-06 failure happened.
-2. **The pipeline file for the brand.** HU and QDE are separate documents on purpose — they
-   have different voice rules, different thumbnail house styles, and different CTA policy.
-   Never run one brand's pipeline against the other's content.
+1. **Pre-flight checklist.** Resolve the brand from the Ready-to-Publish folder *first* —
+   you cannot choose the pipeline file until you know the lane — then identify the SOP, read
+   it end to end, and verify assets. A job that skips this is how the 2026-07-06 failure
+   happened.
+2. **The pipeline file for the resolved brand.** HU and QDE are separate documents on
+   purpose — they have different voice rules, different thumbnail house styles, and
+   different CTA policy. Never run one brand's pipeline against the other's content.
 3. **The brand kit.** Every voice, palette and terminology question resolves there.
 
 ---
@@ -65,7 +67,7 @@ before doing any of this.
 
 | Phase | What happens | Owner |
 | :--- | :--- | :--- |
-| **0** | Pre-flight: brand, assets, ClickUp task, repo freshness | Joan |
+| **0** | Pre-flight: **brand resolved from the folder**, assets, ClickUp task, repo freshness | Joan |
 | **1** | Generate captions, clean the VTT to ≤5 words per cue, fix name spellings | Betty |
 | **2** | Six title options written from the cleaned transcript | Peggy |
 | **3** | The description package — five platform outputs in one file | Peggy |
@@ -73,7 +75,7 @@ before doing any of this.
 | **5** | The vertical 9:16 cut, confirmed by ffprobe and never by filename | Betty |
 | **6** | YouTube upload via the `yutu` CLI — **private**, title, description, thumbnail | Betty |
 | **7** | Caption upload. Always last on YouTube, always after the thumbnail | Betty |
-| **8** | Media URL, then four Metricool **drafts** — one per network, never scheduled | Betty |
+| **8** | Two media URLs, then four Metricool **drafts** — **two of them Facebook** — never scheduled | Betty |
 | **9** | Verify everything, notify the reviewer, append the ledger | Joan |
 
 **Phases 0–9 run agent-to-agent with no human step.** The work then stops and waits.
@@ -94,13 +96,14 @@ is a config change, not a rewrite.
 
 ### The only two human touchpoints
 
-1. **Someone puts the video in the Ready-to-Publish folder** — the approval to start.
-   *(That folder is the approval. Phase 0 does not check a spreadsheet for one.)*
+1. **Someone puts the video in the Ready-to-Publish folder** — the approval to start, and
+   also how the system learns the brand. *(That folder is the approval. Phase 0 does not
+   check a spreadsheet for one.)*
 2. **The reviewer makes the video public and schedules the drafts** — the approval to publish.
 
 Anything else that halts a job is a **broken input, not an approval** — a missing VTT, no
-ClickUp task, a missing asset, a prompt not on `main`, content in the wrong brand lane. A
-human fixes the input; nobody approves an output.
+ClickUp task, a missing asset, a prompt not on `main`, a brand that will not resolve, or
+content in the wrong lane. A human fixes the input; nobody approves an output.
 
 ⚠️ **QDE has one addition:** the legal-accuracy check, which is part of touchpoint 2.
 Statutes, jurisdictions, citations, credentials and timestamps are verified by a human before
@@ -130,6 +133,10 @@ Cite the Drive folder ID, never a local path.
 
 - [ ] Does another file already state this? Link instead.
 - [ ] Does this contradict anything written elsewhere? Search first.
+- [ ] **Is the rule you are writing still current?** Check project memory and the newest
+      ruling before copying from an existing document. A file written from a stale sibling
+      inherits its errors — that is how the retired Facebook 90-second split survived into
+      three files after it had been overturned.
 - [ ] Number bumped in **both** the filename and the header, and do they match?
 - [ ] **Is the file it replaces deleted in the same commit?** Never leave two live.
 - [ ] Did you write an exact version into a reference? Use `_V<n>` instead.
