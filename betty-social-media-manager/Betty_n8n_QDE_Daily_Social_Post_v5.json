@@ -1,0 +1,942 @@
+{
+  "name": "Betty — QDE Daily Social Post (Metricool drafts) v5",
+  "settings": {
+    "timezone": "America/Chicago",
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "notes": "One READY row per day → graphic (if none) → Metricool DRAFT for Facebook and LinkedIn → sheet updated → reviewer pinged. Agent never schedules. See Betty_n8n_QDE_Daily_Social_Post_SOP_v1.md for setup and every [TO VERIFY].",
+    "templateCredsSetupCompleted": false
+  },
+  "nodes": [
+    {
+      "id": "n01",
+      "name": "Daily 7:00 CT",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * 1-5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n02",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        300
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1",
+              "name": "metricool_blogId",
+              "type": "string",
+              "value": "6268508"
+            },
+            {
+              "id": "c2",
+              "name": "metricool_userId",
+              "type": "string",
+              "value": "4831552"
+            },
+            {
+              "id": "c3",
+              "name": "sheet_id",
+              "type": "string",
+              "value": "14pkeLjlH5SFf4X_DwafTCJlgdKRNOcY-p_AAbZjxfec"
+            },
+            {
+              "id": "c4",
+              "name": "sheet_gid",
+              "type": "string",
+              "value": "0"
+            },
+            {
+              "id": "c5",
+              "name": "drive_folder_id",
+              "type": "string",
+              "value": "[TO VERIFY — Drive folder for generated social graphics]"
+            },
+            {
+              "id": "c6",
+              "name": "gemini_image_model",
+              "type": "string",
+              "value": "gemini-2.5-flash-image"
+            },
+            {
+              "id": "c7",
+              "name": "reviewer_slack_channel",
+              "type": "string",
+              "value": "[TO VERIFY — e.g. #qde-review]"
+            },
+            {
+              "id": "c8",
+              "name": "timezone",
+              "type": "string",
+              "value": "America/Chicago"
+            },
+            {
+              "id": "c9",
+              "name": "placeholder_publish_time",
+              "type": "string",
+              "value": "09:00:00"
+            },
+            {
+              "id": "openai_image_model",
+              "name": "openai_image_model",
+              "value": "gpt-image-1",
+              "type": "string"
+            },
+            {
+              "id": "openai_image_size",
+              "name": "openai_image_size",
+              "value": "1024x1536",
+              "type": "string"
+            },
+            {
+              "id": "regen_form_url",
+              "name": "regen_form_url",
+              "value": "https://empresse.app.n8n.cloud/form/regenerate-image",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true
+      }
+    },
+    {
+      "id": "n03",
+      "name": "Read queue (READY rows)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.sheet_id }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.sheet_gid }}"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "READY"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Google Sheets — Baggett"
+        }
+      }
+    },
+    {
+      "id": "n04",
+      "name": "Queue has a post?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "q1",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              },
+              "leftValue": "={{ $json.post_id }}",
+              "rightValue": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n05",
+      "name": "Queue empty — tell reviewer",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        880,
+        520
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Config').item.json.reviewer_slack_channel }}"
+        },
+        "text": "=QDE daily post: the queue has no READY rows. Nothing was staged today. Set a row to READY in QDE_Post_Queue to resume.",
+        "otherOptions": {}
+      },
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Slack — Baggett"
+        }
+      }
+    },
+    {
+      "id": "n06",
+      "name": "Preflight checks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        200
+      ],
+      "parameters": {
+        "jsCode": "// Betty — QDE Daily Social Post v4 · \"Preflight checks\" Code node (LIVE 2026-09-12)\n// Mode: Run Once for All Items. Input: the one READY row from \"Queue has a post?\".\n// Preflight REPAIRS or FLAGS. It never blocks. Only an empty caption skips the row.\n// Output keeps v3 field names: preflight_ok (false only when caption empty), preflight_problems (flag list).\n// caption goes out CLEAN — flags live in the sheet `notes` column and the Slack message, never in the post.\nconst row = { ...$input.first().json };\nconst flags = [];\nlet cap = String(row.caption || '').trim();\n// Repair Mac-Roman mojibake from the seed CSV import (‚Äî = —, ¬∑ = ·, etc.)\nconst MOJI = [['‚Äî','—'],['‚Äì','–'],['¬∑','·'],['‚Äô','’'],['‚Äò','‘'],['‚Äú','“'],['‚Äù','”'],['‚Ä¶','…'],['‚úÖ','✅'],['‚ö†Ô∏è','⚠️'],['¬Ω','½'],['√©','é']];\nconst demoji = s => MOJI.reduce((t,[a,b]) => t.split(a).join(b), String(s || ''));\ncap = demoji(cap);\nfor (const k of ['headline','subline','torn_note','gold_word','fact_status','image_prompt','face_source']) row[k] = demoji(row[k]);\nconst PHONE = '1-800-980-9030';\nconst DOMAIN_OK = 'HandwritingExpertUSA.com';\nconst CTA = '\\n\\n' + PHONE + '\\n' + DOMAIN_OK + ' · bartbaggett.com';\n\nif (!cap) {\n  return [{ json: { ...row, preflight_ok: false, preflight_problems: 'EMPTY CAPTION', flags: ['EMPTY CAPTION'] } }];\n}\n\n// --- repairs (mechanical only) ---\nif (/HandwritingExpert\\.com/i.test(cap)) { cap = cap.replace(/HandwritingExpert\\.com/gi, DOMAIN_OK); flags.push('DOMAIN REPAIRED'); }\nif (!cap.includes(PHONE) || !cap.includes(DOMAIN_OK)) { cap = cap + CTA; flags.push('CTA APPENDED'); }\nconst pointer = /[^.!?\\n]*\\b(link in (my )?bio|full (breakdown|video|episode) on (youtube|tiktok|instagram)|watch (the )?full (video|episode))\\b[^.!?\\n]*[.!?]?/gi;\nif (pointer.test(cap)) { cap = cap.replace(pointer, '').replace(/\\n{3,}/g, '\\n\\n'); flags.push('POINTER REMOVED'); }\n\n// --- flags (reviewer fixes in the sheet / Metricool) ---\nif (/graphol/i.test(cap.replace(/#\\w+/g, ''))) flags.push('BANNED TERM');\nif (/\\[TO VERIFY\\]|\\*\\*\\*\\*/.test(cap)) flags.push('TO VERIFY IN COPY');\nif (/win your case|guarantee/i.test(cap)) flags.push('OUTCOME LANGUAGE');\nif (String(row.facts_need_verify || '').toUpperCase() === 'YES') flags.push('FACTS UNVERIFIED');\nconst facePending = String(row.photo_required || '').toUpperCase() === 'YES' && !String(row.image_url || '').trim();\nif (facePending) flags.push('FACE PENDING');\n\nreturn [{ json: {\n  ...row,\n  caption: cap,\n  caption_clean: cap,\n  flags,\n  face_pending: facePending,\n  preflight_ok: true,\n  preflight_problems: flags.length ? flags.join('; ') : 'none',\n} }];\n",
+        "mode": "runOnceForAllItems"
+      }
+    },
+    {
+      "id": "n07",
+      "name": "Preflight passed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        200
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "p1",
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              },
+              "leftValue": "={{ $json.preflight_ok }}",
+              "rightValue": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n08",
+      "name": "Mark row ERROR",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1320,
+        420
+      ],
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.sheet_id }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.sheet_gid }}"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "post_id"
+          ],
+          "value": {
+            "post_id": "={{ $json.post_id }}",
+            "status": "ERROR",
+            "notes": "={{ 'ERROR: ' + $json.preflight_problems }}"
+          }
+        }
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Google Sheets — Baggett"
+        }
+      }
+    },
+    {
+      "id": "n09",
+      "name": "Error — tell reviewer",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1540,
+        420
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Config').item.json.reviewer_slack_channel }}"
+        },
+        "text": "=QDE daily post ERROR — {{ $('Preflight checks').item.json.post_id }} ({{ $('Preflight checks').item.json.headline }}). Reason: {{ $('Preflight checks').item.json.preflight_problems }}. Nothing was sent to Metricool. Fix the row and set it back to READY.",
+        "otherOptions": {}
+      },
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Slack — Baggett"
+        }
+      }
+    },
+    {
+      "id": "n10",
+      "name": "Has image already?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        100
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "i1",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              },
+              "leftValue": "={{ $json.image_url }}",
+              "rightValue": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n11",
+      "name": "OpenAI — generate graphic",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/images/generations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: $('Config').item.json.openai_image_model, prompt: $json.image_prompt, size: $('Config').item.json.openai_image_size, quality: 'high', moderation: 'low', output_format: 'png', n: 1 }) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "OpenAI Images"
+        }
+      },
+      "notes": "Header Auth credential 'OpenAI Images': Name = Authorization, Value = Bearer <OpenAI API key>. The prompt in the sheet already names and describes the person and quotes the headline/gold word/sub-line — nothing is appended here."
+    },
+    {
+      "id": "n12",
+      "name": "Base64 → PNG",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        200
+      ],
+      "parameters": {
+        "jsCode": "const resp = $input.first().json;\nconst b64 = resp && resp.data && resp.data[0] && resp.data[0].b64_json;\nif (!b64) throw new Error('OpenAI returned no image. Raw: ' + JSON.stringify(resp).slice(0,500));\nconst row = $('Preflight checks').first().json;\nconst buf = Buffer.from(b64, 'base64');\nconst stamp = $now.setZone('America/Chicago').toFormat('yyyyLLdd-HHmm');\nconst bin = await this.helpers.prepareBinaryData(buf, row.post_id + '_' + stamp + '_1024x1536.png', 'image/png');\nreturn [{ json: { post_id: row.post_id }, binary: { data: bin } }];"
+      }
+    },
+    {
+      "id": "n13",
+      "name": "Upload PNG to Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1980,
+        200
+      ],
+      "parameters": {
+        "operation": "upload",
+        "name": "={{ $json.post_id }}_1080x1350.png",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.drive_folder_id }}"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Google Drive — Baggett"
+        }
+      }
+    },
+    {
+      "id": "n14",
+      "name": "Share: anyone with link",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2200,
+        200
+      ],
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.id }}"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Google Drive — Baggett"
+        }
+      }
+    },
+    {
+      "id": "n15",
+      "name": "Set image_url (generated)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2420,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "g1",
+              "name": "image_url",
+              "type": "string",
+              "value": "={{ 'https://drive.google.com/uc?id=' + $('Upload PNG to Drive').item.json.id }}"
+            },
+            {
+              "id": "g2",
+              "name": "image_source",
+              "type": "string",
+              "value": "generated"
+            }
+          ]
+        },
+        "includeOtherFields": false
+      }
+    },
+    {
+      "id": "n16",
+      "name": "Set image_url (pre-built)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1540,
+        0
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "h1",
+              "name": "image_url",
+              "type": "string",
+              "value": "={{ $json.image_url }}"
+            },
+            {
+              "id": "h2",
+              "name": "image_source",
+              "type": "string",
+              "value": "pre-built"
+            }
+          ]
+        },
+        "includeOtherFields": false
+      }
+    },
+    {
+      "id": "n17",
+      "name": "Assemble post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        100
+      ],
+      "parameters": {
+        "jsCode": "const row = $('Preflight checks').first().json;\nconst cfg = $('Config').first().json;\nconst img = $input.first().json;\n// v5: publish slot = latest publish_date among STAGED/PUBLISHED rows + 1 weekday; never today or earlier;\n// never a day another QDE post already holds. One post per weekday, 24 hours apart.\nconst taken = $('Read scheduled dates').all().map(i => i.json.publish_date).filter(Boolean).map(s => String(s).slice(0,10));\nconst tz = cfg.timezone || 'America/Chicago';\nlet d = $now.setZone(tz).startOf('day').plus({ days: 1 });\nif (taken.length) {\n  const latest = taken.sort().slice(-1)[0];\n  const l = DateTime.fromISO(latest, { zone: tz }).plus({ days: 1 });\n  if (l > d) d = l;\n}\nwhile (d.weekday > 5 || taken.includes(d.toISODate())) d = d.plus({ days: 1 });\nconst ymd = d.toISODate();\nconst base = {\n  text: row.caption,\n  media: [img.image_url],\n  mediaAltText: [row.headline + ' — ' + row.subline],\n  draft: true,\n  saveExternalMediaFiles: true,\n  autoPublish: true,\n  shortener: false,\n  hasNotReadNotes: false,\n  descendants: [],\n  firstCommentText: '',\n  smartLinkData: { ids: [] },\n  publicationDate: { dateTime: ymd + 'T' + cfg.placeholder_publish_time, timezone: tz }\n};\nconst fb = { ...base, providers: [{ network: 'facebook' }], facebookData: { type: 'POST' } };\nconst li = { ...base, providers: [{ network: 'linkedin' }], linkedinData: { type: 'post', previewIncluded: true, publishImagesAsPDF: false } };\nreturn [{ json: { post_id: row.post_id, headline: row.headline, image_url: img.image_url, image_source: img.image_source, publish_date: ymd, fb_body: fb, li_body: li } }];"
+      }
+    },
+    {
+      "id": "n18",
+      "name": "Metricool — Facebook DRAFT",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2860,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://app.metricool.com/api/v2/scheduler/posts?blogId={{ $('Config').item.json.metricool_blogId }}&userId={{ $('Config').item.json.metricool_userId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.fb_body) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Metricool X-Mc-Auth"
+        }
+      }
+    },
+    {
+      "id": "n19",
+      "name": "Metricool — LinkedIn DRAFT",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2860,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://app.metricool.com/api/v2/scheduler/posts?blogId={{ $('Config').item.json.metricool_blogId }}&userId={{ $('Config').item.json.metricool_userId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('Assemble post').item.json.li_body) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Metricool X-Mc-Auth"
+        }
+      }
+    },
+    {
+      "id": "n20",
+      "name": "Mark row STAGED",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3080,
+        100
+      ],
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.sheet_id }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.sheet_gid }}"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "post_id"
+          ],
+          "value": {
+            "post_id": "={{ $('Assemble post').item.json.post_id }}",
+            "status": "STAGED",
+            "image_url": "={{ $('Assemble post').item.json.image_url }}",
+            "metricool_fb_id": "={{ $('Metricool — Facebook DRAFT').item.json.data ? $('Metricool — Facebook DRAFT').item.json.data.id : JSON.stringify($('Metricool — Facebook DRAFT').item.json).slice(0,120) }}",
+            "metricool_li_id": "={{ $json.data ? $json.data.id : JSON.stringify($json).slice(0,120) }}",
+            "date_staged": "={{ $now.setZone('America/Chicago').toFormat('yyyy-LL-dd HH:mm') }}",
+            "publish_date": "={{ $('Assemble post').item.json.publish_date }}",
+            "notes": "={{ 'REVIEW: ' + $('Preflight checks').item.json.preflight_problems + ($('Preflight checks').item.json.face_pending ? ' | Face source: ' + $('Preflight checks').item.json.face_source : '') + (String($('Preflight checks').item.json.facts_need_verify).toUpperCase() === 'YES' ? ' | Fact status: ' + $('Preflight checks').item.json.fact_status : '') }}",
+            "image_feedback": ""
+          }
+        }
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Google Sheets — Baggett"
+        }
+      }
+    },
+    {
+      "id": "n21",
+      "name": "Staged — tell reviewer",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        3300,
+        100
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Config').item.json.reviewer_slack_channel }}"
+        },
+        "text": "=QDE daily post STAGED — {{ $('Assemble post').item.json.post_id }} ({{ $('Assemble post').item.json.headline }}) · publishes {{ $('Assemble post').item.json.publish_date }} 09:00 CT if approved\nImage: {{ $('Assemble post').item.json.image_url }}\nFacebook: {{ $('Metricool — Facebook DRAFT').item.json.data && $('Metricool — Facebook DRAFT').item.json.data.plannerUrl ? $('Metricool — Facebook DRAFT').item.json.data.plannerUrl : 'see Metricool planner' }}\nLinkedIn: {{ $('Metricool — LinkedIn DRAFT').item.json.data && $('Metricool — LinkedIn DRAFT').item.json.data.plannerUrl ? $('Metricool — LinkedIn DRAFT').item.json.data.plannerUrl : 'see Metricool planner' }}\nFlags: {{ $('Preflight checks').item.json.preflight_problems }}\n{{ String($('Preflight checks').item.json.facts_need_verify).toUpperCase() === 'YES' ? 'Fact status: ' + $('Preflight checks').item.json.fact_status : '' }}\nNothing is scheduled. Approve by scheduling the drafts in the planner. Not happy with the image? Put feedback in column S, then: Regenerate image → {{ $('Config').item.json.regen_form_url }}?post_id={{ $('Assemble post').item.json.post_id }}",
+        "otherOptions": {}
+      },
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Slack — Baggett"
+        }
+      }
+    },
+    {
+      "id": "read-scheduled-dates",
+      "name": "Read scheduled dates",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        330,
+        120
+      ],
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.sheet_id }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Config').item.json.sheet_gid }}"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "STAGED"
+            },
+            {
+              "lookupColumn": "status",
+              "lookupValue": "PUBLISHED"
+            }
+          ]
+        },
+        "options": {
+          "combineFilters": "OR"
+        }
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "[SET IN N8N]",
+          "name": "Google Sheets — Baggett"
+        }
+      },
+      "alwaysOutputData": true,
+      "notes": "Every STAGED/PUBLISHED row — Assemble post uses their publish_date to find the next open weekday slot. alwaysOutputData so an empty result still lets the run continue."
+    }
+  ],
+  "connections": {
+    "Daily 7:00 CT": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Read scheduled dates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read queue (READY rows)": {
+      "main": [
+        [
+          {
+            "node": "Queue has a post?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Queue has a post?": {
+      "main": [
+        [
+          {
+            "node": "Preflight checks",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Queue empty — tell reviewer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preflight checks": {
+      "main": [
+        [
+          {
+            "node": "Preflight passed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preflight passed?": {
+      "main": [
+        [
+          {
+            "node": "Has image already?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark row ERROR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has image already?": {
+      "main": [
+        [
+          {
+            "node": "Set image_url (pre-built)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "OpenAI — generate graphic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base64 → PNG": {
+      "main": [
+        [
+          {
+            "node": "Upload PNG to Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload PNG to Drive": {
+      "main": [
+        [
+          {
+            "node": "Share: anyone with link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share: anyone with link": {
+      "main": [
+        [
+          {
+            "node": "Set image_url (generated)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set image_url (generated)": {
+      "main": [
+        [
+          {
+            "node": "Assemble post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set image_url (pre-built)": {
+      "main": [
+        [
+          {
+            "node": "Assemble post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble post": {
+      "main": [
+        [
+          {
+            "node": "Metricool — Facebook DRAFT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Metricool — LinkedIn DRAFT": {
+      "main": [
+        [
+          {
+            "node": "Mark row STAGED",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark row STAGED": {
+      "main": [
+        [
+          {
+            "node": "Staged — tell reviewer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read scheduled dates": {
+      "main": [
+        [
+          {
+            "node": "Read queue (READY rows)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark row ERROR": {
+      "main": [
+        [
+          {
+            "node": "Error — tell reviewer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI — generate graphic": {
+      "main": [
+        [
+          {
+            "node": "Base64 → PNG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Metricool — Facebook DRAFT": {
+      "main": [
+        [
+          {
+            "node": "Metricool — LinkedIn DRAFT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "versionNotes": "v5 2026-09-13 — built from the v3 export plus every edit made in the live editor on 2026-09-12/13, plus the v5 changes not yet applied in the editor (OpenAI image engine, ERROR rename, publish-slot logic, notes/Slack text). Import, re-select the five credentials (Google Sheets, Google Drive, Slack, Metricool X-Mc-Auth, OpenAI Images), run once on a READY row, then Publish. The Regenerate-image button is a separate workflow (see SOP v5)."
+}
