@@ -18,7 +18,7 @@ between them except the voice file and the banned-terms list. A lane with no pro
 | **Video descriptions — HU** | cleaned VTT | `<VID_ID>_Description_Package_v1.md` | `hu_description_prompt_V2.md` | **Current** |
 | **Video descriptions — QDE** | cleaned VTT | `<VID_ID>_Description_Package_v1.md` | `qde_legal_description_prompt_V6.md` | **Current** |
 | **QDE famous-case posts** | researched public sources | one row of `QDE_Post_Queue` | three-stage chain, below | **Current** |
-| **LinkedIn organic posts** | Bart, or the day's material | a post on Bart's personal LinkedIn | — | ⛔ **not written** |
+| **LinkedIn organic posts** | Bart, or the day's material | a post on Bart's personal LinkedIn | — | ⛔ **not written, but it will be similar to QDE famous-case posts procedure. Peggy writes, never posts. ** |
 | Bart Allan Baggett / The Bart Show video | cleaned VTT | description package | — | ⛔ **not written** |
 
 **The QDE famous-case chain — three stages, one owner each. Run in order; each names the next.**
