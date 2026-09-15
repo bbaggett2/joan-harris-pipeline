@@ -1,3 +1,21 @@
+> # ⛔ DEPRECATED — superseded by V4
+>
+> **Do not run this file. Use [`QDE_FamousCase_Story_Prompt_V4.md`](./QDE_FamousCase_Story_Prompt_V4.md).**
+>
+> **V4 is a superset of this file — every copy rule below is unchanged.** What V3 is missing:
+>
+> 1. **The completeness gate.** V3 says column J is written at Stage B but never says a row must not reach `READY`
+>    with it blank. Betty sends column J straight to `gpt-image-1` with no human stop, so a blank cell still becomes
+>    two Metricool drafts with nothing usable in the frame. Preflight will not catch it — it checks the caption.
+> 2. **The render-approval loop.** A prompt is finished when someone looks at the picture, not when it is written.
+>    V4 covers column S, the Regenerate button, and the rule that a wrong *concept* means fixing column J first.
+> 3. **The drift warning.** Editing a headline in D orphans the headline quoted inside J. Four of the five published
+>    rows already have this problem.
+>
+> Body kept as the record of what changed from V2.
+
+---
+
 # QDE Famous-Case Story Prompt — the copy step
 **Version:** V3 · **Prepared:** 2026-09-15 · **Owner:** Peggy (copy) · **Lane:** Handwriting Experts Inc. / QDE only
 **Voice:** `BART_BAGGETT_VOICE.MD` · **Credentials:** `brands/qde-brand.md`
