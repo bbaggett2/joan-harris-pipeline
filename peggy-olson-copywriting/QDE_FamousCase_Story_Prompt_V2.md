@@ -1,3 +1,14 @@
+> # ⛔ DEPRECATED — superseded by V3
+>
+> **Do not run this file. Use [`QDE_FamousCase_Story_Prompt_V3.md`](./QDE_FamousCase_Story_Prompt_V3.md).**
+>
+> V2 lived for about twenty minutes on 2026-09-15. **V3 changes no rules** — it moves the RICK paste block out of
+> Stage A into its own file, [`Headline-QDE-Post.md`](./Headline-QDE-Post.md), so the block exists in one place
+> instead of two. Everything below is accurate but duplicated; the body is kept only as the record of what changed
+> from v1.
+
+---
+
 # QDE Famous-Case Story Prompt — the copy step
 **Version:** V2 · **Prepared:** 2026-09-15 · **Owner:** Peggy (copy) · **Lane:** Handwriting Experts Inc. / QDE only
 **Voice:** `BART_BAGGETT_VOICE.MD` · **Credentials:** `brands/qde-brand.md`
@@ -55,6 +66,9 @@ it renders the brackets into the graphic.
 ---
 
 ## Stage A — RICK writes the headline, the gold word and the sub-line
+
+> **In V3 this section is a separate file: [`Headline-QDE-Post.md`](./Headline-QDE-Post.md), which also carries the
+> approved headline library for QDE-FC-1 through FC-9. Use that, not the copy below.**
 
 Open a **new** session of the R.I.C.K. custom GPT: https://chatgpt.com/g/g-u9LaoH9J2-r-i-c-k — never continue an old
 one. RICK gets **only** what is below. Do not paste the ⚠️ lines; they are internal and RICK will try to use them.
