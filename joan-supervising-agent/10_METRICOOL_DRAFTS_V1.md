@@ -25,3 +25,6 @@ All four carry the same `publish_date` from the sub-workflow. `videoThumbnailUrl
 
 ## Refinement hook
 Which networks / captions map where → the table above. Slot rule → the sub-workflow. Copy → file 06.
+
+##  updating the master sheet. 
+Never write into columns A-Y.  This contains content you do not touch.  Only columns AM-AP are available for from n8n to write to at this time.
