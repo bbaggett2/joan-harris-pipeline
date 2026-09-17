@@ -1,4 +1,6 @@
 # QDE Video Pipeline — 00 OVERVIEW
+
+This version is outdated. find OVERVIEW_V2.md
 **V1 · 2026-09-15 · Lane: Handwriting Experts Inc. / QDE only · Supersedes `QDE_Video_Publishing_Pipeline_V14.md`**
 
 This folder replaces the single pipeline document. **One file per step, one n8n node group per file.** When an outcome is consistently wrong, the file with that number is the only thing to edit. Each file versions in its own filename; bump the file you changed, nothing else.
