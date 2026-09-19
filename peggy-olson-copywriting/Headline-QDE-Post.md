@@ -1,6 +1,9 @@
 # Headline — QDE Famous-Case Post
-**The RICK prompt. Stage A of `QDE_FamousCase_Story_Prompt_V3.md`.** · Prepared 2026-09-15 · **Lane:** QDE only
+**The RICK prompt. Stage A of `QDE_FamousCase_Story_Prompt_V4.md`.** · Prepared 2026-09-15 · **Lane:** QDE only
 **RICK:** https://chatgpt.com/g/g-u9LaoH9J2-r-i-c-k — **open a NEW session every time. Never continue an old one.**
+
+> ⚠️ **RICK is run by a human, always.** Custom GPTs have no API endpoint — RICK cannot be
+> called from n8n, a script, or any agent. A person pastes this and pastes the result back.
 
 This file produces three cells and nothing else: **D `headline`**, **E `gold_word`**, **F `subline`**.
 Column J (image prompt) and column L (caption) come afterwards, written by Peggy/Claude — the image prompt is built
@@ -39,7 +42,7 @@ Rules, all of them hard:
   reason to stop scrolling.
 - Use only the facts I give you below. Do not add a name, a date, a number or a claim of your own.
 
-Here are nine approved headlines from this same series. Match their length and their punch:
+Here are eight approved headlines from this same series. Match their length and their punch:
 
 ARETHA'S FRANKLIN'S WILL WAS IN THE COUCH / COUCH / A Michigan jury took less than an hour.
 THE FAKE HITLER DIARIES / WEEKS / The handwriting was close. The paper wasn't.
@@ -64,6 +67,10 @@ Torn note fragments:
 Who is in the frame:
 <<< paste column H >>>
 ```
+
+> **Why eight and not nine:** FC-2 is deliberately absent from the exemplars. It carries two
+> of the defects listed below — the HUGES misspelling and a two-word gold word — so it is not
+> something to imitate. The paste block used to say "nine"; the count was the error.
 
 ---
 
@@ -125,9 +132,11 @@ All six must pass:
 3. Sub-line is **under twelve words** and is not the microscope detail.
 4. Nothing states or implies the famous person committed the crime.
 5. Every proper noun, date and number traces to column N. **RICK invents confidently** — anything it added on its
-   own goes back through `QDE_FamousCase_Research_Prompt_v1.md` before use.
+   own goes back through `QDE_FamousCase_Research_Prompt_v2.md` before use.
 6. No banned term: no "graphology" or "graphologist", no `HandwritingExpert.com` (it is
-   **HandwritingExpertUSA.com**), no outcome language. Spell-check the proper nouns — see the defect list above.
+   **HandwritingExpertUSA.com**), no outcome language. ⚠️ `handwritingexperts.com` — plural — **is** a real owned
+   property; never "correct" it to the singular. Spell-check the proper nouns — see the defect list above, and
+   `Peggy_Copy_Names_and_Spelling_v1.md` for the house names.
 
 If a line fails, say which rule it broke and ask again **in the same session**. Do not fix it yourself — the
 headline is RICK's job — and do not settle for a near miss because the third attempt is tiring.
@@ -138,5 +147,5 @@ Write the three values into **D**, **E** and **F**. Leave **C `status` blank**; 
 
 ## What happens next
 
-Back to `QDE_FamousCase_Story_Prompt_V3.md`, Stage B: Peggy/Claude writes the image prompt around the headline you
+Back to `QDE_FamousCase_Story_Prompt_V4.md`, Stage B: Peggy/Claude writes the image prompt around the headline you
 just chose, then the caption. Then a human sets `status` to READY and Betty takes it.
