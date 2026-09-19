@@ -12,7 +12,7 @@
 > moved to `joan-supervising-agent/`. Every copy rule below is unchanged from V1.
 
 > ⛔ **This file is HU only.** Do not use it for QDE / Handwriting Experts Inc.
-> (use `qde_legal_description_prompt_V6.md`) or for The Bart Show / Bart Allan
+> (use `qde_legal_description_prompt_V9.md`) or for The Bart Show / Bart Allan
 > Baggett (no prompt written yet — STOP and flag to Joan).
 > If the video is forensic, attorney-facing, or about document examination,
 > you are in the wrong lane. Stop.
@@ -21,6 +21,9 @@
 > `brands/handwriting-university.md`.** §3 below summarizes the copy-relevant parts for
 > convenience. Where the two disagree, the brand kit wins.
 
+> **Name spellings are governed by `Peggy_Copy_Names_and_Spelling_v1.md`.** Do not
+> restate its rules here; point at it.
+
 ---
 
 ## 0. HARD STOP BEFORE YOU WRITE ANYTHING
@@ -28,8 +31,12 @@
 - [ ] The **cleaned VTT** (non-RAW) is open in front of you and read **end to end**.
 - [ ] If no cleaned VTT exists → **STOP. Flag to Joan.** Do not write from the title,
       the filename, or the thumbnail. There is no exception to this.
-- [ ] "Baggett" correction pass applied to the transcript (`Bagot`, `Bagget`,
-      `Baget`, `Bagott`, `Bert`, `Mark Baggett` → `Bart Baggett`).
+- [ ] Name correction pass applied to the transcript per
+      **`Peggy_Copy_Names_and_Spelling_v1.md` §1**. Both halves of the host's name are
+      wrong independently — `Bert` / `Barb` / `Mark` on the given name, `Bagot` /
+      `Bagget` / `Baget` / `Bagott` on the surname. ⚠️ `Bert` and bare `Barb` are
+      **review flags, not automatic swaps** — a guest genuinely named Bert exists, and
+      renaming him is the worse failure.
 
 Every claim, chapter, name, story, and number in your output must trace to a line
 in that transcript. If you cannot point at the line, it does not go in.
@@ -126,7 +133,8 @@ tells a story, keep the story — the specificity is the brand. End on the "so w
 what the viewer does with this tomorrow.
 
 **Chapters** — exact timestamps read off the VTT. Never estimated, never invented.
-First entry must be `0:00` or YouTube will not build the chapter bar. Format:
+First entry must be `0:00` or YouTube will not build the chapter bar. Chapters go
+**before** the CTA, never after it. Format:
 
 ```
 Chapters:
@@ -195,8 +203,9 @@ package. Real examples from past batches:
 - A proper noun the transcriber may have mangled (Whisper turned "Nicole Kidman"
   into "Nico Kidman")
 
-Correct obvious transcription errors of **names** silently. Everything else gets
-flagged for Bart, not fixed by you.
+Correct obvious transcription errors of **names** silently, per
+`Peggy_Copy_Names_and_Spelling_v1.md` §5. Everything else gets flagged for Bart,
+not fixed by you.
 
 ---
 
@@ -208,9 +217,11 @@ flagged for Bart, not fixed by you.
 - [ ] `HandwritingUniversity.com` appears in all five
 - [ ] "Link in bio" appears in **none**
 - [ ] Zero markdown artifacts in the YouTube description (no `###`, no backticks)
-- [ ] Chapters start at `0:00` and every timestamp exists in the VTT
+- [ ] Chapters start at `0:00`, every timestamp exists in the VTT, and they sit
+      **before** the CTA
 - [ ] `graphology` / `graphologist` absent from all body copy
-- [ ] "Bart Baggett" spelled correctly everywhere
+- [ ] Names spelled per `Peggy_Copy_Names_and_Spelling_v1.md` — "Bart Baggett"
+      everywhere, and "Curt" is C-U-R-T if the father is mentioned
 - [ ] No banned openers, no hype words
 - [ ] `⚠️ TO VERIFY` list attached (or explicitly "none")
 - [ ] Package saved to `particles/` as `<VID_ID>_Description_Package_v1.md`
