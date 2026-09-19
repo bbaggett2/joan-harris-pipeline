@@ -72,9 +72,12 @@ youtube_credential    : ~/.config/betty/youtube/hu_client_secret.json
 facebook_page_id      : 348215195822   (verified HU brand page, Bart 2026-08-18)
 networks              : YouTube · TikTok · Instagram · Facebook
                         ⛔ NO LinkedIn, NO X. X @handwritingu is suspended.
-slack_channel         : [TO VERIFY — needs Bart. QDE uses #qde-celebrity-post-review;
-                        HU must not share it or HU failures vanish into QDE's stream.]
-ntfy_topic            : [TO CREATE — must be distinct from qde-pipeline-bhi-x7f2k9]
+slack_channel         : #qde-celebrity-post-review
+                        ⭐ SHARED WITH THE QDE LANE. Bart, 2026-09-19: "everyone
+                        that needs to see it will see it." The channel's QDE-era
+                        name is cosmetic — every HU notice leads with "HU video
+                        STAGED" so the lane is unambiguous at a glance (file 12).
+ntfy_topic            : qde-pipeline-bhi-x7f2k9   (same topic, same reasoning)
 ledger                : betty/hu_syndication_ledger.json
 clickup_space         : Video Production   statuses: Open · in progress · Closed
 prompt_base_url       : https://raw.githubusercontent.com/bbaggett2/joan-harris-pipeline/main/
@@ -117,12 +120,14 @@ Everything not in this block — voice, palette, fonts, banned words, audience, 
 | Banned terms | legal-claim language | **"graphology"/"graphologist" banned from all body copy.** Hashtag only |
 | CTA | HandwritingExpertUSA.com + bartbaggett.com | **HandwritingUniversity.com only** |
 | Credentials | never in HU copy | court testimony counts, judicial acceptance, expert-witness claims are **QDE-only** |
+| Slack / ntfy | `#qde-celebrity-post-review` | **the same channel and topic** — shared deliberately |
 
 ## Open flags
 
-1. **Slack channel and ntfy topic for HU** — needs Bart.
-2. **`hu_description_prompt_V3.md`** does not exist. The lane is blocked until it does.
-3. **Thumbnail method conflict.** V15 Phase 4 banned "PIL hand-composite" and "red"; `brands/handwriting-university.md` §7 mandates a deterministic Python build and §3/§6 require Teacher Red on the 16:9. See file 07 — unresolved, needs Bart.
-4. **`Next open slot` double-booked a day** (QDE runs 308 and 314 both landed on 2026-11-04). Do not share it between lanes until it is read and made brand-aware.
-5. **`Betty_SOP_VideoSmimeo_IG_Resize_Normalize_v<n>.md`** is named as file 08's governing doc and was never committed. By this repo's own rule that is a blocked job.
-6. **Is Google Drive linked in the Metricool account?** If yes, nothing needs staging. Only checkable in Metricool's own settings.
+1. **`hu_description_prompt_V3.md`** does not exist. The lane is blocked until it does.
+2. **Thumbnail method conflict.** V15 Phase 4 banned "PIL hand-composite" and "red"; `brands/handwriting-university.md` §7 mandates a deterministic Python build and §3/§6 require Teacher Red on the 16:9. See file 07 — unresolved, needs Bart.
+3. **`Next open slot` double-booked a day** (QDE runs 308 and 314 both landed on 2026-11-04). Do not share it between lanes until it is read and made brand-aware.
+4. **`Betty_SOP_VideoSmimeo_IG_Resize_Normalize_v<n>.md`** is named as file 08's governing doc and was never committed. By this repo's own rule that is a blocked job.
+5. **Is Google Drive linked in the Metricool account?** If yes, nothing needs staging. Only checkable in Metricool's own settings.
+
+> ✅ **Closed 2026-09-19 — HU alerting.** Flag 1 in the first draft of this file asked which Slack channel and ntfy topic HU should use. Bart ruled: share the QDE ones. See the config block.

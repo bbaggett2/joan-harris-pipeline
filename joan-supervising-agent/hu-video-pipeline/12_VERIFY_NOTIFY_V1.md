@@ -26,7 +26,9 @@ The only record of a run is the notification at the time it happens. A human mai
 
 ## `Slack: reviewer` — one message
 
-Channel: **[TO VERIFY — needs Bart]**. It must not be QDE's `#qde-celebrity-post-review`, or HU failures disappear into the QDE stream.
+**Channel: `#qde-celebrity-post-review` — shared with the QDE lane.** Bart, 2026-09-19: *"everyone that needs to see it will see it."*
+
+⭐ **Because the channel is shared, the first line must name the lane.** Every HU notice opens `HU video STAGED`; QDE's opens `QDE video STAGED`. A reader scanning the channel should never have to open a message to know which brand it belongs to. The same applies to error alerts and to the daily sweep, which reports both lanes and must label each row.
 
 ```
 HU video STAGED — <vid_id> · <title>
@@ -44,8 +46,10 @@ The reviewer then makes the video public and schedules the drafts. **That is the
 
 **Error alerts carry a plain-language line.** Bart's standing rule: every failure notice ends with an `Error to Correct:` line finishing `Please have human investigate`. The raw n8n error alone is not actionable.
 
+**ntfy:** topic `qde-pipeline-bhi-x7f2k9`, shared with QDE for the same reason. The message body carries the lane prefix.
+
 ## `Daily sweep` — 08:00 CT
-Reads and reports; changes nothing. One digest: runs staged more than 3 days and still private or unscheduled; anything waiting on the Mac worker more than 2 hours (worker down?); anything at `ERROR`.
+Reads and reports; changes nothing. One digest covering **both lanes, each row labelled HU or QDE**: runs staged more than 3 days and still private or unscheduled; anything waiting on the Mac worker more than 2 hours (worker down?); anything at `ERROR`.
 
 ## Reminder cadence
 One notice when both surfaces are staged, then a reminder every few days while anything is still unreviewed. No approval form, no third tool, no dashboard.
