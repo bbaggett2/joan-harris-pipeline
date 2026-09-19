@@ -4,25 +4,18 @@ The Handwriting University video publishing lane, one file per step.
 
 **Start at `00_HU_OVERVIEW_V2.md`.** It holds the runtime split, the hard rules, the config block, and the table of which file governs which n8n node.
 
-## ⚠️ Renamed 2026-09-19 — and the old files still need deleting
+## Renamed 2026-09-19
 
 Every step file now carries `HU` in its name: `<NN>_HU_<NAME>_V<n>.md`. The bare names collided with the QDE step files one directory up, where a file opened by name alone could be the wrong brand's.
 
-**The V1-named originals were not removed** — the tooling used to write the new ones cannot delete. Until these fourteen are deleted, the repo is in breach of its own "never two live" rule:
+The fourteen numbered V1-named originals were deleted the same day, so 00–13 each exist exactly once. **Two stragglers still need removing:**
 
 ```
-00_OVERVIEW_V1.md          07_THUMBNAIL_V1.md
-01_PICKUP_AND_BRAND_V1.md  08_VERTICAL_CUT_V1.md
-02_MEDIA_FACTS_V1.md       09_YOUTUBE_V1.md
-03_VTT_CLEAN_V1.md         10_METRICOOL_DRAFTS_V1.md
-04_TITLE_V1.md             11_PREFLIGHT_V1.md
-05_DESCRIPTION_V1.md       12_VERIFY_NOTIFY_V1.md
-06_CAPTIONS_V1.md          13_REGENERATE_V1.md
+HU_Clone_SOP_v2.md          ← superseded by HU_CLONE_RUNBOOK_V3.md
+hu_description_prompt_V2.md ← duplicate; the authority is peggy-olson-copywriting/
 ```
 
-Also delete, both superseded:
-- `HU_Clone_SOP_v2.md` — replaced by `HU_CLONE_RUNBOOK_V3.md`
-- `hu_description_prompt_V2.md` — a duplicate; what gets written lives in `peggy-olson-copywriting/`
+⚠️ **`HU_Clone_SOP_v2.md` is the urgent one.** It was written before this folder had been read and it contradicts the corrected step files on four questions that are already settled: which Slack channel and ntfy topic to use (share QDE's — file 12), Drive trigger versus form trigger (Drive — file 01), "four platforms, not five" (five copy outputs, four Metricool drafts — file 05), and retiring V14/V15 as outstanding work (already done). A session that opens it instead of the runbook gets wrong answers on all four.
 
 ## Files
 
@@ -44,7 +37,12 @@ Also delete, both superseded:
 | `13_HU_REGENERATE_V1.md` | The three regenerate forms |
 | `HU_CLONE_RUNBOOK_V3.md` | Sequencing and the authorization register for building the lane |
 
-Files at V1 are byte-identical to their originals apart from the name and the H1. Files at V2 changed on 2026-09-19.
+**Files at V2 changed on 2026-09-19.** Files at V1 kept their version because the body did not change — with two exceptions worth knowing, since "unchanged" is a claim someone will rely on:
+
+- **`04`** — one self-reference reworded. It named the QDE title file by its old filename, which no longer resolves.
+- **`13`** — one sentence added, noting the `field-0` form-trigger behaviour was re-confirmed on a live run.
+
+Every other V1 file is byte-identical to its original apart from the filename and the H1.
 
 ## What changed on 2026-09-19
 
@@ -56,10 +54,12 @@ The QDE lane had a working day and one video ran end to end. Three defects were 
 
 **Two of the three fixes are brand-agnostic.** `make_16x9()` and `fix_vtt_hours()` both live in the single `worker.py` that serves both brands, so HU inherits them. Only the warning branch has to be cloned.
 
+All three are proven on **one** live run. One run is evidence, not a track record.
+
 ## Versioning
 The version lives in the filename; the highest number is current; every change bumps the file you changed and nothing else. **A new revision deletes the old file in the same commit — never two live.**
 
-Cross-references never name an exact version: `Something_V<n>.md` means *the highest-numbered file of that name in that folder*. References by step number ("file 09") are stable across renames and are preferred.
+Cross-references never name an exact version: `Something_V<n>.md` means *the highest-numbered file of that name in that folder*. References by step number ("file 09") are stable across renames and are preferred — the 2026-09-19 rename broke every by-filename reference and none of the by-number ones.
 
 ## What this replaces
 `joan-supervising-agent/HU_Video_Publishing_Pipeline_V15.md` and `..._V14.md`, both now pointer stubs. V15 described the HU lane as an agent-to-agent process and said itself that it did not include the n8n workflow. V14 was a misfiled copy of the QDE document.
@@ -82,3 +82,4 @@ Cross-references never name an exact version: `Something_V<n>.md` means *the hig
 - **Alerting shares the QDE channel and ntfy topic** (Bart, 2026-09-19). HU notices lead with `HU video STAGED` so the lane is obvious at a glance — see file 12.
 - **`Next open slot` is shared, not cloned** (2026-09-19). It takes `blogId` as an input and is already brand-aware — see file 10.
 - **`draft: true` with `autoPublish: true` is correct** and is what Bart wants — see file 10.
+- **The trigger is a Drive trigger on the HU Ready folder**, matched on folder ID — see file 01.
