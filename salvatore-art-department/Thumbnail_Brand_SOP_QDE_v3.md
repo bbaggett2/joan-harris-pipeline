@@ -1,8 +1,8 @@
 # QDE Forensic Brand — YouTube Thumbnail SOP
 
-**Version 2 · 2026-07-13 · Brand: QDE / @TheHandwritingExpert**
-**Supersedes:** v1 (2026-05-22)
-**Changes in v2:** Reference library moved from Betty to Salvatore. QDE-specific generation script added. Mandatory reference review step added before Gemini generation. Ownership transferred to Salvatore.
+**Version 3 · 2026-07-13 · Brand: QDE / @TheHandwritingExpert**
+**Supersedes:** v1 and v2 (2026-05-22)
+**Changes in v3:** Reference library moved from Betty to Salvatore. QDE-specific generation script added. Mandatory reference review step added before Gemini generation. Ownership transferred to Salvatore.
 
 This SOP defines the thumbnail look for the **QDE forensic brand only**. It is deliberately separate from the Handwriting University (HU), Bart Allan Baggett, and Bart Show brands so the four channels never blur together. When you make a QDE thumbnail, follow this document — not the HU style guide.
 
