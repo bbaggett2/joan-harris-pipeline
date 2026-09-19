@@ -3,7 +3,7 @@
 
 One file per step, one n8n node group per file. When an outcome is consistently wrong, the file with that number is the only thing to edit. Each file versions in its own filename; bump the file you changed, nothing else.
 
-> **Why this replaces V15.** V15 described the HU lane as an agent-to-agent process and said so itself: *"This document does not include the n8n workflow. This process will be rewritten asap."* The QDE lane has since been built in n8n with a Mac side-car worker, and Metricool now works a specific, proven way. This set is the HU lane rewritten on that reality. V15 and the misfiled `HU_Video_Publishing_Pipeline_V14.md` are both retired by this set and should be deleted.
+> **Why this replaces V15.** V15 described the HU lane as an agent-to-agent process and said so itself: *"This document does not include the n8n workflow. This process will be rewritten asap."* The QDE lane has since been built in n8n with a Mac side-car worker, and Metricool now works a specific, proven way. This set is the HU lane rewritten on that reality. V15 and the misfiled `HU_Video_Publishing_Pipeline_V14.md` are now pointer stubs.
 
 ## Runtime split — this is the shape of the whole lane
 
@@ -31,6 +31,8 @@ One file per step, one n8n node group per file. When an outcome is consistently 
    restarted, and `yutu thumbnail set` printing its usage text and exiting 0.
 ⛔ A saved n8n change is not a live change — sub-workflows included. Deactivate,
    reactivate, then prove it from a later execution's workflowData snapshot.
+⛔ No HU copy names another company's platform as a destination. The only
+   destination is HandwritingUniversity.com. (Bart, 2026-09-19. See file 06.)
 ✦ GitHub is authority; the Mac is where execution happens. Every prompt is
    fetched from raw.githubusercontent.com at run time. An uncommitted file is a
    blocked job, never a local fallback.
@@ -82,8 +84,8 @@ ledger                : betty/hu_syndication_ledger.json
 clickup_space         : Video Production   statuses: Open · in progress · Closed
 prompt_base_url       : https://raw.githubusercontent.com/bbaggett2/joan-harris-pipeline/main/
 copy_prompt           : peggy-olson-copywriting/hu_description_prompt_V<n>.md
-                        ⚠️ the file on main is V2 and predates the five-output
-                        contract in file 05. Blocked until V3 lands.
+                        Current: V3. V2 is a pointer stub. Not a blocker — see
+                        file 05 for the one remaining gap (no Shorts variant).
 text_model            : gpt-4.1
 facebook_cap_bytes    : 524288000   (500 MB — a size cap, never a duration gate)
 ```
@@ -112,7 +114,7 @@ Everything not in this block — voice, palette, fonts, banned words, audience, 
 
 | | QDE | HU |
 |---|---|---|
-| Captions copy | per-platform (V9) | per-platform, **four** platforms not five |
+| Captions copy | per-platform | per-platform, **four** platforms not five |
 | LinkedIn | in scope | **out** — no connection exists |
 | Thumbnail | `gpt-image-1` inside n8n | **Gemini plate + build script on the Mac.** Gemini is 403-blocked from n8n Cloud and from the agent sandbox |
 | Trait handwriting | generated is acceptable | **never generated.** Real strokes from the published library only |
@@ -124,10 +126,13 @@ Everything not in this block — voice, palette, fonts, banned words, audience, 
 
 ## Open flags
 
-1. **`hu_description_prompt_V3.md`** does not exist. The lane is blocked until it does.
-2. **Thumbnail method conflict.** V15 Phase 4 banned "PIL hand-composite" and "red"; `brands/handwriting-university.md` §7 mandates a deterministic Python build and §3/§6 require Teacher Red on the 16:9. See file 07 — unresolved, needs Bart.
+1. **Thumbnail method conflict.** V15 Phase 4 banned "PIL hand-composite" and "red"; `brands/handwriting-university.md` §7 mandates a deterministic Python build and §3/§6 require Teacher Red on the 16:9. See file 07 — unresolved, needs Bart.
+2. **No Shorts variant in the copy prompt.** V3 §4 defines one long-form YouTube description. A vertical HU clip under three minutes will get long-form treatment — the exact defect the QDE lane spent a day fixing. Interim handling and the durable fix are in file 05.
 3. **`Next open slot` double-booked a day** (QDE runs 308 and 314 both landed on 2026-11-04). Do not share it between lanes until it is read and made brand-aware.
 4. **`Betty_SOP_VideoSmimeo_IG_Resize_Normalize_v<n>.md`** is named as file 08's governing doc and was never committed. By this repo's own rule that is a blocked job.
 5. **Is Google Drive linked in the Metricool account?** If yes, nothing needs staging. Only checkable in Metricool's own settings.
+6. **No n8n Cloud API key on the Mac.** Needed to clone and patch the workflow with a diff and a rollback.
+7. **The copy prompt still ends with a pre-paste sign-off line** that contradicts the two-touchpoint review model. Flagged in V3's own footer; needs Bart to either delete the line or restore the gate.
 
-> ✅ **Closed 2026-09-19 — HU alerting.** Flag 1 in the first draft of this file asked which Slack channel and ntfy topic HU should use. Bart ruled: share the QDE ones. See the config block.
+> ✅ **Closed 2026-09-19 — HU alerting.** Bart ruled: share the QDE Slack channel and ntfy topic.
+> ✅ **Closed 2026-09-19 — the copy prompt.** The lane was never blocked on a rewrite; V2 already required five distinct per-platform outputs and chapters before the CTA. V3 adds the off-platform ban.
