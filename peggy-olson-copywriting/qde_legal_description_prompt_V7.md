@@ -1,4 +1,5 @@
 # PROMPT: Multi-Platform Description Generator — Bart Baggett QDE / Handwriting Experts Inc.
+This is outdated.  Go to V8
 
 **Version:** V7 · September 19, 2026
 **Repo location:** `peggy-olson-copywriting/qde_legal_description_prompt_V7.md`
