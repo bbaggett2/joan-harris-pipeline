@@ -1,7 +1,7 @@
 # PROMPT: Multi-Platform Description Generator — Bart Baggett QDE / Handwriting Experts Inc.
 
 **Version:** V7 · September 19, 2026
-**Repo location:** `betty-social-media-manager/qde_legal_description_prompt_V6.md`
+**Repo location:** `betty-social-media-manager/qde_legal_description_prompt_V7.md`
 **Reads from:** `brands/qde.md` · `brands/BART_BAGGETT_VOICE.MD`
 **Supersedes:** V6 and all earlier versions.
 
