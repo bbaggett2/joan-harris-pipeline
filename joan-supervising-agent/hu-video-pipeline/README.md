@@ -12,7 +12,7 @@ The fourteen numbered V1-named originals were deleted the same day, so 00–13 e
 
 ```
 HU_Clone_SOP_v2.md          ← superseded by HU_CLONE_RUNBOOK_V3.md
-hu_description_prompt_V2.md ← duplicate; the authority is peggy-olson-copywriting/
+
 ```
 
 ⚠️ **`HU_Clone_SOP_v2.md` is the urgent one.** It was written before this folder had been read and it contradicts the corrected step files on four questions that are already settled: which Slack channel and ntfy topic to use (share QDE's — file 12), Drive trigger versus form trigger (Drive — file 01), "four platforms, not five" (five copy outputs, four Metricool drafts — file 05), and retiring V14/V15 as outstanding work (already done). A session that opens it instead of the runbook gets wrong answers on all four.
