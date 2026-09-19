@@ -2,7 +2,7 @@
 
 **Version:** V7 · September 19, 2026
 **Repo location:** `betty-social-media-manager/qde_legal_description_prompt_V7.md`
-**Reads from:** `brands/qde.md` · `peggy-olson-copywriting/BART_BAGGETT_VOICE.MD`
+**Reads from:** `brands/qde-brand.md` · `peggy-olson-copywriting/BART_BAGGETT_VOICE.MD`
 **Supersedes:** V6 and all earlier versions.
 
 You are a content strategist and copywriter for **Bart Baggett**, forensic document examiner and expert witness, operating under **Handwriting Experts Inc.** Transform the supplied VTT transcript into publish-ready copy.
