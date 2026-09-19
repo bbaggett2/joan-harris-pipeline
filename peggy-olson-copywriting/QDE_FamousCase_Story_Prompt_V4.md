@@ -1,6 +1,6 @@
 # QDE Famous-Case Story Prompt — the copy step
 **Version:** V4 · **Prepared:** 2026-09-15 · **Owner:** Peggy (copy) · **Lane:** Handwriting Experts Inc. / QDE only
-**Voice:** `BART_BAGGETT_VOICE.MD` · **Credentials:** `brands/qde-brand.md`
+**Voice:** `brands/BART_BAGGETT_VOICE.MD` · **Credentials:** `brands/qde-brand.md` · **Names:** `Peggy_Copy_Names_and_Spelling_v1.md`
 **Stage A prompt:** `Headline-QDE-Post.md` — the RICK paste block and the approved headline library live there.
 **Runs on:** a row of `QDE_Post_Queue` (Google Sheet `14pkeLjlH5SFf4X_DwafTCJlgdKRNOcY-p_AAbZjxfec`, tab gid 0) that
 already has a fact card in it. **Never create a new spreadsheet — update the existing row.**
@@ -14,7 +14,7 @@ from V3.** The gate exists because V3 said column J is written at Stage B but ne
 ## Where this sits
 
 ```
-QDE_FamousCase_Research_Prompt_v1.md   →   THIS FILE   →   Betty_n8n_QDE_Daily_Social_Post_SOP (v6)
+QDE_FamousCase_Research_Prompt_v2.md   →   THIS FILE   →   Betty_n8n_QDE_Daily_Social_Post_SOP (v6)
 Claude finds and verifies the case.        Stage A: RICK names it.        A human sets status READY.
 Writes the fact card into the row.         Stage B: Peggy writes it.      Betty stages two Metricool drafts.
 Status stays BLANK.                        Status stays BLANK.            The reviewer judges the graphic.
@@ -98,6 +98,9 @@ column J, because the headlines were hand-edited after the prompt was written. O
 and the six-point acceptance test. Open a **new** RICK session every time:
 https://chatgpt.com/g/g-u9LaoH9J2-r-i-c-k
 
+> ⚠️ **RICK is run by a human.** Custom GPTs have no API endpoint, so Stage A cannot be automated —
+> a person pastes the block and pastes the three values back.
+
 Stage A produces **D**, **E** and **F**, and nothing else. Do not write a headline in Claude's own voice — that is
 RICK's job. Come back here when those three cells are filled and have passed the acceptance test.
 
@@ -153,6 +156,9 @@ that matters," no "now," no throat-clearing. Dry, confident, a little amused —
 described in body copy as a court-qualified handwriting examiner, with the actual title kept in `fact_status`),
 `HandwritingExpert.com`, any sentence that makes the famous person the criminal, any claim not in `fact_status`.
 One em-dash per paragraph at most.
+
+⚠️ **`handwritingexperts.com` — plural — is a real owned property.** Only the singular is banned; never "correct"
+the plural to it. Names are spelled per `Peggy_Copy_Names_and_Spelling_v1.md`.
 
 ### Acceptance test before the row is done
 
