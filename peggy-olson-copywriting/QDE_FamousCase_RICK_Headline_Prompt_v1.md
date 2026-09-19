@@ -10,7 +10,7 @@ it cannot delete files — **it is safe to delete outright in the GitHub web UI*
 
 | Step | File |
 | :--- | :--- |
-| Research and verify the case | `QDE_FamousCase_Research_Prompt_v1.md` |
+| Research and verify the case | `QDE_FamousCase_Research_Prompt_v2.md` |
 | RICK writes headline, gold word, sub-line | **`Headline-QDE-Post.md`** |
-| Peggy writes image prompt and caption | `QDE_FamousCase_Story_Prompt_V3.md` |
+| Peggy writes image prompt and caption | `QDE_FamousCase_Story_Prompt_V4.md` |
 | Betty stages the drafts | `betty-social-media-manager/Betty_n8n_QDE_Daily_Social_Post_SOP_v5.md` (header v6) |
