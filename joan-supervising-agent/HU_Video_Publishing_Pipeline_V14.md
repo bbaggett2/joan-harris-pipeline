@@ -1,9 +1,9 @@
-# HU VIDEO PUBLISHING PIPELINE — V14
+# HU VIDEO PUBLISHING PIPELINE — V15
 
 **Brand:** Handwriting University (HU) ONLY
-**Date:** 2026-09-14
+**Date:** 2026-09-19
 **Location:** `joan-supervising-agent/` — cross-agent document, not Betty's
-**Status:** AUTHORITATIVE for HU — supersedes V13
+**Status:** AUTHORITATIVE for HU — supersedes V13 and V14
 
 > **Versioning:** the version lives in the filename, the highest number is current, and
 > every change bumps it. A new revision becomes `..._V15.md`, and this file is deleted in
