@@ -26,8 +26,9 @@ yourself reading either of the others for status, stop.
 | Sheet | ID | Role |
 |---|---|---|
 | AEO Video Publishing Master Worksheet — MASTER | `152bwCLMRRQlewuIIHj12XO64GLbLdsBzefRxuRaHX30` | **Canonical for the QDE / AEO question series (Q1–Q59).** Has per-platform published columns. |
+| Video Production MASTER (Workflow) Bart Baggett_V4 most current | `1EO2ZdAEiVHJ9FVz5ZHY-9f0CjjngHkpMVa84nHCFpDA` | **Canonical for HU as of 2026-09-20 — confirmed by Bart directly.** Workflow tab `gid=2134111827`. This is a separate lineage from Copy-LanePryce (Bart edits it himself); do not assume a `Copy-LanePryce_V#` bump supersedes it going forward — check modified time against both before choosing which to read. |
 | Video Production MASTER (Workflow) | `1KwNrq2H9uJbRKy9-OfyBEjYWYI1EjTMGu5mtAW458f4` | Origin of the HU lineage. **Frozen history — do not read for status.** |
-| Video Production MASTER (Workflow) Copy-LanePryce_V2_ | `121Im_ock0A-GfE_qjp1j0tu5utosgBYiyVjvB1HvLbs` | **Canonical for HU as of 2026-08-07.** Each session reads the highest-numbered `Copy-LanePryce_V#` and writes the next one. List Drive for `Copy-LanePryce` before every run — never assume this is still the newest. |
+| Video Production MASTER (Workflow) Copy-LanePryce_V2_ / _V3 | `121Im_ock0A-GfE_qjp1j0tu5utosgBYiyVjvB1HvLbs` / `1ap7cNS3ozzuzxE-3snq2G4jY-keDOGLBChcGoIh4vks` | **Superseded 2026-09-20 by Bart Baggett_V4 above.** Last confirmed live 2026-08-09. Do not read for status unless Bart says the V4 sheet is stale. |
 | Zeeshan Video Publishing Master | `1mUn5jNXUu8pUSsPoS_zly8LicpVRiNOlLcL9Hj4Bc6k` | Superseded. Read-only. |
 | Video_Production_MASTER__for_approval__v1 | `1Ld--_76Rtwrg4N7qBYMO4AVnWD2mgxvfeTp0lcWeguI` | Abandoned draft. Ignore. |
 | QDE_Metricool_Mobile_Inventory_v1 | `1NYLqygb8cHzvTv-aXjkMb-Nguo1l5xm6Ja5jHzOT5Oc` | Point-in-time inventory. Not a tracker. |
