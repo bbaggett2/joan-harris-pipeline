@@ -89,7 +89,7 @@ stop rather than fill the gap or fix the copy.
 **Default (current):**
 
 ```
-🔗 Free handwriting Level 100 course. Join our monthly live zoom class... upload our own handwriting for analysis during class. 
+🔗 Free handwriting Level 100 course. Join our monthly live zoom class... upload your own handwriting for analysis during class. 
 HandwritingUniversity.com
 ```
 
