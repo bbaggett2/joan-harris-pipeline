@@ -15,7 +15,7 @@ lane with no prompt on `main` is a **blocked job** — see "When a lane has no p
 
 | Lane | Source | Output | Prompt | Status |
 |---|---|---|---|---|
-| **Video descriptions — HU** | cleaned VTT | `<VID_ID>_Description_Package_v1.md` | `hu_description_prompt_V4.md` | **Current** |
+| **Video descriptions — HU** | cleaned VTT | `<VID_ID>_Description_Package_v1.md` | `hu_description_prompt_V5.md` | **Current** |
 | **Video descriptions — QDE** | cleaned VTT | `<VID_ID>_Description_Package_v1.md` | `qde_legal_description_prompt_V9.md` | **Current** |
 | **QDE famous-case posts** | researched public sources | one row of `QDE_Post_Queue` | three-stage chain, below | **Current** |
 | **LinkedIn organic posts** | Bart, or the day's material | a draft post for Bart's personal profile | `Peggy_LinkedIn_Organic_Post_Prompt_v1.md` | **Current** |
