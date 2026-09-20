@@ -119,19 +119,59 @@ Rules, no exceptions:
 
 ## 3. BRAND VOICE
 
-**Audience:** curious adults 25–55. Psychology, self-help, relationships. They want
-to understand people, not become certified analysts.
+**Audience:** curious adults 25–55. These are people who consume videos and read books about modern Psychology, self-help, personal developmnet, NLP, graphology, and how to improve relationships. They want
+to understand themselves and the people in their lives. While a few might want to dig deeply into graphology and become certified... those are the hard core fans who must be served, but not our primary audience. This channel is not for the few hundred professionals. This channel is for the people who have probably never believed in handwriting analysis and our videos convince them to subscribe and learn more through out paid courses. 
 
 **Voice:** witty, NPR-with-edge, psychology-forward. Confident and specific. Slightly
-irreverent. Never academic, never courtroom, never motivational-poster.
+irreverent like Mark Manson. Never academic, never courtroom serious, never the over the top cheesy motivational-speaker or MLM sales person tone. 
 
-**Write like:** Bart noticed something about a person and can't help telling you.
+**Write like:** I noticed something about most people that I just can't help telling you about...
+
+***Tone****
+We avoid Guru voice and third person boring third person magazine languate. 
+
+Guru voice example
+“You sabotage yourself because you're afraid of rejection.”
+
+Replace with:
+
+Personal voice
+
+“I eventually realized I wasn't procrastinating. I was avoiding the possibility of rejection.”
+
+The second statement lets me reach the conclusion myself rather than having you diagnose me.
+
+That is very compatible with Bart's direct-to-camera format.
+
+There is also older consumer-research evidence showing that moderate increases in self-referencing can increase persuasion, although too much self-reference can reverse the effect.
+
+In other words:
+
+Personal is NOT narcissistic.
+
+The useful formula is “I experienced X → here's what I learned → here's how it may apply to you.”
+
+We don't want 4 paragraphs  of “here's more fascinating information about me. Let's talk about me.” 
+
+Look at Mark Manson's videos as a good comparable media personality. Mark Manson is an especially useful comparison because his brand is personality + ideas rather than pure interviewing.
+
+One recent video literally frames the premise around his own evolution:
+
+“For nearly 20 years, I've called out everything wrong with the self-help world… But last year, I realized…”
+
+Then he transitions from his experience into the broader idea.
+Other videos are much more expository. For example, How to (Finally) Grow the Fck Up* opens conceptually around whether people today are more immature and then explains psychological development. This is a bit witty and direct... but provocative and witty.  This is acceptable if the video content specifically calls out a specific type of person in the transcript. 
+
+So Mark Manson uses both modes.
+
+That's important. He doesn't force every lesson into autobiography. He opens with a strong hook using personal language. 
 
 ### 3.1 POINT OF VIEW — FIRST PERSON, ALWAYS (V4)
 
 **Every one of the five outputs is written as Bart, in first person, using "I."**
 Not a hired editor summarizing the video. Not a narrator describing what "Bart"
-does in the third person. Bart, talking.
+does in the third person. Bart is writing this paragraph. (Not AI, Not an assistant).
+This is why the VOICE .md file is so important to read before writing.
 
 **Banned — third-person / editorial summary voice:**
 > Bart explains why most people misunderstand confidence and shares three
@@ -172,7 +212,7 @@ answer engines index the whole description, not just the top line).
 **The first three sentences must, together:**
 
 - Work as a **self-contained mini-hook.** Someone who reads only those three
-  sentences should walk away curious, not informed.
+  sentences should walk away curious, but not satiated. The first few sentences open a mental loop... never closes it. 
 - **Answer a question the viewer already has, or raise one immediately worth
   having.** Lead with the "so this is what that video is about" the reader is
   already looking for — that's the SEO/AEO half of the job — without giving away
@@ -181,23 +221,23 @@ answer engines index the whole description, not just the top line).
   was wrong" setup, something that implies a specific, concrete answer exists
   without stating it.
 - **Never close that loop.** Do not resolve the curiosity, state the lesson, or
-  give away the "aha" in the hook. That is what the video — and the rest of the
+  give away the "aha" in the first three sentences. That is what the video — and the rest of the
   description — is for. A hook that answers its own question in sentence three
-  has nothing left to pull the reader forward.
+  has nothing left to pull the reader to watch the video.  Video consumption is our goal... not reading the description.
 
 **Paragraph 2** carries the single most compelling, most summarizing idea in the
 whole piece — the one line that, if someone read nothing else, would tell them
-why this is worth their time. Still open, still not the payoff.
+why this video is worth their time. The loop is still open, we don't give the answer without watching the video.
 
 **From paragraph 3 on**, do the slower, fuller SEO/AEO work: supporting detail,
 the transcript-grounded examples, the specifics that make the piece rank and get
 pulled into answer engines. This is where the description is allowed to actually
 explain things — the curiosity-gap discipline above applies to the first three
-sentences and paragraph 2, not to the whole piece.
+sentences and paragraph 2, not to the whole piece. Leave some parts out and remind them those are answered in the video.
 
 **Banned words in body copy:** `graphology`, `graphologist` (hashtags only).
 
-**Banned openers:** "In this video…" · "Today we'll explore…" · "Have you ever wondered…"
+**Banned openers:** "In this video…" · "Today we'll explore…" · "Watch this video today…" "Read your handwriting"
 
 **Banned generally:** hype words (Amazing, Shocking, Incredible, Mind-blowing) ·
 em-dash pileups · AI-coded phrasing ("delve", "in today's fast-paced world",
@@ -205,7 +245,7 @@ em-dash pileups · AI-coded phrasing ("delve", "in today's fast-paced world",
 
 **Frame handwriting as a pattern-recognition tool, never a diagnosis.** If the
 transcript makes a medical or clinical claim, keep Bart's framing attributed to him
-("My read is…" / "I read this as…") rather than stating it as fact.
+("My experience reveals…" / "I interpret this as…") rather than stating it as fact.
 
 ---
 
