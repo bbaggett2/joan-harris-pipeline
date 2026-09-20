@@ -89,14 +89,14 @@ stop rather than fill the gap or fix the copy.
 **Default (current):**
 
 ```
-🔗 Free handwriting Level 100 course. Join our weekly live zoom class.
+🔗 Free handwriting Level 100 course. Join our monthly live zoom class... upload our own handwriting for analysis during class. 
 HandwritingUniversity.com
 ```
 
 **Approved alternate** (longer, for YouTube body when the description has room):
 
 ```
-🔗 Free handwriting resources, live classes, courses, and personality tools: HandwritingUniversity.com
+🔗 Free handwriting resources, articles, live classes, courses, and personality self-tests: HandwritingUniversity.com
 ```
 
 Rules, no exceptions:
