@@ -296,6 +296,8 @@ broken before — check it.
 
 **Hashtags** — 12–18. Always include `#HandwritingUniversity` and `#BartBaggett`.
 
+**Video number** Because all of these post will be reviewed by a human, please include the Video number at the very bottom VID-XXXX... The human editor will use this number to quickly find the source folder and other assets that she might need for revisions. 
+
 ---
 
 ## 5. OUTPUT 2 — INSTAGRAM CAPTION
