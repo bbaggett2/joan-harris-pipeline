@@ -50,7 +50,13 @@ SEO / AEO
 - slug: lowercase-hyphenated, 3 to 8 words, no stop-word padding.
 - meta_description: 140 to 158 characters, plain and specific.
 - excerpt: 1 to 2 sentences for the blog listing page.
-- faq: 3 to 5 real questions a reader would type into Google or ask an AI assistant, each answered in 2 to 3 sentences using only source facts or general method.
+- faq: 5 to 7 questions a reader would type into Google or ask an AI assistant. The FAQ is used ONLY as hidden FAQPage schema for answer engines (it is not shown as a section in the article). Every answer is 1 to 3 plain sentences, uses only source facts or general method, and names the person or case so it stands alone when quoted by an AI.
+  The FIRST FOUR questions are required for every case, in this order, each naming the person or case:
+  1. What happened in the [case]? (who, what document, what was disputed)
+  2. When did it happen? (every key date the source gives: event, discovery, trial or ruling; say plainly if the source has no date for something)
+  3. What was the outcome? (the verdict, ruling or result exactly as the source states it; never overstate it)
+  4. Was the handwriting or document ever questioned, and what role did document examination play? (only what the source says; if it played no role, say so)
+  Then 1 to 3 more useful questions, such as how a document examiner would examine this kind of document, or what a family should do if they face a similar document today.
 - schema_jsonld: a BlogPosting + FAQPage JSON-LD object as a string. author is Bart Baggett, jobTitle "Forensic Handwriting Expert", knowsAbout handwriting, document examination, expert testimony. publisher name "Bart Baggett", logo https://bartbaggett.com/images/hsilogo2016.jpg. Include a SpeakableSpecification with cssSelector ["#speakable-summary"]. Use the placeholders {{POST_URL}} and {{DATE_PUBLISHED}}; do not guess them.
 
 FEATURED IMAGE (image_ideas and featured_image)
