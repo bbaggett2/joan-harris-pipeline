@@ -50,7 +50,7 @@ SEO / AEO
 - slug: lowercase-hyphenated, 3 to 8 words, no stop-word padding.
 - meta_description: 140 to 158 characters, plain and specific.
 - excerpt: 1 to 2 sentences for the blog listing page.
-- faq: 5 to 7 questions a reader would type into Google or ask an AI assistant. The FAQ is used ONLY as hidden FAQPage schema for answer engines (it is not shown as a section in the article). Every answer is 1 to 3 plain sentences, uses only source facts or general method, and names the person or case so it stands alone when quoted by an AI.
+- faq: 5 to 7 questions a reader would type into Google or ask an AI assistant. The workflow shows the FAQ publicly at the end of the article (a "Frequently Asked Questions" section just before the closing Handwriting Experts line) AND uses it as FAQPage schema, so the visible text and the schema always match. Do NOT write your own FAQ section inside content_html; the workflow adds it. Every answer is 1 to 3 plain sentences, uses only source facts or general method, and names the person or case so it stands alone when quoted by an AI.
   The FIRST FOUR questions are required for every case, in this order, each naming the person or case:
   1. What happened in the [case]? (who, what document, what was disputed)
   2. When did it happen? (every key date the source gives: event, discovery, trial or ruling; say plainly if the source has no date for something)
