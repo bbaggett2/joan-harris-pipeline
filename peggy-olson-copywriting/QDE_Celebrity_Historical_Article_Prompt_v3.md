@@ -59,6 +59,15 @@ SEO / AEO
   Then 1 to 3 more useful questions, such as how a document examiner would examine this kind of document, or what a family should do if they face a similar document today.
 - schema_jsonld: a BlogPosting + FAQPage JSON-LD object as a string. author is Bart Baggett, jobTitle "Forensic Handwriting Expert", knowsAbout handwriting, document examination, expert testimony. publisher name "Bart Baggett", logo https://bartbaggett.com/images/hsilogo2016.jpg. Include a SpeakableSpecification with cssSelector ["#speakable-summary"]. Use the placeholders {{POST_URL}} and {{DATE_PUBLISHED}}; do not guess them.
 
+IMAGE TEXT FIELDS (seo.featured_alt, seo.main_alt, seo.image_caption, seo.image_description) — rules from QDE_Celebrity_Historical_Articles_Image_SOP_v3.md
+- Both images are AI-generated illustrations, not photographs and not the real documents. Never describe them as authentic.
+- featured_alt and main_alt: describe what the picture shows in one short phrase, under 125 characters, and start with "Illustration of". Name the person. Do NOT use the article title or headline as alt text. The two alts must be different.
+  Example: "Illustration of Aretha Franklin beside a spiral notebook will under a couch cushion"
+- image_caption (saved on both images; shown under the in-article image): one sentence that starts with "Illustration:" and ends with "Not a reproduction of the original document." (or "Not a photograph." when there is no document).
+- image_description: one or two plain factual sentences for the media library. No keyword stuffing.
+- Do not stuff "forgery", "handwriting expert", "forensic document examiner" or Bart's name into these fields.
+- seo.tags: 3 to 5 tags specific to this case (the famous name, the case or document name, the document type). No long generic lists.
+
 FEATURED IMAGE (image_ideas and featured_image)
 These case articles are sold by the famous name. Images must show the famous person's NAME and FACE (or the famous document if there is no person) and be built from the source image_prompt (the sheet's column J art direction). Goal: earn the click. Never a quiet, generic, faceless mood scene.
 - image_ideas: 3 alternative 2-line headlines for the featured image, each including the famous name (e.g. ARETHA'S WILL / WAS IN THE COUCH).
