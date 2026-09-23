@@ -14,7 +14,7 @@ HOW TO EDIT SAFELY
 - If you break the file, the workflow falls back to the built-in copy of v1 and flags it in Slack.
 
 ## FEATURED_PROMPT
-The click image (square "E" layout). SOP v2 requires this square to be centered on a wide 1536 x 1024 canvas so the blog card never cuts off words. As of 2026-09-23 the workflow does NOT do that step yet; it is the next build item.
+The click image (square "E" layout). After it is made, the workflow automatically centers this square on a wide 1536 x 1024 navy canvas so the blog card never cuts off words (see SOP v2).
 
 ```text
 Cinematic editorial blog featured image, 1:1 square, photoreal, designed to earn a click at small thumbnail size. Deep navy background (#10142E), moody light from upper left, film grain. LEFT HALF: {SUBJECT}, looking into camera. RIGHT HALF: {SCENE}, lit by warm gold light. TOP: very large bold condensed white headline on two lines "{LINE1}" / "{LINE2}" with only the word "{GOLD}" in gold (#FFE455). No other text anywhere. Spell every word exactly. Leave generous contrast so the headline reads on a phone.
