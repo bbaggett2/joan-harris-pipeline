@@ -73,5 +73,6 @@ Result: all headline words and the face sit in the middle 56% of the width. The 
 
 ## WORKFLOW STATUS (as of 2026-09-23)
 
-- The Aretha featured image was fixed by hand with this method.
-- The n8n workflow still uploads the plain square featured image. The wide-canvas step still has to be added to it before the workflow goes live for Kristine.
+- The Aretha featured image was fixed by hand with the blurred-background method above.
+- The n8n workflow now does this automatically in the node "Widen featured (crop-safe)": it resizes the square to 860 x 860 and centers it on a 1536 x 1024 canvas with a solid navy (#10142E) border instead of the blur, saved at JPEG quality 68 (Howard Hughes test: 1536 x 1024, 118 KB). The main in-article image is not changed.
+- A daily scheduler ("Betty — QDE Blog Drafts DAILY x5") drafts the next 5 undrafted cases every day at 7:00 AM Central, starting at sheet row 3. Everything lands as a WordPress DRAFT for review.
