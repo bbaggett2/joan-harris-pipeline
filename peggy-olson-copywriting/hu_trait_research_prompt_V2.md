@@ -50,10 +50,10 @@ Please structure the analysis using the following lenses so I can use it as a fo
     - Provide 5-7 specific, citable items a video host could reference on camera: named researchers and landmark studies (who, when, what was found), famous historical or pop-culture examples, and memorable anecdotes or thought experiments used by clinicians and authors.
     - For each: one-paragraph summary + source (URL or book/author). If a story is widely told but unverifiable, keep it and mark it **(unverified — tells well, check before quoting as fact)**.
 
-12. **Suggested Video Angles (seed outlines):**
-    - **90-second short:** one hook line + 3 beats.
-    - **8-minute video:** hook + 5-7 section beats.
-    - **15-minute deep dive:** hook + outline including which studies/stories from sections 11 and 13 carry each act.
+12. **Suggested Video Angles (seed outlines — these feed the 30-sec / 90-sec / 10-min script stage):**
+    - **30-second short:** one hook line + the single strongest insight + payoff.
+    - **90-second video:** hook + 3-5 beats.
+    - **10-minute deep dive:** hook + outline including which studies/stories from sections 11 and 13 carry each act.
 
 13. **Bart's Personal Stories (from the STORY BANK — mandatory when the bank has entries):**
     - Below the CONTEXT block you will find a **STORY BANK** of Bart Baggett's own catalogued personal stories for this trait, drawn from his books (each entry has a Story ID, book, chapter/page, summary, quotable line, and on-camera notes).
@@ -72,4 +72,4 @@ Please structure the analysis using the following lenses so I can use it as a fo
 - Distinguish **scientific consensus vs. contested claims** (e.g., note the validity criticisms of MBTI and NLP eye-accessing cues where relevant — the host wants the nuance of the scientific community, not just the folklore).
 - End with a **## TO VERIFY** section listing every claim, figure, attribution, or story in the document that could not be fully verified (including STORY BANK items the bank itself flags as unverified).
 - **Never use the words "graphology" or "graphologist"** — write "handwriting analysis" / "handwriting expert" (HU body-copy rule).
-- Depth over brevity: this is a source document for 90-second to 15-minute scripts. Aim for thorough coverage a host can pick and choose from.
+- Depth over brevity: this is a source document for 30-second to 10-minute scripts. Aim for thorough coverage a host can pick and choose from.
