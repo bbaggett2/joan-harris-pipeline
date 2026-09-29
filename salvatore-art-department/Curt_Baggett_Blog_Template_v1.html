@@ -1,0 +1,168 @@
+<!doctype html>
+<!--
+CURT BAGGETT BLOG FEATURED-IMAGE TEMPLATE v1 (LOCKED 2026-09-28)
+Brand: Curt Baggett / curtbaggett.com ONLY - see salvatore-art-department/Curt_Baggett_Design_Template_v1.md
+for the locked palette, typography, layout, firewall, and variation rules.
+Render: headless Chromium, viewport >=1300x800, deviceScaleFactor 2; await document.fonts.ready before screenshotting each .board element.
+Per post: substitute the title, exhibit number/letter, annotation labels, and stroke path; rotate A->B->C.
+Fonts load from Google Fonts (all OFL).
+-->
+
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;700&family=Lora:wght@400;700&family=Work+Sans:wght@400;700&family=Nothing+You+Could+Do&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --navy:#2B3542; --navy-deep:#222A35; --cream:#F4EFE6; --cream-dk:#EAE3D5;
+  --red:#B0392E; --brass:#A98B4F; --ink:#2F3A47;
+}
+body { background:#888; }
+.board { width:1200px; height:675px; position:relative; overflow:hidden; }
+
+/* ============ STYLE A — dark: examined signature ============ */
+#a { background:var(--navy); }
+#a .rules { position:absolute; inset:0; }
+#a .kicker { position:absolute; top:64px; left:72px; font:700 15px/1 'IBM Plex Mono'; letter-spacing:.42em; color:var(--brass); }
+#a .title { position:absolute; left:72px; bottom:110px; width:600px; font:700 42px/1.24 'IBM Plex Serif'; color:var(--cream); }
+#a .domain { position:absolute; left:72px; bottom:56px; font:400 14px/1 'IBM Plex Mono'; letter-spacing:.26em; color:#8E99A8; }
+#a .caseno { position:absolute; top:64px; right:72px; font:400 13px/1.7 'IBM Plex Mono'; color:#77828F; text-align:right; letter-spacing:.08em; }
+
+/* ============ STYLE B — cream: question card ============ */
+#b { background:var(--cream); }
+#b .paper-rules { position:absolute; inset:0; }
+#b .kicker { position:absolute; top:70px; left:84px; font:700 14px/1 'IBM Plex Mono'; letter-spacing:.42em; color:var(--red); }
+#b .title { position:absolute; left:84px; top:150px; width:760px; font:700 56px/1.18 'Lora'; color:var(--ink); }
+#b .rule-accent { position:absolute; left:84px; bottom:150px; width:110px; height:5px; background:var(--red); }
+#b .byline { position:absolute; left:84px; bottom:96px; font:400 15px/1.6 'Work Sans'; color:#5A6472; }
+#b .byline b { font:700 15px 'Work Sans'; color:var(--ink); }
+#b .domain { position:absolute; right:84px; bottom:96px; font:400 14px/1 'IBM Plex Mono'; letter-spacing:.22em; color:#8A8272; }
+#b .stamp {
+  position:absolute; top:62px; right:84px; padding:10px 18px; border:2.5px solid var(--red);
+  font:700 15px/1 'IBM Plex Mono'; letter-spacing:.3em; color:var(--red); transform:rotate(6deg); opacity:.75; border-radius:3px;
+}
+
+/* ============ STYLE C — split: the loupe ============ */
+#c { background:var(--cream); }
+#c .left { position:absolute; left:0; top:0; bottom:0; width:560px; background:var(--navy-deep); }
+#c .kicker { position:absolute; top:68px; left:64px; font:700 14px/1 'IBM Plex Mono'; letter-spacing:.4em; color:var(--brass); }
+#c .title { position:absolute; left:64px; top:130px; width:430px; font:700 41px/1.24 'IBM Plex Serif'; color:var(--cream); }
+#c .domain { position:absolute; left:64px; bottom:60px; font:400 14px/1 'IBM Plex Mono'; letter-spacing:.24em; color:#8E99A8; }
+</style>
+</head>
+<body>
+
+<!-- ================= A ================= -->
+<div class="board" id="a">
+  <svg class="rules" width="1200" height="675" viewBox="0 0 1200 675">
+    <!-- faint ruled baselines -->
+    <g stroke="#3A4655" stroke-width="1">
+      <line x1="0" y1="205" x2="1200" y2="205"/><line x1="0" y1="275" x2="1200" y2="275"/>
+      <line x1="0" y1="345" x2="1200" y2="345"/><line x1="0" y1="415" x2="1200" y2="415"/>
+    </g>
+    <!-- specimen signature, drawn stroke (ABSTRACT — regenerate per post, never a legible name) -->
+    <g transform="translate(490,60)">
+      <path d="M 90 210 C 130 90, 185 85, 175 165 C 168 225, 120 268, 168 258 C 220 246, 238 150, 285 148 C 322 147, 300 235, 342 222 C 380 210, 388 150, 432 158 C 486 168, 470 240, 540 208 C 585 187, 610 170, 660 178"
+            fill="none" stroke="#E9E2D3" stroke-width="6" stroke-linecap="round"/>
+      <!-- pen lift tail -->
+      <path d="M 545 250 C 590 260, 640 236, 668 244" fill="none" stroke="#E9E2D3" stroke-width="3.4" stroke-linecap="round" opacity=".82"/>
+      <!-- examiner red annotations -->
+      <circle cx="176" cy="160" r="46" fill="none" stroke="#C4453A" stroke-width="2.6"/>
+      <circle cx="438" cy="163" r="38" fill="none" stroke="#C4453A" stroke-width="2.6"/>
+      <line x1="176" y1="114" x2="176" y2="66" stroke="#C4453A" stroke-width="1.6"/>
+      <line x1="438" y1="125" x2="438" y2="66" stroke="#C4453A" stroke-width="1.6"/>
+      <text x="190" y="58" font-family="IBM Plex Mono" font-size="13" letter-spacing="2" fill="#C4453A">Q-1</text>
+      <text x="452" y="58" font-family="IBM Plex Mono" font-size="13" letter-spacing="2" fill="#C4453A">Q-2</text>
+      <!-- measurement ticks under baseline -->
+      <g stroke="#A98B4F" stroke-width="1.4">
+        <line x1="240" y1="310" x2="668" y2="310"/>
+        <line x1="240" y1="302" x2="240" y2="318"/><line x1="347" y1="304" x2="347" y2="316"/>
+        <line x1="454" y1="304" x2="454" y2="316"/><line x1="561" y1="304" x2="561" y2="316"/>
+        <line x1="668" y1="302" x2="668" y2="318"/>
+      </g>
+      <text x="240" y="342" font-family="IBM Plex Mono" font-size="12" letter-spacing="3" fill="#A98B4F">BASELINE&#160;ANALYSIS&#160;&#160;0&#8211;144&#160;mm</text>
+    </g>
+  </svg>
+  <div class="kicker">FORENSIC&nbsp;DOCUMENT&nbsp;EXAMINATION</div>
+  <div class="caseno">SPECIMEN&nbsp;/&nbsp;Q-DOC<br>EXHIBIT&nbsp;NO.&nbsp;09</div>
+  <div class="title">Can Someone Forge My Signature So Well That Even an Expert Can&rsquo;t Tell?</div>
+  <div class="domain">CURTBAGGETT.COM</div>
+</div>
+
+<!-- ================= B ================= -->
+<div class="board" id="b">
+  <svg class="paper-rules" width="1200" height="675" viewBox="0 0 1200 675">
+    <g stroke="#D8CFBC" stroke-width="1">
+      <line x1="0" y1="430" x2="1200" y2="430"/><line x1="0" y1="470" x2="1200" y2="470"/>
+      <line x1="0" y1="510" x2="1200" y2="510"/><line x1="0" y1="550" x2="1200" y2="550"/>
+      <line x1="0" y1="590" x2="1200" y2="590"/><line x1="0" y1="630" x2="1200" y2="630"/>
+    </g>
+    <!-- red margin rule -->
+    <line x1="60" y1="0" x2="60" y2="675" stroke="#D9A49D" stroke-width="1.6"/>
+    <!-- ghost signature specimen lower right (font-rendered, NOT a real signature) -->
+    <g transform="translate(760,468)" opacity=".5">
+      <text font-family="Nothing You Could Do" font-size="58" fill="#4A5563" transform="rotate(-4)">
+        <tspan x="0" y="60">Curt Baggett</tspan>
+      </text>
+    </g>
+  </svg>
+  <div class="kicker">ASK&nbsp;THE&nbsp;DOCUMENT&nbsp;EXAMINER</div>
+  <div class="stamp">EXHIBIT&nbsp;A</div>
+  <div class="title">The Three Red Flags of Forgery Every Lawyer Should Know</div>
+  <div class="rule-accent"></div>
+  <div class="byline"><b>Curt Baggett</b> &nbsp;&middot;&nbsp; Forensic Handwriting Expert</div>
+  <div class="domain">CURTBAGGETT.COM</div>
+</div>
+
+<!-- ================= C ================= -->
+<div class="board" id="c">
+  <div class="left"></div>
+  <svg style="position:absolute;inset:0" width="1200" height="675" viewBox="0 0 1200 675">
+    <!-- right panel: paper with ruled grid -->
+    <g stroke="#DDD4C1" stroke-width="1">
+      <line x1="560" y1="112" x2="1200" y2="112"/><line x1="560" y1="224" x2="1200" y2="224"/>
+      <line x1="560" y1="336" x2="1200" y2="336"/><line x1="560" y1="448" x2="1200" y2="448"/>
+      <line x1="560" y1="560" x2="1200" y2="560"/>
+      <line x1="672" y1="0" x2="672" y2="675"/><line x1="784" y1="0" x2="784" y2="675"/>
+      <line x1="896" y1="0" x2="896" y2="675"/><line x1="1008" y1="0" x2="1008" y2="675"/>
+      <line x1="1120" y1="0" x2="1120" y2="675"/>
+    </g>
+    <!-- faint full script under lens -->
+    <text x="620" y="380" font-family="Nothing You Could Do" font-size="52" fill="#B9AE97" transform="rotate(-3 620 380)">examined &amp; compared</text>
+    <!-- loupe circle -->
+    <g>
+      <circle cx="880" cy="337" r="188" fill="#F8F4EA" stroke="#222A35" stroke-width="7"/>
+      <circle cx="880" cy="337" r="172" fill="none" stroke="#A98B4F" stroke-width="1.6"/>
+      <!-- magnified stroke detail (ABSTRACT — regenerate per post) -->
+      <path d="M 762 400 C 800 250, 862 240, 856 340 C 852 410, 812 448, 858 436 C 912 421, 918 302, 986 320"
+            fill="none" stroke="#2F3A47" stroke-width="11" stroke-linecap="round"/>
+      <!-- annotation (label from approved list only) -->
+      <circle cx="856" cy="352" r="40" fill="none" stroke="#B0392E" stroke-width="2.6"/>
+      <line x1="884" y1="323" x2="948" y2="252" stroke="#B0392E" stroke-width="1.6"/>
+      <text x="908" y="240" font-family="IBM Plex Mono" font-size="13" letter-spacing="2" fill="#B0392E">TREMOR</text>
+      <!-- lens crosshair ticks -->
+      <g stroke="#222A35" stroke-width="2.4">
+        <line x1="880" y1="149" x2="880" y2="171"/><line x1="880" y1="503" x2="880" y2="525"/>
+        <line x1="692" y1="337" x2="714" y2="337"/><line x1="1046" y1="337" x2="1068" y2="337"/>
+      </g>
+      <!-- handle -->
+      <line x1="1013" y1="470" x2="1105" y2="562" stroke="#222A35" stroke-width="26" stroke-linecap="round"/>
+    </g>
+    <!-- caliper scale bottom right -->
+    <g stroke="#8B8270" stroke-width="1.4">
+      <line x1="620" y1="612" x2="1140" y2="612"/>
+      <line x1="620" y1="604" x2="620" y2="620"/><line x1="750" y1="606" x2="750" y2="618"/>
+      <line x1="880" y1="604" x2="880" y2="620"/><line x1="1010" y1="606" x2="1010" y2="618"/>
+      <line x1="1140" y1="604" x2="1140" y2="620"/>
+    </g>
+    <text x="620" y="644" font-family="IBM Plex Mono" font-size="12" letter-spacing="3" fill="#8B8270">MAGNIFICATION&#160;10&#215;&#160;&#160;&#183;&#160;&#160;STROKE&#160;DETAIL</text>
+  </svg>
+  <div class="kicker">EXPERT&nbsp;ANALYSIS</div>
+  <div class="title">Traced Signature vs. Authentic Signature: What&rsquo;s the Difference?</div>
+  <div class="domain">CURTBAGGETT.COM</div>
+</div>
+
+</body>
+</html>
