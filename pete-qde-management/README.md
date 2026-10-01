@@ -1,7 +1,7 @@
 # Pete — QDE Case Supervisor & Operations Manager Agent
 
 **Repo path:** `joan-harris-pipeline/pete-qde-management/`
-**Status:** Active. Email triage SOP v2 (2026-09-30); case-lifecycle role defined in `pete.md`.
+**Status:** Active. Email triage SOP v3 (2026-09-30); case-lifecycle role defined in `pete.md`.
 **Brand boundary:** Brand 1 only — Bart Baggett, Forensic Expert Witness (Handwriting Experts Inc., QDE). Public name is "Bart Baggett."
 
 **Team profile (from *Joan AI Operations Team v1*, p. 10):** Pete — Document Examination, Department Head & Case Supervisor. *In one line: run every paid forensic case from intake to signed report, with zero missed deadlines.* Owns: case folders and Q/K/S labeling, side-by-side exhibits, examiner handoff to Bart, declarations and final packets. Works in: Google Drive, Sheets dashboards, Adobe Acrobat, Microsoft TODO. The clock he runs on: label documents within 24 hours, case complete within 5 days; bad-news opinions go to the client by phone, never email.
@@ -21,7 +21,8 @@ Pete never gives a forensic opinion and never sends client mail without human ap
 |---|---|
 | `README.md` | This overview |
 | `pete.md` | Agent definition: case lifecycle, folder/naming rules, coordination map, never/always lists |
-| `Pete_Email_Triage_SOP_QDE_v2.md` | Hourly email sweep runbook (supersedes v1) |
+| `Pete_Email_Triage_SOP_QDE_v3.md` | **Current** hourly email sweep runbook (supersedes v2) |
+| `Pete_Email_Triage_SOP_QDE_v2.md` | Superseded — kept for history. Routed the ops report to `#pete-operations`, a channel that does not exist |
 
 Source documents kept outside this repo (Google Drive / local): the QDE New Case Procedure (.docx), Case Supervisor role summary, 2026 Case Management Training, Protocol for Forensic Case Management and Trial Logistics, Client Case Inquiry SOP, `Joan_Harris_SOP.docx`, the AI Executive Operating Manual for Joan, and `joan.md`, `don.md`, `peggy.md`.
 
@@ -44,17 +45,18 @@ Pete owns everything after Don closes the sale and before the client receives th
 
 Account-manager duties (court RSVPs, invoices, additional funds, awareness of Bart's travel/court calendar) are also Pete's when he wears that hat. Full detail and every rule live in `pete.md`.
 
-## Job 2 — Email triage (SOP v2)
+## Job 2 — Email triage (SOP v3)
 
-- **Hourly sweep** of new/unread mail in info@handwritingexpertusa.com.
+- **Hourly sweep** (at :25) of new mail received in the past ~70 minutes in info@handwritingexpertusa.com.
 - **Classifies** into nine categories: new lead, payment received, client documents, client update, scope/billing, court/deadline, attorney, upset client/refund, noise.
+- **Lead rules:** when in doubt, flag as "POSSIBLE LEAD — needs human review"; never classify no-reply senders, marketing blasts, SEO pitches, or automated notifications as leads.
 - **Labels** messages in Gmail and **drafts** replies for human approval (never auto-sent).
-- **Posts the Daily Operations Report** to Slack `#pete-operations`.
+- **Sends the Daily Operations Report** as a Slack **group DM to Bart and Kristine** (high-priority items first). There is no `#pete-operations` channel.
 - **Posts a lead alert** to `#qde-leads-channel` (`C0B8YVBRBJL`) only when new leads exist, tagging Tigerlily and Bart Baggett. No new leads means no post and no tags.
-- **Stops and notifies the owner** if the SOP, Gmail, or Slack is unreachable. Silent when nothing needs attention.
+- **Silent when the inbox is quiet** — no post, no DM.
 - **Backlog rule:** with roughly 50+ unread threads (best estimate, not a verified figure), process only mail since the last sweep and report the backlog size.
 
-Details, label map, and lead-alert format are in `Pete_Email_Triage_SOP_QDE_v2.md`.
+Details, label map, and lead-alert format are in `Pete_Email_Triage_SOP_QDE_v3.md`. **The live scheduled task's prompt is self-contained** (it reads no file at run time); when the SOP changes, the scheduled task's prompt must be updated to match.
 
 ## Who Pete works with
 
@@ -69,7 +71,7 @@ Details, label map, and lead-alert format are in `Pete_Email_Triage_SOP_QDE_v2.m
 | Kristine Sylvester, Karla Fermano (human employees, Philippines); Kassandra | Pete **supervises** them. Production: Q/K labeling, side-by-sides, declaration drafting; Kristine also approves and sends email drafts |
 | Katie | Pete may contact her directly (with Bart) on urgent customer-facing deadline issues when Kristine's ability to resolve is in doubt. Role not specified in the source material |
 | Lauren (office manager) | Client communication continuity |
-| Tigerlily | Handles leads; tagged on lead alerts |
+| Tigerlily | Handles leads; tagged on lead alerts; controls pricing |
 
 ## Hard rules (both jobs)
 
@@ -85,18 +87,17 @@ Details, label map, and lead-alert format are in `Pete_Email_Triage_SOP_QDE_v2.m
 
 ## Setup requirements
 
-- Gmail access to info@handwritingexpertusa.com; Slack access to `#pete-operations` and `#qde-leads-channel`.
+- Gmail access to info@handwritingexpertusa.com; Slack access to `#qde-leads-channel` and DM access to Bart and Kristine.
 - Drive, Microsoft TODO, and Slack access for the case-lifecycle work.
-- The SOP and `pete.md` must live where the scheduled run can read them (this repo or Google Drive). A scheduled cloud run cannot read a local computer folder, which is why the 2026-09-30 sweep failed.
+- The scheduled task's prompt is self-contained — a scheduled cloud run cannot read a local computer folder, which is why the Aug–Sep 2026 sweeps silently failed (prompt pointed at `/Pete/...`, a path the run could never reach, and at `#pete-operations`, a channel that doesn't exist). Fixed 2026-09-30.
 
 ## Open items to resolve (conflicts found while merging)
 
-1. **Escalation path (partly resolved).** Pete may contact Bart and Katie directly on urgent customer-facing deadline issues when Kristine's ability to resolve is in doubt. Still to confirm: whether the other Bart-escalation categories in SOP v2 (opinions, refunds, upset clients) also go direct or through Joan, as `pete.md` states.
+1. **Escalation path (partly resolved).** Pete may contact Bart and Katie directly on urgent customer-facing deadline issues when Kristine's ability to resolve is in doubt. Still to confirm: whether the other Bart-escalation categories in the SOP (opinions, refunds, upset clients) also go direct or through Joan, as `pete.md` states.
 2. **Kristine's role (resolved).** Kristine and Karla are human employees in the Philippines supervised by Pete. `pete.md` should be updated to state the direct-contact exception.
-3. **Procedure file name.** `pete.md` cites `2026_QDE_New Case Procedure_remote_officesV29BB.docx`; SOP v1/v2 cite the 2023 file. Confirm the current file and update both.
+3. **Procedure file name.** `pete.md` cites `2026_QDE_New Case Procedure_remote_officesV29BB.docx`; the SOP cites the 2023 file. Confirm the current file and update both.
 4. **Status tracking tools.** The case lifecycle uses Microsoft TODO; the email sweep reports through Slack. Confirm whether the Daily Operations Report should also update the Dashboard.
-5. **Gmail label map** (SOP v2) and the **backlog threshold** still need confirmation.
-6. **Scheduled task** must be pointed at the repo/Drive copy of the SOP.
+5. **Gmail label map** (SOP v3) and the **backlog threshold** still need confirmation.
 
 ## Chain of command
 
@@ -104,7 +105,7 @@ Pete supervises Kristine and Karla. Routine issues go through Kristine. On urgen
 
 ## Version history
 
-- **2026-09-30:** README rewritten to cover both the case-lifecycle role (`pete.md`) and email triage (SOP v2); GitHub folder structure added; open conflicts listed. Previously read only "This agent has not yet been built."
+- **2026-09-30 (evening):** SOP v3. Root-caused and fixed the silent failures: scheduled prompt made self-contained (no file reads at run time); ops report rerouted from the nonexistent `#pete-operations` to a group DM to Bart and Kristine; lead classification rules added (POSSIBLE LEAD flag; no-reply/marketing exclusions). Live scheduled task updated to match.
+- **2026-09-30:** README rewritten to cover both the case-lifecycle role (`pete.md`) and email triage; GitHub folder structure added; open conflicts listed. Previously read only "This agent has not yet been built."
 - **SOP v2 (2026-09-30):** Slack routing, lead alerts, failure handling, label map, backlog rule.
 - **SOP v1:** Initial email triage SOP.
-
