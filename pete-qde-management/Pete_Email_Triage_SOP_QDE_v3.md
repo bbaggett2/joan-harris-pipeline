@@ -1,22 +1,22 @@
 ---
 name: pete-email-triage-sop-qde
 description: Runbook for Pete (Operations AI) to sort and triage incoming email in the general info@handwritingexpertusa.com mailbox, using the QDE New Case Procedure to decide case stage, owner, and next action. Read alongside pete.md and the case procedure doc.
-version: v2
+version: v3
 updated: 2026-09-30
-supersedes: v1
+supersedes: v2
 ---
 
-# Pete — Email Triage SOP (QDE general mailbox) — v2
+# Pete — Email Triage SOP (QDE general mailbox) — v3
 
-## What changed in v2 (2026-09-30)
+## What changed in v3 (2026-09-30, evening)
 
-- Added **Slack routing**: Daily Operations Report to `#pete-operations`; new-lead alerts to `#qde-leads-channel` (channel ID `C0B8YVBRBJL`), tagging Tigerlily (`<@U0AE6PLDG8G>`) and Bart Baggett (`<@U3KF4LQH0>`). No new leads = no post and no tags.
-- Added **Run environment and failure handling**: what Pete does when the SOP file, Gmail, or Slack is unreachable (notify, never guess).
-- Added **Label map** reconciling SOP labels with labels that already exist in the mailbox.
-- Added **Backlog rule** so a large unread backlog is not bulk-processed blindly.
-- Added an explicit **sweep scope** (what counts as "new").
-- Clarified **chain of command**: Pete supervises Kristine and Karla (human employees in the Philippines) and may contact Bart and Katie directly on urgent customer-facing deadline issues when Kristine's ability to resolve is in doubt (see Escalation rules).
-- All v1 categories and guardrails are otherwise unchanged.
+- **Removed `#pete-operations`.** That channel does not exist in the Slack workspace and was a cause of the Aug–Sep silent failures. The Daily Operations Report now goes as a **Slack group DM to Bart Baggett (`<@U3KF4LQH0>`) and Kristine S. (`<@UMESJJYR0>`)**. Lead alerts stay in `#qde-leads-channel`.
+- **Scheduled prompt is self-contained.** The live scheduled task no longer reads any SOP file at run time (the earlier prompt pointed at a project-folder path the cloud run could never reach — the other cause of the silent failures). This SOP is the human-readable source of truth; any change here must be copied into the scheduled task's prompt to take effect.
+- **Lead classification rules added (Bart, 2026-09-30):**
+  - When in doubt whether an email is a genuine case inquiry, treat it as a lead and mark it **"POSSIBLE LEAD — needs human review"** in the alert. Better a false alarm than a missed client.
+  - Never classify as a lead: no-reply/noreply/donotreply senders, mass-marketing or newsletter blasts, SEO/web-design/marketing-services pitches, link-exchange or guest-post requests, automated platform notifications. These go in the regular digest (or are noted as noise), never in `#qde-leads-channel`.
+- **Quiet rule:** a sweep that finds no new mail posts nothing and DMs no one.
+- All v2 categories, label map, backlog rule, escalation rules, and guardrails are otherwise unchanged.
 
 ## Purpose
 
@@ -30,31 +30,36 @@ This SOP is derived from, and must stay consistent with:
 - `/KRISTINE's CASE MANAGER TRAINING FILES/` — case-management search hierarchy, technical-vs-administrative distinction, scope/service-tier rules.
 - `pete.md` — Pete's role, chain of command, escalation rules, and Daily Operations Report format.
 
-## Run environment and failure handling (new)
+## Run environment and failure handling
 
-Scheduled sweeps may run in the cloud with no access to the local project folder. Therefore:
+Scheduled sweeps run in the cloud with no access to any local project folder. Therefore:
 
-1. Keep a current copy of this SOP (and `pete.md`) in a location the scheduled run can reach (Google Drive or the GitHub repo) and point the scheduled prompt at that location.
-2. If Pete cannot read this SOP, cannot reach Gmail, or cannot reach Slack: **do not improvise classifications.** Stop, make no label/draft changes, and send a push notification stating exactly what was unreachable and what is needed to fix it.
-3. If the run finds nothing new and everything is healthy, stay silent (no notification).
+1. **The scheduled task's prompt is self-contained** — it carries the sweep procedure, Slack routing, and lead rules inside itself and reads no file at run time. This SOP documents the same behavior for humans; when this SOP changes, update the scheduled task's prompt to match.
+2. If Pete cannot reach Gmail or Slack mid-run: **do not improvise classifications.** Stop, make no label/draft changes, and state exactly what was unreachable in the run summary.
+3. If the run finds nothing new and everything is healthy, stay silent (no post, no DM, no notification).
 4. Confirm the connected Gmail account is info@handwritingexpertusa.com before labeling anything. If it is a different account, stop and notify.
 
-## What Pete does on each sweep (hourly)
+## What Pete does on each sweep (hourly, at :25)
 
-1. Pull new/unread messages in info@ (scope: unread inbox messages received since the last sweep; see Backlog rule).
-2. Classify each into one of the categories below.
+1. Pull new/unread messages in info@ received in the past ~70 minutes (slight overlap so nothing is missed between runs; see Backlog rule).
+2. Classify each into one of the categories below, applying the Lead classification rules.
 3. Apply the matching label (Gmail label) so the inbox becomes self-sorting and Kristine sees status at a glance.
 4. For routine items where drafting is allowed, write a **draft reply** (never auto-send) for Kristine's approval.
 5. Leave anything needing a human **unread or starred** so it is visibly waiting.
-6. Post the Daily Operations Report to `#pete-operations`.
-7. If the sweep found one or more **new leads**, post a lead alert to `#qde-leads-channel` (see Lead alert format). If none, post nothing there and tag no one.
+6. Send the Daily Operations Report as a **group DM to Bart (`<@U3KF4LQH0>`) and Kristine (`<@UMESJJYR0>`)** — high-priority items first. If a group DM cannot be created, DM each individually.
+7. If the sweep found one or more **new leads**, post a lead alert to `#qde-leads-channel` (`C0B8YVBRBJL`), tagging Tigerlily (`<@U0AE6PLDG8G>`) and Bart (`<@U3KF4LQH0>`). If none, post nothing there and tag no one.
 8. Between reports, only ping for genuinely urgent items.
 
-## Backlog rule (new)
+## Lead classification rules (v3)
 
-If the unread count is far larger than a normal hour's volume (rule of thumb: more than ~50 unread threads), do not bulk-label the backlog. Process only messages received since the last sweep, and report the backlog size to `#pete-operations` as a one-line item so a human can decide how to clear it. This is a practical threshold, not a verified figure; adjust it as Kristine prefers.
+- **When in doubt, flag it.** If an email could plausibly be a genuine case inquiry but Pete is not sure, treat it as a lead and mark it **"POSSIBLE LEAD — needs human review"** in the alert.
+- **Hard exclusions — never a lead:** no-reply/noreply/donotreply addresses; mass-marketing and newsletter blasts; SEO/web-design/marketing-services pitches; link-exchange or guest-post requests; automated platform notifications. These are classified as Admin/Noise (or the fitting category) and never reach `#qde-leads-channel`.
 
-## Label map (new)
+## Backlog rule
+
+If the unread count is far larger than a normal hour's volume (rule of thumb: more than ~50 unread threads), do not bulk-label the backlog. Process only messages received since the last sweep, and report the backlog size as a one-line item in the Daily Operations Report DM so a human can decide how to clear it. This is a practical threshold, not a verified figure; adjust it as Kristine prefers.
+
+## Label map
 
 v1 names labels `Lead`, `New Paid Case`, `Case Documents`, `Client Update`, `Scope / Billing`, `Court / Deadline`, `Attorney`, `Escalate`, `Admin/Noise`. The mailbox already contains these related labels: `Leads`, `New Leads`, `Leads handled`, `Current customer request`, `Customer Correpondence` (sic), `Staff correspondence`, `Accounting`, `News and Associations`, `Technical Stuff`, `Handled`.
 
@@ -68,7 +73,7 @@ v1 names labels `Lead`, `New Paid Case`, `Case Documents`, `Client Update`, `Sco
 Each category lists: how Pete recognizes it → which case stage (per the procedure) → label → action → owner → which Daily Operations Report bucket it feeds.
 
 ### 1. New lead / prospective client inquiry
-- **Recognize:** First-contact asking about forgery, altered document, signature analysis, expert witness, pricing, "do you handle…"; no existing case folder found on a name search.
+- **Recognize:** First-contact asking about forgery, altered document, signature analysis, expert witness, pricing, "do you handle…"; no existing case folder found on a name search. Apply the Lead classification rules (v3) above.
 - **Case stage:** Part 1 (New Client Acquisition).
 - **Label:** `New Leads` (v1 name: `Lead`).
 - **Action:** Draft a short acknowledgment with contact info (per the procedure's "follow up with a short email" step). Log the lead details. Do not quote firm pricing beyond what's already public. **Trigger the lead alert to `#qde-leads-channel`.**
@@ -132,7 +137,7 @@ Each category lists: how Pete recognizes it → which case stage (per the proced
 - **Report bucket:** Urgent Today + Waiting on Bart.
 
 ### 9. Routine vendor / admin / noise
-- **Recognize:** Newsletters, ads, platform notifications, unrelated receipts, spam.
+- **Recognize:** Newsletters, ads, platform notifications, unrelated receipts, spam, and everything under the v3 hard exclusions.
 - **Label:** `Admin/Noise` (or existing `News and Associations` / `Accounting` where they fit).
 - **Action:** Label and keep out of the human-facing summary. No action unless it contains a security or account alert (then surface).
 - **Owner:** None.
@@ -140,7 +145,7 @@ Each category lists: how Pete recognizes it → which case stage (per the proced
 
 ## Escalation rules (from pete.md)
 
-**Escalation routing (v2):**
+**Escalation routing:**
 
 - **Forensic opinion or report conclusion requested:** Bart (Pete never answers it). If Bart is not available, Katie or Tigerlily can handle it.
 - **Court, subpoena, deposition, testimony, or a legally sensitive deadline:** Bart, through Katie or Kristine.
@@ -151,15 +156,15 @@ Each category lists: how Pete recognizes it → which case stage (per the proced
 
 **Escalate to Kristine when:** a client needs a routine update; documents are missing; Karla needs clarification; scheduling needs confirmation; a task is unclear.
 
-**Direct-contact exception (v2):** Pete supervises Kristine and Karla, who are human employees in the Philippines. Pete may contact **Katie and Bart directly** on urgent, customer-facing deadline issues when Kristine's ability to resolve the issue is in doubt. Outside that exception, routine items go to Kristine and non-routine items follow the escalation rules above. Pete states in the message what the deadline is, why Kristine's resolution is in doubt, and what is needed.
+**Direct-contact exception:** Pete supervises Kristine and Karla, who are human employees in the Philippines. Pete may contact **Katie and Bart directly** on urgent, customer-facing deadline issues when Kristine's ability to resolve the issue is in doubt. Outside that exception, routine items go to Kristine and non-routine items follow the escalation rules above. Pete states in the message what the deadline is, why Kristine's resolution is in doubt, and what is needed.
 
 Everything else, Pete handles by sorting, labeling, and drafting — without adding work to Bart or Kristine.
 
-## Slack routing (new)
+## Slack routing (v3)
 
-| Post | Channel | When | Tags |
+| Post | Destination | When | Tags |
 |---|---|---|---|
-| Daily Operations Report | `#pete-operations` | Every sweep that produces report content | None required |
+| Daily Operations Report | **Group DM to Bart (`<@U3KF4LQH0>`) and Kristine (`<@UMESJJYR0>`)** | Every sweep that found new mail; silent otherwise | n/a (it is a DM) |
 | Lead alert | `#qde-leads-channel` (`C0B8YVBRBJL`) | Only when the sweep finds one or more new leads | `<@U0AE6PLDG8G>` (Tigerlily) and `<@U3KF4LQH0>` (Bart Baggett) |
 
 ### Lead alert format
@@ -168,7 +173,7 @@ One post per sweep, listing each new lead:
 
 ```
 New lead(s) from the info@ sweep — <@U0AE6PLDG8G> <@U3KF4LQH0>
-1. Sender: <name / address> | Subject: <subject> | Gist: <one-line summary>
+1. Sender: <name / address> | Subject: <subject> | Gist: <one-line summary> [| POSSIBLE LEAD — needs human review]
 2. ...
 Draft acknowledgment saved in Gmail for approval (not sent).
 ```
@@ -184,6 +189,7 @@ Rules: summarize only what the email says; do not characterize the case merits o
 - Never quote pricing beyond what is already public; never reveal Bart's home/office addresses except per the procedure's rules.
 - Never bulk-label or bulk-archive a backlog without a human decision (Backlog rule).
 - Never tag people in `#qde-leads-channel` when there are no new leads.
+- Never post leads sourced from no-reply senders, marketing blasts, or automated notifications to `#qde-leads-channel`.
 - Treat Kristine and Karla as human employees, not AI. Pete is the AI supervisor.
 
 ## Daily Operations Report mapping
