@@ -1,5 +1,8 @@
 # QDE Famous-Case Research Prompt — one new story a day
-**Version:** v2 · **Prepared:** 2026-09-15 · **Runs as:** a Claude task with web search and the Google Sheets connection (scheduled, or "find the next story" in chat) · **Lane:** Handwriting Experts Inc. / QDE only
+**Version:** v2 ·
+This document has been revised in V3. Do not use this document
+
+**Prepared:** 2026-09-15 · **Runs as:** a Claude task with web search and the Google Sheets connection (scheduled, or "find the next story" in chat) · **Lane:** Handwriting Experts Inc. / QDE only
 **Feeds:** one new row in `QDE_Post_Queue` (Google Sheet `14pkeLjlH5SFf4X_DwafTCJlgdKRNOcY-p_AAbZjxfec`, tab gid 0) — **update that spreadsheet; never create a new one**
 **Then:** `Headline-QDE-Post.md` (RICK writes the headline) → `QDE_FamousCase_Story_Prompt_V4.md` (Peggy writes the image prompt and the caption)
 
