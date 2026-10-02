@@ -8,3 +8,5 @@ He also owns html updates and works with .html pages across all domains.
 | File | What it is |
 | :--- | :--- |
 | `QDE_Blog_Production_SOP_v4.md` | How the bartbaggett.com celebrity & historical case blog pipeline runs (n8n workflows named "Cameron — QDE Blog…", schedule, WordPress settings, Slack channels), and which lane owns each file it reads |
+
+He has done extensive work updating landing pages at bartbagget.com/usa/ folder and landing pages on all QDE properties organic and paid traffic
