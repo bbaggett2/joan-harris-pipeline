@@ -1,0 +1,583 @@
+{
+ "name": "Peggy — Deep fact re-check (thin-source QDE rows)",
+ "nodes": [
+  {
+   "id": "08dfcb68-a6e7-4d8f-af02-d88acb0c4df9",
+   "name": "Re-check form",
+   "type": "n8n-nodes-base.formTrigger",
+   "typeVersion": 2.2,
+   "position": [
+    0,
+    200
+   ],
+   "parameters": {
+    "formTitle": "QDE deep fact re-check",
+    "formDescription": "Re-researches QDE_Post_Queue rows with a deep web-research model. Leave the box empty to re-check every blank-status row whose sources came back thin (max 5 per run). Or type post IDs like 43, 45, 48. It only rewrites the fact_status, facts_need_verify and notes columns. It never changes status, the headline, or the caption — suggested copy fixes go to Slack and notes for a human. Results post to Slack #qde-celebrity-post-review.",
+    "formFields": {
+     "values": [
+      {
+       "fieldLabel": "Post IDs (optional)",
+       "placeholder": "43, 45, 48   — or leave empty for all thin-source rows"
+      },
+      {
+       "fieldLabel": "Requested by (optional)",
+       "placeholder": "Your name"
+      }
+     ]
+    },
+    "options": {
+     "path": "qde-fact-recheck",
+     "buttonLabel": "Run deep re-check",
+     "respondWithOptions": {
+      "values": {
+       "respondWith": "text",
+       "formSubmittedText": "Started. Deep research takes several minutes per story. Results land in the sheet (columns N, O and notes) and post to Slack #qde-celebrity-post-review."
+      }
+     }
+    }
+   },
+   "webhookId": "c4ef4612-4704-44d8-9efa-7e0e816784a6"
+  },
+  {
+   "id": "0d646ff3-0650-4be8-8ba8-f23f5f4f9eb0",
+   "name": "Daily 6:40am PT",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    0,
+    420
+   ],
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "40 6 * * *"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "ec052ff9-5598-4232-a4ed-9a446f0fa5fe",
+   "name": "Trigger params",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    220,
+    300
+   ],
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "p1",
+       "name": "post_ids",
+       "type": "string",
+       "value": "={{ $json['Post IDs (optional)'] || '' }}"
+      },
+      {
+       "id": "p2",
+       "name": "max",
+       "type": "number",
+       "value": "=5"
+      },
+      {
+       "id": "p3",
+       "name": "source",
+       "type": "string",
+       "value": "={{ $json['Requested by (optional)'] ? 'form · ' + $json['Requested by (optional)'] : ($json.formMode ? 'form' : 'daily schedule') }}"
+      }
+     ]
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "ab9525ee-a5ee-4b0a-82c7-286bb7424b77",
+   "name": "Config",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    440,
+    300
+   ],
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "c1",
+       "name": "model",
+       "type": "string",
+       "value": "gpt-5.5"
+      },
+      {
+       "id": "c2",
+       "name": "effort",
+       "type": "string",
+       "value": "high"
+      },
+      {
+       "id": "c3",
+       "name": "slack_channel",
+       "type": "string",
+       "value": "qde-celebrity-post-review"
+      },
+      {
+       "id": "c4",
+       "name": "ready_owner_slack_id",
+       "type": "string",
+       "value": "U0C1QDCRV6J"
+      },
+      {
+       "id": "c5",
+       "name": "research_url",
+       "type": "string",
+       "value": "https://raw.githubusercontent.com/bbaggett2/joan-harris-pipeline/main/peggy-olson-copywriting/QDE_FamousCase_Research_Prompt_v3.md"
+      }
+     ]
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "4d4bdfce-37e0-4bfb-92e2-25530a370161",
+   "name": "Fetch research prompt",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    660,
+    300
+   ],
+   "parameters": {
+    "method": "GET",
+    "url": "={{ $('Config').first().json.research_url }}?t={{ Date.now() }}",
+    "options": {
+     "response": {
+      "response": {
+       "responseFormat": "text",
+       "outputPropertyName": "research_md"
+      }
+     },
+     "timeout": 30000
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "id": "b3e7f136-2e61-45db-8a98-49c988db345d",
+   "name": "Read queue",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    880,
+    300
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "value": "14pkeLjlH5SFf4X_DwafTCJlgdKRNOcY-p_AAbZjxfec",
+     "mode": "id"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": "0",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "aZplykFQOTxSckqJ",
+     "name": "happy buddha"
+    }
+   },
+   "alwaysOutputData": true,
+   "executeOnce": false
+  },
+  {
+   "id": "6dbc64b9-3862-4cf5-b73c-4da5b2eceb09",
+   "name": "Select rows",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1100,
+    300
+   ],
+   "parameters": {
+    "jsCode": "// Select rows to re-verify. Input: Read queue rows. Trigger may pass post_ids (\"QDE-FC-43, QDE-FC-45\") and force.\nconst trig = $('Trigger params').first().json;\nconst wanted = String(trig.post_ids || '').toUpperCase().split(/[\\s,;]+/).map(s => s.trim()).filter(Boolean)\n  .map(s => /^\\d+$/.test(s) ? 'QDE-FC-' + s : (/^FC-\\d+$/.test(s) ? 'QDE-' + s : s));\nconst MAX = Number(trig.max || 5);\nconst rows = $input.all().map(i => i.json).filter(r => r.post_id);\nlet pick;\nif (wanted.length) {\n  pick = rows.filter(r => wanted.includes(String(r.post_id).trim().toUpperCase()));\n} else {\n  pick = rows.filter(r => {\n    const st = String(r.status || '').trim().toUpperCase();\n    const fs = String(r.fact_status || '');\n    const notes = String(r.notes || '');\n    return st === '' && String(r.facts_need_verify || '').toUpperCase().startsWith('YES')\n      && /Only [01] source URL/.test(fs) && !/RE-VERIFIED/.test(notes);\n  });\n}\nconst skipped = pick.slice(MAX).map(r => r.post_id);\npick = pick.slice(0, MAX);\nif (!pick.length) return [{ json: { _none: true, wanted, skipped } }];\nreturn pick.map(r => ({ json: { ...r, _skipped: skipped } }));\n"
+   }
+  },
+  {
+   "id": "3995b370-6aa5-4364-b36f-8b19d425d880",
+   "name": "Any rows?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1320,
+    300
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "a1",
+       "leftValue": "={{ $json._none !== true }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "looseTypeValidation": true,
+    "options": {}
+   }
+  },
+  {
+   "id": "44a09906-c66c-4441-a3d6-f80f0ee3cf49",
+   "name": "Build re-research request",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1540,
+    200
+   ],
+   "parameters": {
+    "mode": "runOnceForEachItem",
+    "jsCode": "const cfg = $('Config').first().json;\nconst rules = String($('Fetch research prompt').first().json.research_md || '').slice(0, 12000);\nconst r = $json;\nconst sys = `You are the senior fact-checker for Bart Baggett's forensic document examiner (QDE) social posts. A first pass used a weak web search and came back with ZERO retrieved sources, so every fact below is UNTRUSTED, including any URLs already listed (they may have been invented). Your job is a deep re-verification on the live web.\n\nMETHOD\n- Run many searches (at least 6, more if needed): the case name, each person, each date, each number, the forensic \"tell\", and the outcome. Prefer primary/authoritative sources: court records, the institution's own announcement, major newspapers, academic papers, government sites.\n- Open and read pages. Only cite a URL you actually retrieved in THIS session. Never cite a URL from the row text unless you retrieved it yourself and it says what you claim.\n- Check every factual claim in FACT_STATUS, CAPTION, SUBLINE, TORN_NOTE and HEADLINE: names, dates, places, numbers, money, sentences, who did the examination and what it found.\n- If the story is not one identifiable real case, or the documents/handwriting/ink/paper evidence is not documented, say so (verdict WRONG_CASE or UNVERIFIED). Never substitute a different case.\n- A person charged but not convicted must be written as accused, never as guilty.\n- Do not soften or embellish. If a detail is not supported, say it is not supported.\n- DO NOT fact-check Bart's standard house lines: \"I wasn't involved in the ... case\", the \"Attorneys:\" call to action, the phone number, the website line, or hashtags. Leave them alone.\n- Judge MATERIAL claims only (who, what, when, where, the forensic tell, the outcome, numbers). Ignore harmless style choices.\n\nLENGTH LIMITS (the sheet cell is read by a busy human)\n- fact_status: max ~1,800 characters total. One or two sentences per heading. SOURCES: the 3–6 best retrieved URLs, one per line, each with a few words on what it confirms. Then at most 3 lines starting ⚠️ for material facts you could not verify.\n- claims: list only claims that are WRONG or materially UNSUPPORTED (skip the verified ones). Max 6.\n- copy_fixes: only where the current copy is wrong or would mislead a reader. Keep the replacement about the same length and the same punchy voice as the original — do not turn a caption sentence into a paragraph. Max 5.\n\nHOUSE RESEARCH RULES (from Bart's research prompt, for context):\n${rules}\n\nOUTPUT: reply with ONE JSON object only, no prose, with keys:\n{\n \"verdict\": \"VERIFIED\" | \"CORRECTED\" | \"UNVERIFIED\" | \"WRONG_CASE\",\n \"claims\": [ {\"field\": \"fact_status|caption|subline|torn_note|headline\", \"claim\": \"short quote\", \"status\": \"VERIFIED|WRONG|UNSUPPORTED\", \"correction\": \"corrected wording or empty\", \"url\": \"retrieved URL or empty\"} ],\n \"fact_status\": \"the full rewritten fact block in this exact format:\\\\nCASE: ...\\\\nWHEN/WHERE: ...\\\\nTHE DOCUMENT: ...\\\\nTHE CRIME: ...\\\\nTHE TELL: ...\\\\nTHE OUTCOME: ...\\\\nTHE DETAILS THAT MAKE IT A STORY: ...\\\\nSOURCES: one retrieved URL per line, each followed by ' — what it confirms'. Only include facts you verified; mark anything else with a line starting ⚠️\",\n \"copy_fixes\": [ {\"field\": \"caption|subline|torn_note|headline\", \"from\": \"exact text now in the row\", \"to\": \"corrected text\"} ],\n \"slack_line\": \"one plain sentence for the reviewer: what you confirmed and what (if anything) must change\"\n}`;\nconst user = `POST_ID: ${r.post_id}\nTITLE: ${r.title}\nHEADLINE: ${r.headline}\nSUBLINE: ${r.subline}\nTORN_NOTE: ${r.torn_note}\nCAPTION:\n${r.caption}\n\nFACT_STATUS (untrusted first pass):\n${r.fact_status}`;\nlet body;\nif (/deep-research/.test(cfg.model)) {\n  body = { model: cfg.model, input: [{ role: 'developer', content: [{ type: 'input_text', text: sys }] }, { role: 'user', content: [{ type: 'input_text', text: user }] }],\n    tools: [{ type: 'web_search_preview' }], reasoning: { summary: 'auto' } };\n} else {\n  body = { model: cfg.model, instructions: sys, input: user,\n    tools: [{ type: 'web_search', search_context_size: 'high' }],\n    include: ['web_search_call.action.sources'],\n    reasoning: { effort: cfg.effort || 'high' } };\n}\nreturn { json: { post_id: r.post_id, row: r, body } };\n"
+   }
+  },
+  {
+   "id": "2ba71413-4e3e-4971-bf18-06782c8e186a",
+   "name": "OpenAI — deep research",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1760,
+    200
+   ],
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.openai.com/v1/responses",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify($json.body) }}",
+    "options": {
+     "timeout": 1200000,
+     "batching": {
+      "batch": {
+       "batchSize": 1,
+       "batchInterval": 1000
+      }
+     },
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "credentials": {
+    "openAiApi": {
+     "id": "OpkVCse0PvBeVT5x",
+     "name": "OpenAI account"
+    }
+   }
+  },
+  {
+   "id": "e8bd9bcd-bcab-44a7-b313-fe241ab6b30f",
+   "name": "Parse + guard sources",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1980,
+    200
+   ],
+   "parameters": {
+    "jsCode": "const out = [];\nconst items = $input.all();\nconst builds = $('Build re-research request').all();\nconst stamp = $now.setZone('America/Los_Angeles').toFormat('yyyy-LL-dd HH:mm');\nconst cfg = $('Config').first().json;\nfor (let i = 0; i < items.length; i++) {\n  const res = items[i].json;\n  const row = builds[i].json.row;\n  const post_id = row.post_id;\n  const fail = (why) => out.push({ json: { post_id, _ok: false, _why: why, _row: row,\n    fact_status: row.fact_status, facts_need_verify: row.facts_need_verify || 'YES',\n    notes: (String(row.notes || '') + ` | RE-VERIFIED ${stamp} (${cfg.model}): FAILED — ${why}`).trim() } });\n  if (res.error || !Array.isArray(res.output)) { fail('API error: ' + JSON.stringify(res.error || res).slice(0, 300)); continue; }\n  // Collect URLs actually retrieved this session\n  const retrieved = new Set();\n  let text = '';\n  let searches = 0;\n  for (const o of res.output) {\n    if (o.type === 'web_search_call') {\n      searches++;\n      const a = o.action || {};\n      for (const s of (a.sources || [])) if (s.url) retrieved.add(s.url);\n      if (a.url) retrieved.add(a.url);\n    }\n    if (o.type === 'message') for (const c of (o.content || [])) {\n      if (c.type === 'output_text') { text += c.text; for (const an of (c.annotations || [])) if (an.url) retrieved.add(an.url); }\n    }\n  }\n  const norm = u => String(u || '').replace(/[?#].*$/, '').replace(/\\/$/, '').replace(/^https?:\\/\\/(www\\.)?/, '').toLowerCase();\n  const rset = new Set([...retrieved].map(norm));\n  const isRet = u => u && rset.has(norm(u));\n  let j;\n  try { const m = text.match(/\\{[\\s\\S]*\\}/); j = JSON.parse(m ? m[0] : text); }\n  catch (e) { fail('could not parse model JSON'); continue; }\n  // Strip any source URL in fact_status that was not retrieved\n  let fs = String(j.fact_status || '').trim();\n  const dropped = [];\n  fs = fs.split('\\n').map(line => {\n    const urls = line.match(/https?:\\/\\/[^\\s,)]+/g);\n    if (!urls) return line;\n    let l = line;\n    for (const u of urls) if (!isRet(u.replace(/[.;]+$/, ''))) { dropped.push(u); l = l.replace(u, ''); }\n    if (l === line) return line;\n    if (!/https?:\\/\\//.test(l)) return /^\\s*SOURCES:/i.test(l) ? 'SOURCES:' : null;\n    return l.replace(/\\s+—[^h]*$/, '').replace(/,\\s*,/g, ',').trim();\n  }).filter(l => l !== null).join('\\n');\n  const goodSources = [...new Set((fs.match(/https?:\\/\\/[^\\s,)]+/g) || []).map(norm))];\n  const claims = Array.isArray(j.claims) ? j.claims : [];\n  const badClaims = claims.filter(c => c.status && c.status !== 'VERIFIED');\n  const fixes = (Array.isArray(j.copy_fixes) ? j.copy_fixes : []).filter(f => f && f.from && f.to && f.from !== f.to);\n  let verdict = String(j.verdict || 'UNVERIFIED').toUpperCase();\n  const warn = [];\n  if (goodSources.length < 2) warn.push(`⚠️ Deep re-check kept only ${goodSources.length} retrieved source URL(s) — verify every fact before READY.`);\n  if (dropped.length) warn.push(`⚠️ Removed ${dropped.length} cited URL(s) the model did not actually retrieve.`);\n  if (!/⚠️/.test(fs)) for (const c of badClaims.slice(0, 4)) warn.push(`⚠️ ${c.field || 'fact'}: \"${String(c.claim || '').slice(0, 140)}\" is ${c.status}${c.correction ? ' → ' + String(c.correction).slice(0, 200) : ''}`);\n  if (verdict === 'WRONG_CASE') warn.unshift('⚠️ WRONG CASE / not a documented document-examination story — do not mark READY.');\n  const fsHasWarn = /⚠️/.test(fs);\n  const clean = verdict !== 'WRONG_CASE' && verdict !== 'UNVERIFIED' && goodSources.length >= 2 && !badClaims.length && !fixes.length && !fsHasWarn;\n  if (verdict === 'VERIFIED' && !clean) verdict = 'NEEDS REVIEW';\n  const finalFs = [fs, ...warn].filter(Boolean).join('\\n');\n  const fixTxt = fixes.map(f => `${f.field}: \"${String(f.from).slice(0, 160)}\" → \"${String(f.to).slice(0, 200)}\"`).join(' ; ');\n  out.push({ json: {\n    post_id, _ok: true, _verdict: verdict, _clean: clean, _sources: goodSources.length, _searches: searches,\n    _fixes: fixes, _bad: badClaims, _slack: String(j.slack_line || '').slice(0, 400), _row: row,\n    fact_status: finalFs,\n    facts_need_verify: clean ? 'NO' : 'YES',\n    notes: (String(row.notes || '') + ` | RE-VERIFIED ${stamp} (${cfg.model}, ${searches} searches, ${goodSources.length} sources): ${verdict}` + (fixTxt ? ` — SUGGESTED COPY FIXES: ${fixTxt}`.slice(0, 2500) : '')).trim()\n  } });\n}\nreturn out;\n"
+   }
+  },
+  {
+   "id": "f9ef09ed-c07a-491e-9679-c6b07175748b",
+   "name": "Update row (by post_id)",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    2200,
+    200
+   ],
+   "parameters": {
+    "operation": "appendOrUpdate",
+    "documentId": {
+     "__rl": true,
+     "value": "14pkeLjlH5SFf4X_DwafTCJlgdKRNOcY-p_AAbZjxfec",
+     "mode": "id"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": "0",
+     "mode": "id"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "post_id": "={{ $json.post_id }}",
+      "fact_status": "={{ $json.fact_status }}",
+      "facts_need_verify": "={{ $json.facts_need_verify }}",
+      "notes": "={{ $json.notes }}"
+     },
+     "matchingColumns": [
+      "post_id"
+     ],
+     "schema": [
+      {
+       "id": "post_id",
+       "displayName": "post_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "fact_status",
+       "displayName": "fact_status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "facts_need_verify",
+       "displayName": "facts_need_verify",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "notes",
+       "displayName": "notes",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ]
+    },
+    "options": {}
+   },
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "aZplykFQOTxSckqJ",
+     "name": "happy buddha"
+    }
+   }
+  },
+  {
+   "id": "40fa7df1-fa4b-454c-81c5-90354a6c7deb",
+   "name": "Slack summary text",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2420,
+    200
+   ],
+   "parameters": {
+    "jsCode": "const cfg = $('Config').first().json;\nconst src = $('Trigger params').first().json.source || '';\nconst res = $('Parse + guard sources').all().map(i => i.json);\nconst katie = `<@${cfg.ready_owner_slack_id}>`;\nconst lines = [];\nlines.push(`*Deep fact re-check — ${res.length} row(s)* (${cfg.model}, ${src})`);\nlet needs = 0;\nfor (const r of res) {\n  if (!r._ok) { needs++; lines.push(`• *${r.post_id}* — ❌ re-check failed: ${r._why}. Leave it unREADY; Bart/Claude to look.`); continue; }\n  const icon = r._clean ? '✅' : (r._verdict === 'WRONG_CASE' ? '⛔' : '⚠️');\n  if (!r._clean) needs++;\n  lines.push(`• *${r.post_id}* ${icon} ${r._verdict} — ${r._sources} retrieved source(s), ${r._searches} searches. ${r._slack}`);\n  for (const f of (r._fixes || []).slice(0, 4)) lines.push(`    ↳ fix ${f.field}: \"${String(f.from).slice(0, 120)}\" → \"${String(f.to).slice(0, 160)}\"`);\n}\nlines.push('');\nlines.push(`${katie} Column O (fact_status) now has the re-checked facts with only sources the model actually opened, and column N says YES/NO. ✅ rows: review D–F as usual and mark READY in column C when happy. ⚠️ rows: apply the suggested fixes (also saved in notes) before READY. ⛔ rows: do not mark READY.`);\nreturn [{ json: { text: lines.join('\\n'), needs } }];\n"
+   }
+  },
+  {
+   "id": "ee198d17-f0ff-407f-b07d-f67a49c8dc18",
+   "name": "Slack — re-check results",
+   "type": "n8n-nodes-base.slack",
+   "typeVersion": 2.3,
+   "position": [
+    2640,
+    200
+   ],
+   "parameters": {
+    "select": "channel",
+    "channelId": {
+     "__rl": true,
+     "mode": "name",
+     "value": "={{ $('Config').first().json.slack_channel }}"
+    },
+    "text": "={{ $json.text }}",
+    "otherOptions": {}
+   },
+   "credentials": {
+    "slackApi": {
+     "id": "LEyKGjkPiIISWvjI",
+     "name": "Slack account"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Re-check form": {
+   "main": [
+    [
+     {
+      "node": "Trigger params",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Daily 6:40am PT": {
+   "main": [
+    [
+     {
+      "node": "Trigger params",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Trigger params": {
+   "main": [
+    [
+     {
+      "node": "Config",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Config": {
+   "main": [
+    [
+     {
+      "node": "Fetch research prompt",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch research prompt": {
+   "main": [
+    [
+     {
+      "node": "Read queue",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Read queue": {
+   "main": [
+    [
+     {
+      "node": "Select rows",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows": {
+   "main": [
+    [
+     {
+      "node": "Any rows?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Any rows?": {
+   "main": [
+    [
+     {
+      "node": "Build re-research request",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Build re-research request": {
+   "main": [
+    [
+     {
+      "node": "OpenAI — deep research",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI — deep research": {
+   "main": [
+    [
+     {
+      "node": "Parse + guard sources",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parse + guard sources": {
+   "main": [
+    [
+     {
+      "node": "Update row (by post_id)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Update row (by post_id)": {
+   "main": [
+    [
+     {
+      "node": "Slack summary text",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Slack summary text": {
+   "main": [
+    [
+     {
+      "node": "Slack — re-check results",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveDataSuccessExecution": "all",
+  "executionTimeout": 3600,
+  "timezone": "America/Los_Angeles"
+ }
+}
