@@ -1,5 +1,5 @@
-# Mobile Template: Master Architecture (v2)
-**QDE / Bart Baggett Forensic Landing Pages** · v1 locked 2026-10-02 · v2 (merged look "C") approved 2026-10-02
+# Mobile Template: Master Architecture (v2.1)
+**QDE / Bart Baggett Forensic Landing Pages** · v1 locked 2026-10-02 · v2 (merged look "C") approved 2026-10-02 · v2.1 (light grey headline) approved 2026-10-02
 Reference page: `bartbaggett.com/usa/florida/documentexaminer_mobile.html`
 Template file (same folder): `QDE_MOBILE_TEMPLATE_documentexaminer_mobile.template.html`
 
@@ -8,11 +8,11 @@ Template file (same folder): `QDE_MOBILE_TEMPLATE_documentexaminer_mobile.templa
 ---
 
 ## 1. Decision
-Use the Florida mobile page layout as the master mobile template for all city landing pages, with the approved v2 look ("C"):
+Use the Florida mobile page layout as the master mobile template for all city landing pages, with the approved v2.1 look ("C" + light grey):
 - Grey menu bar (from the Florida/California/Texas style pages)
 - Blue sticky click-to-call bar (kept)
 - Source Sans Pro for all text, bold headline (from the /usa/1/ style pages)
-- Tightened grey headline box (darker grey kept from the Florida style; Bart can switch to the lighter grey)
+- Tightened headline box in the **light grey #D6D6D6** (v2.1; chosen by Bart over the darker #B9B9B9 of the Florida style)
 Phone-first, proof above the fold, one persistent call action.
 
 ## 2. Why (findings)
@@ -44,12 +44,12 @@ Phone-first, proof above the fold, one persistent call action.
 
 ### 2.5 Consistency audit of the 48 live mobile pages (2026-10-02)
 - [Verified] Two looks existed: **A** = Source Sans Pro + lighter grey headline (#D6D6D6), 20 pages (/usa/1/, /usa root); **B** = Times + darker grey headline (#B9B9B9), 21 pages (California, Florida, Nevada, New Mexico, San Francisco, Texas).
-- Bart approved a merge of the two ("C"), described in section 1.
+- Bart approved a merge of the two ("C"), described in section 1, and then chose the lighter grey #D6D6D6 for the headline box (v2.1).
 
 ## 3. Template architecture (top to bottom, phone)
 1. **Credibility header image**: name, "Forensic Handwriting Expert & Court Qualified Expert Witness", portrait, media logo strip.
 2. **Menu bar** (grey, collapsed "Menu"; links behind a tap).
-3. **Headline box** (grey): 2-line bold H1 + phone number as its own H1 line. Tightened padding (see 4.2).
+3. **Headline box** (light grey #D6D6D6): 2-line bold H1 + phone number as its own H1 line. Tightened padding (see 4.2).
 4. **Authority paragraph**: "seen on CNN, CBS, FOX, NBC... over 135 court qualifications and testimonies" (confirm the figure before reuse: the brand profile states about 138 testimonies, 100% judicial acceptance).
 5. **Yellow-highlight CTA line**: "Call Today to Talk About Your Case".
 6. **Celebrity/media photo (CNN)** visible on first scroll.
@@ -79,16 +79,17 @@ body { padding-bottom: 64px; }
 ```
 Cause of the wasted space: shared `salesletter.css` `#headline{padding:20px}` plus default H1 margins. Inject before `</head>`.
 
-### 4.3 Typography (v2, approved "C")
+### 4.3 Typography and headline color (v2.1, approved)
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 <style id="bb-sans-merge">
 body,p,li,td,h1,h2,h3,h4,h5,.testimonial2,#blurb,#section2,#nextstep,footer{font-family:"Source Sans Pro",Arial,Helvetica,sans-serif !important}
 #headline h1,#headline h1 span{font-weight:700 !important}
 h2{font-weight:700}
+#headline{background:#D6D6D6 !important;color:#000 !important}
 </style>
 ```
-Inject before `</head>`, after the tight-headline style.
+Inject before `</head>`, after the tight-headline style. The last rule (light grey headline) was added in v2.1.
 
 ### 4.4 Other mobile rules in the reference page
 `h1{font-size:24px!important}`, `h2{font-size:20px!important}`, single-column override (`#section1{display:none}`), images `max-width:100%`, container max 800px.
@@ -108,8 +109,8 @@ Copy rules: phone-first. Never use "text us" wording with the office numbers (th
 ## 6. Rollout and deploy
 - Archive the original on the server before overwriting: `<stem>_Joan_<YYYY-MM-DD>[b..j].html`, then put the new file.
 - Verify live: fix present, `mobile-callbar` present, tel number correct per city, Source Sans Pro loading.
-- Done so far (2026-10-02): tight headline live on 40 `_mobile` pages; "text us" wording removed from office numbers; merged look "C" approved as the template but NOT yet rolled out to live pages.
-- Next: roll v2 typography out to the mobile pages; decide on the responsive /usa/1/ pages (non-`_mobile`), which still lack the call bar.
+- Done so far (2026-10-02): tight headline live on 40 `_mobile` pages; "text us" wording removed from office numbers; merged look "C" with the light grey headline approved as the template but NOT yet rolled out to live pages.
+- Next: roll v2.1 typography and headline color out to the mobile pages (needs Bart's go-ahead); decide on the responsive /usa/1/ pages (non-`_mobile`), which still lack the call bar.
 
 ## 7. Open items and caveats
 - After rollout, test mobile cost per phone-click conversion on `_mobile` pages against the $63-91 baseline (phone-click conversions only).
