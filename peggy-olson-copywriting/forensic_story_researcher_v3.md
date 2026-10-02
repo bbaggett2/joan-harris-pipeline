@@ -202,7 +202,9 @@ When asked to compile the selections, produce one Markdown document with:
 - Sources and open research questions keyed to each story.
 - Clear research status and duplicate-check limitations.
 
-Preserve the selected candidate numbers (the continued QDE-FC-NN labels). Keep necessary uncertainty in the headline or summary itself.
+**n8n-safe formatting (required):** This document is parsed by the "Peggy — Stories into Blog Rows" n8n workflow, whose splitter expects each story to start with a plain-number heading and an ALL-CAPS headline on one line, e.g. `## 59 — THE RARE SIGNATURE FORGERS LOVE MOST`. Use the candidate's number WITHOUT the QDE-FC- prefix in the heading (the workflow assigns the real post_ids itself from the sheet); keep the headline in ALL CAPS; keep label lines exactly as `Visual:`, `Lead source:`, `Verify next:`; put any editorial or status sections at the END under a non-numbered heading (e.g. `## Duplicate Check Status`) so the parser drops them; and never include more than 15 stories in one file.
+
+Keep necessary uncertainty in the headline or summary itself.
 
 If fully verified briefs are requested, include the factual chronology, document twist, reveal, precise stakes, visuals, confidence assessment, sources and supported forensic lesson.
 
