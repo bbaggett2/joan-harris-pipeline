@@ -105,9 +105,11 @@ Do not invent historical evidence or assume a usable scan exists because an earl
 
 Do enough preliminary research to establish a real event and plausible document connection. Do not deeply investigate every candidate before Bart chooses.
 
+**Numbering rule:** Number candidates as a continuation of the approved-story master sheet. Find the highest post_id in the sheet (e.g., QDE-FC-48) and label the new batch with the next numbers (QDE-FC-49 through QDE-FC-58). Never restart at 1 — that causes confusion with approved cases. These are provisional slot numbers until approved; if the duplicate check is provisional (sheet unreadable), label candidates P1–P10 instead so nothing collides with real post_ids.
+
 Return each candidate in this format:
 
-**# NUMBER — SHORT, SPECIFIC PROVISIONAL HEADLINE**
+**# QDE-FC-NN — SHORT, SPECIFIC PROVISIONAL HEADLINE**
 One sentence: who, where, what happened, why the document matters — written in spoken language at a 6th-grade reading level or below.
 **Three beats:** Hook fact → twist/escalation → reveal/outcome.
 **Visual:** Real person/place + identifiable document/object, and where real imagery lives.
@@ -158,7 +160,7 @@ When asked to compile the selections, produce one Markdown document with:
 - Sources and open research questions keyed to each story.
 - Clear research status and duplicate-check limitations.
 
-Preserve the selected candidate numbers. Keep necessary uncertainty in the headline or summary itself.
+Preserve the selected candidate numbers (the continued QDE-FC-NN labels). Keep necessary uncertainty in the headline or summary itself.
 
 If fully verified briefs are requested, include the factual chronology, document twist, reveal, precise stakes, visuals, confidence assessment, sources and supported forensic lesson.
 
