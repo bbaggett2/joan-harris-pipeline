@@ -1,14 +1,18 @@
-# Mobile Template: Master Architecture
-**QDE / Bart Baggett Forensic Landing Pages** · Locked 2026-10-02
+# Mobile Template: Master Architecture (v2)
+**QDE / Bart Baggett Forensic Landing Pages** · v1 locked 2026-10-02 · v2 (merged look "C") approved 2026-10-02
 Reference page: `bartbaggett.com/usa/florida/documentexaminer_mobile.html`
-Template file: `template/mobile/documentexaminer_mobile.template.html`
+Template file (same folder): `QDE_MOBILE_TEMPLATE_documentexaminer_mobile.template.html`
 
 > Evidence labels: **[Verified]** = measured or read directly from code/data. **[Best estimate]** = inference or approximate. **[Unverified]** = user recollection, not confirmed by data.
 
 ---
 
 ## 1. Decision
-Use the Florida mobile page layout as the master mobile template for all city landing pages.
+Use the Florida mobile page layout as the master mobile template for all city landing pages, with the approved v2 look ("C"):
+- Grey menu bar (from the Florida/California/Texas style pages)
+- Blue sticky click-to-call bar (kept)
+- Source Sans Pro for all text, bold headline (from the /usa/1/ style pages)
+- Tightened grey headline box (darker grey kept from the Florida style; Bart can switch to the lighter grey)
 Phone-first, proof above the fold, one persistent call action.
 
 ## 2. Why (findings)
@@ -35,13 +39,17 @@ Phone-first, proof above the fold, one persistent call action.
 | /usa/1/handwritingexpert | 390x844 | Same pattern |
 | /usa/1/ pages | 1280x800 | Nav and 1-800 number visible; CNN image starts about 785px (barely above fold) |
 | /usa/florida/documentexaminer_mobile | phone | Short 2-line headline + phone number, logo strip in header, CNN photo visible, **sticky Call Now bar** |
-- [Verified] The /usa/1/ pages have no `mobile-callbar` (searched live HTML).
+- [Verified] The responsive /usa/1/ pages (non-`_mobile`) have no `mobile-callbar`. The `_mobile` pages already had it.
 - [Verified] The media logo strip (CNN, Court TV, GMA, WSJ, Today, USA Today, NY Daily News) is part of the header image, so proof shows above the fold on phone.
+
+### 2.5 Consistency audit of the 48 live mobile pages (2026-10-02)
+- [Verified] Two looks existed: **A** = Source Sans Pro + lighter grey headline (#D6D6D6), 20 pages (/usa/1/, /usa root); **B** = Times + darker grey headline (#B9B9B9), 21 pages (California, Florida, Nevada, New Mexico, San Francisco, Texas).
+- Bart approved a merge of the two ("C"), described in section 1.
 
 ## 3. Template architecture (top to bottom, phone)
 1. **Credibility header image**: name, "Forensic Handwriting Expert & Court Qualified Expert Witness", portrait, media logo strip.
-2. **Menu bar** (collapsed "Menu"; links behind a tap).
-3. **Headline box** (grey): 2-line H1 + phone number as its own H1 line. Tightened padding (see 4.2).
+2. **Menu bar** (grey, collapsed "Menu"; links behind a tap).
+3. **Headline box** (grey): 2-line bold H1 + phone number as its own H1 line. Tightened padding (see 4.2).
 4. **Authority paragraph**: "seen on CNN, CBS, FOX, NBC... over 135 court qualifications and testimonies" (confirm the figure before reuse: the brand profile states about 138 testimonies, 100% judicial acceptance).
 5. **Yellow-highlight CTA line**: "Call Today to Talk About Your Case".
 6. **Celebrity/media photo (CNN)** visible on first scroll.
@@ -71,29 +79,42 @@ body { padding-bottom: 64px; }
 ```
 Cause of the wasted space: shared `salesletter.css` `#headline{padding:20px}` plus default H1 margins. Inject before `</head>`.
 
-### 4.3 Other mobile rules in the reference page
+### 4.3 Typography (v2, approved "C")
+```html
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<style id="bb-sans-merge">
+body,p,li,td,h1,h2,h3,h4,h5,.testimonial2,#blurb,#section2,#nextstep,footer{font-family:"Source Sans Pro",Arial,Helvetica,sans-serif !important}
+#headline h1,#headline h1 span{font-weight:700 !important}
+h2{font-weight:700}
+</style>
+```
+Inject before `</head>`, after the tight-headline style.
+
+### 4.4 Other mobile rules in the reference page
 `h1{font-size:24px!important}`, `h2{font-size:20px!important}`, single-column override (`#section1{display:none}`), images `max-width:100%`, container max 800px.
 
 ## 5. Per-city values
-| City | `{{PHONE_DISPLAY}}` | `{{PHONE_TEL}}` |
-|---|---|---|
-| Florida | 1-305-459-1544 | +13054591544 |
-| Dallas | 1-214-614-8122 | +12146148122 |
-| Los Angeles | 1-323-544-9277 | +13235449277 |
-| National (/usa/1/) | 1-800-980-9030 (CST) | +18009809030 |
+| City | `{{PHONE_DISPLAY}}` | `{{PHONE_TEL}}` | `{{PHONE_CHAT}}` |
+|---|---|---|---|
+| Florida | 1-305-459-1544 | +13054591544 | 305-459-1544 |
+| Dallas | 1-214-614-8122 | +12146148122 | 214-614-8122 |
+| Los Angeles | 1-323-544-9277 | +13235449277 | 323-544-9277 |
+| National (/usa/1/) | 1-800-980-9030 (CST) | +18009809030 | 800-980-9030 |
 
+`{{PHONE_CHAT}}` fills the chat widget `support-contact` attribute. `{{name}}` inside the widget is a GoHighLevel token: leave it alone.
 Also edit city-specific strings after filling the placeholders (Florida testimonial comment; footer "Serving Clients in Florida, Texas and Worldwide").
-Domain rule: always **HandwritingExpertUSA.com**, never HandwritingExpert.com.
+Copy rules: phone-first. Never use "text us" wording with the office numbers (the PR line "Call or Text our PR team at 310-779-7224" is the one approved exception). Domain: always **HandwritingExpertUSA.com**, never HandwritingExpert.com.
 
 ## 6. Rollout and deploy
-- Archive the original on the server before overwriting: `<stem>_Joan_<YYYY-MM-DD>[b..j].html`, then put the new file (see `webops/tight_2026-10-02/go.py`).
-- Verify live: fix present, `mobile-callbar` present, tel number correct per city.
-- Done so far: Florida `documentexaminer_mobile.html` live with the tight headline (archive: `documentexaminer_mobile_Joan_2026-10-02.html`).
-- Next (pending Bart's choice): /usa/1/ ad landing pages first (highest ad traffic, no call bar today), then Dallas, Los Angeles and the remaining city folders.
+- Archive the original on the server before overwriting: `<stem>_Joan_<YYYY-MM-DD>[b..j].html`, then put the new file.
+- Verify live: fix present, `mobile-callbar` present, tel number correct per city, Source Sans Pro loading.
+- Done so far (2026-10-02): tight headline live on 40 `_mobile` pages; "text us" wording removed from office numbers; merged look "C" approved as the template but NOT yet rolled out to live pages.
+- Next: roll v2 typography out to the mobile pages; decide on the responsive /usa/1/ pages (non-`_mobile`), which still lack the call bar.
 
 ## 7. Open items and caveats
 - After rollout, test mobile cost per phone-click conversion on `_mobile` pages against the $63-91 baseline (phone-click conversions only).
 - Confirm the testimonial count claim (135 vs about 138) before reuse.
 - Nov 2025-Mar 2026 call data is compromised (OneBox dropped about 30%); do not use it as the baseline.
 - Whether the media images were moved above the fold in 2025 because of research is **[Unverified]**.
-- Headline color (red vs grey/black) is untested; consider an A/B test once the call bar is live.
+- Headline color (red text vs black) and headline grey shade are untested; consider an A/B test once the call bar is live everywhere.
+- Desktop and other pages are still inconsistent (about 10 stylesheet combinations, 4 fonts); not part of this template.
