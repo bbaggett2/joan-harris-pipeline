@@ -3,6 +3,7 @@
 **Last updated:** 2026-09-23
 
 Cameron owns blog production, WordPress and technical fixes.
+He also owns html updates and works with .html pages across all domains. 
 
 | File | What it is |
 | :--- | :--- |
