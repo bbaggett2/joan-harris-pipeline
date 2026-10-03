@@ -1,5 +1,5 @@
-# Mobile Template: Master Architecture (v2.1)
-**QDE / Bart Baggett Forensic Landing Pages** · v1 locked 2026-10-02 · v2 (merged look "C") approved 2026-10-02 · v2.1 (light grey headline) approved 2026-10-02
+# Mobile Template: Master Architecture (v2.2)
+**QDE / Bart Baggett Forensic Landing Pages** · v1 locked 2026-10-02 · v2 (merged look "C") approved 2026-10-02 · v2.1 (light grey headline) approved 2026-10-02 · v2.2 (rolled out live; blue bar everywhere; grey menu; local numbers) 2026-10-02
 Reference page: `bartbaggett.com/usa/florida/documentexaminer_mobile.html`
 Template file (same folder): `QDE_MOBILE_TEMPLATE_documentexaminer_mobile.template.html`
 
@@ -8,11 +8,11 @@ Template file (same folder): `QDE_MOBILE_TEMPLATE_documentexaminer_mobile.templa
 ---
 
 ## 1. Decision
-Use the Florida mobile page layout as the master mobile template for all city landing pages, with the approved v2.1 look ("C" + light grey):
-- Grey menu bar (from the Florida/California/Texas style pages)
-- Blue sticky click-to-call bar (kept)
-- Source Sans Pro for all text, bold headline (from the /usa/1/ style pages)
-- Tightened headline box in the **light grey #D6D6D6** (v2.1; chosen by Bart over the darker #B9B9B9 of the Florida style)
+Use the Florida mobile page layout as the master mobile template for all city landing pages, with the approved v2.2 look:
+- **Light grey menu bar** (#e7e7e7, dark text). The old green menu was removed from all mobile pages.
+- **Blue sticky click-to-call bar (#344279) on every mobile page.** Click-to-call is essential on mobile.
+- Source Sans Pro for all text, bold headline.
+- Tightened headline box in the **light grey #D6D6D6**.
 Phone-first, proof above the fold, one persistent call action.
 
 ## 2. Why (findings)
@@ -43,18 +43,21 @@ Phone-first, proof above the fold, one persistent call action.
 - [Verified] The media logo strip (CNN, Court TV, GMA, WSJ, Today, USA Today, NY Daily News) is part of the header image, so proof shows above the fold on phone.
 
 ### 2.5 Consistency audit of the 48 live mobile pages (2026-10-02)
-- [Verified] Two looks existed: **A** = Source Sans Pro + lighter grey headline (#D6D6D6), 20 pages (/usa/1/, /usa root); **B** = Times + darker grey headline (#B9B9B9), 21 pages (California, Florida, Nevada, New Mexico, San Francisco, Texas).
-- Bart approved a merge of the two ("C"), described in section 1, and then chose the lighter grey #D6D6D6 for the headline box (v2.1).
+- [Verified] Two looks existed: **A** = Source Sans Pro + lighter grey headline (#D6D6D6), 20 pages; **B** = Times + darker grey headline (#B9B9B9), 21 pages. Bart approved a merge ("C") and the lighter grey #D6D6D6.
+- [Verified] v2.2 state: look "C" rolled out to the live mobile pages (41 pages). Menu green #1a7f2e replaced on 20 pages (menu now light grey, call bar blue). Blue call bar added to the 7 mobile pages that lacked it (Nevada June 2016 x4 at 702-996-0911, New Mexico ZH at 505-591-7909, Florida SanFran at 1-415-324-8780). All 48 verified to have a blue bar.
+- [Verified] 38 mobile pages had no charset declaration and showed "â€™" for curly apostrophes; `<meta charset="utf-8">` was added right after `<head>`. Test/draft pages (Zakir x2, joanv3-5, _v2) were left alone. **Always keep `<meta charset="utf-8">` as the first element in `<head>`.**
 
 ## 3. Template architecture (top to bottom, phone)
-1. **Credibility header image**: name, "Forensic Handwriting Expert & Court Qualified Expert Witness", portrait, media logo strip.
-2. **Menu bar** (grey, collapsed "Menu"; links behind a tap).
+1. **Credibility header image**: name, "Forensic Handwriting Expert & Court Qualified Expert Witness", portrait, media logo strip. Use `/usa/images/2026QDEexpert_credibility_header_clean.jpg` (the original had a baked-in dark column on the left edge, now removed; 124 pages updated).
+2. **Menu bar** (light grey, collapsed "Menu"; links behind a tap).
 3. **Headline box** (light grey #D6D6D6): 2-line bold H1 + phone number as its own H1 line. Tightened padding (see 4.2).
 4. **Authority paragraph**: "seen on CNN, CBS, FOX, NBC... over 135 court qualifications and testimonies" (confirm the figure before reuse: the brand profile states about 138 testimonies, 100% judicial acceptance).
 5. **Yellow-highlight CTA line**: "Call Today to Talk About Your Case".
-6. **Celebrity/media photo (CNN)** visible on first scroll.
-7. Body copy, testimonials, credentials (existing salesletter content).
-8. **Sticky bottom call bar** on every screen.
+6. **Celebrity/media photos** visible on first scroll. The second CNN photo is replaced by `https://bartbaggett.com/images/2013bart_testmonials_red.jpg` (no duplicate photos).
+7. **Attorney testimonial near the top** (Florida: Scott image `Scott-testimonial-baggett-2026.jpg`), body copy, Riordan image (`riordan_testiml_small.jpg`) in the mid-page, text testimonials.
+8. **Alex (ARose-testimonial.jpg) at the bottom**, once. Never duplicate a testimonial image on a page.
+9. **Sticky bottom call bar** on every screen.
+Brand rule: the "TEXAS JUSTICE" film strip (`/usa/images/35mmTexasJusticefilm.jpg`) belongs on Texas pages only (the show has been off the air for about 20 years, per Bart). Other pages use the Larry King banner hosted at `/images/2006larryking_banner2_hwexpertusa.jpg` / `/usa/images/2006larryking_banner2_hwexpertusa.jpg` (same domain, no cross-domain reach).
 
 ## 4. Code spec
 
@@ -68,6 +71,7 @@ body { padding-bottom: 64px; }
 ```html
 <div id="mobile-callbar"><a href="tel:{{PHONE_TEL}}">📞 Call Now: {{PHONE_DISPLAY}}</a></div>
 ```
+Required on every `_mobile` page. Use the city's local number, never the 1-800 number, on city pages.
 
 ### 4.2 Tight headline (reclaims about 64px; measured 208px -> 144px box at 390px wide)
 ```html
@@ -79,7 +83,7 @@ body { padding-bottom: 64px; }
 ```
 Cause of the wasted space: shared `salesletter.css` `#headline{padding:20px}` plus default H1 margins. Inject before `</head>`.
 
-### 4.3 Typography and headline color (v2.1, approved)
+### 4.3 Typography and headline color
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 <style id="bb-sans-merge">
@@ -89,33 +93,45 @@ h2{font-weight:700}
 #headline{background:#D6D6D6 !important;color:#000 !important}
 </style>
 ```
-Inject before `</head>`, after the tight-headline style. The last rule (light grey headline) was added in v2.1.
 
-### 4.4 Other mobile rules in the reference page
+### 4.4 Grey menu (v2.2)
+```html
+<style id="bb-menu-grey">html body .menu_container .mobile_collapser,html body #menu1 .mobile_collapser,html body label.mobile_collapser{background:#e7e7e7 !important;color:#222 !important}</style>
+```
+Also replace any hard-coded green `#1a7f2e` with `#344279`.
+
+### 4.5 Other mobile rules in the reference page
 `h1{font-size:24px!important}`, `h2{font-size:20px!important}`, single-column override (`#section1{display:none}`), images `max-width:100%`, container max 800px.
 
 ## 5. Per-city values
 | City | `{{PHONE_DISPLAY}}` | `{{PHONE_TEL}}` | `{{PHONE_CHAT}}` |
 |---|---|---|---|
 | Florida | 1-305-459-1544 | +13054591544 | 305-459-1544 |
+| San Francisco | 1-415-324-8780 | +14153248780 | 415-324-8780 |
 | Dallas | 1-214-614-8122 | +12146148122 | 214-614-8122 |
 | Los Angeles | 1-323-544-9277 | +13235449277 | 323-544-9277 |
+| Nevada (June 2016 pages) | 1-702-996-0911 | +17029960911 | 702-996-0911 |
+| New Mexico (ZH page) | 1-505-591-7909 | +15055917909 | 505-591-7909 |
 | National (/usa/1/) | 1-800-980-9030 (CST) | +18009809030 | 800-980-9030 |
+Nevada and New Mexico numbers were taken from the pages themselves [Best estimate: confirm with Bart]. The Florida-named SanFran page now uses the San Francisco number everywhere (the Miami international line for Bahamas callers was also changed to it by Bart's go-ahead).
 
 `{{PHONE_CHAT}}` fills the chat widget `support-contact` attribute. `{{name}}` inside the widget is a GoHighLevel token: leave it alone.
-Also edit city-specific strings after filling the placeholders (Florida testimonial comment; footer "Serving Clients in Florida, Texas and Worldwide").
-Copy rules: phone-first. Never use "text us" wording with the office numbers (the PR line "Call or Text our PR team at 310-779-7224" is the one approved exception). Domain: always **HandwritingExpertUSA.com**, never HandwritingExpert.com.
+Also edit city-specific strings after filling the placeholders (testimonial comment; footer "Serving Clients in Florida, Texas and Worldwide").
+Copy rules: phone-first. Never use "text us" wording with the office numbers (the PR line "Call or Text our PR team at 310-779-7224" is the one approved exception). Domain: always **HandwritingExpertUSA.com**, never HandwritingExpert.com. Media/press-kit menus carry no sales number; the footer 1-800 number on /usa/presskit stays.
 
 ## 6. Rollout and deploy
-- Archive the original on the server before overwriting: `<stem>_Joan_<YYYY-MM-DD>[b..j].html`, then put the new file.
-- Verify live: fix present, `mobile-callbar` present, tel number correct per city, Source Sans Pro loading.
-- Done so far (2026-10-02): tight headline live on 40 `_mobile` pages; "text us" wording removed from office numbers; merged look "C" with the light grey headline approved as the template but NOT yet rolled out to live pages.
-- Next: roll v2.1 typography and headline color out to the mobile pages (needs Bart's go-ahead); decide on the responsive /usa/1/ pages (non-`_mobile`), which still lack the call bar.
+- Archive the original on the server before overwriting: `<stem>_Joan_<YYYY-MM-DD>[b..z].html`, then put the new file.
+- Verify live: fix present, `mobile-callbar` present and blue, tel number correct per city, Source Sans Pro loading, `document.characterSet` = UTF-8.
+- Done (2026-10-02): tight headline, look "C" with light grey headline, grey menu, blue call bar on all 48 mobile pages, charset fix on 38 pages, local city numbers, clean header image on 124 pages.
+- Still open: the responsive /usa/1/ pages (non-`_mobile`) have no call bar; per-city mobile templates for the other cities still need their per-city edits.
+
+## 6b. Desktop (not the mobile template; recorded for consistency)
+Sub pages (rates, CV, FAQ, press kit, reviews, contact) on 26 pages use a thin blue-grey band `#D6E0E1` (band color picked by eye: [Best estimate]) with a black title in place of the red H1, thin 25%-black frame lines on both sides of the 800px column, and a white column background. Style id `bb-headline-band`; pages with a padded wrapper also carry `bb-band-edge` so the band runs edge to edge. Source: `html body #headline h1{color:#AD1C17 !important}` in `bb-conversion.css` caused the red title.
 
 ## 7. Open items and caveats
 - After rollout, test mobile cost per phone-click conversion on `_mobile` pages against the $63-91 baseline (phone-click conversions only).
 - Confirm the testimonial count claim (135 vs about 138) before reuse.
 - Nov 2025-Mar 2026 call data is compromised (OneBox dropped about 30%); do not use it as the baseline.
 - Whether the media images were moved above the fold in 2025 because of research is **[Unverified]**.
-- Headline color (red text vs black) and headline grey shade are untested; consider an A/B test once the call bar is live everywhere.
-- Desktop and other pages are still inconsistent (about 10 stylesheet combinations, 4 fonts); not part of this template.
+- Headline color and grey shade are untested; consider an A/B test now that the call bar is live everywhere.
+- Test/draft pages (Zakir x2, joanv3-5, _v2) still have the encoding problem and were not changed.
